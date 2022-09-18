@@ -1,16 +1,6 @@
-# ahri_manager
+# Ahri_Manager
+## 앵무새를 위한 다양한 정보를 제공하는 안드로이드-ios 하이브리드 어플
 
-A new Flutter project.
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### 해당 프로젝트는 이전까지 배워왔던 flutter 사용법을 익혀보고자 배운 내용을 종합해서 사용할 수 있도록 기획한 프로젝트입니다.
+제작 언어: Dart
+제작 툴: flutter

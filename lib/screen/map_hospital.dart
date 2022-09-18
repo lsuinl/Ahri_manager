@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+//위치 기반 병원 탐색
 class MainScreen extends StatefulWidget {
   const MainScreen({Key? key}) : super(key: key);
 
@@ -12,7 +12,7 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor:Colors.indigoAccent,
-      body: Column(
+      body: Center(
         child: Text(
           'Hello World',
           style: TextStyle(

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+//메인화면(탭 선택 화면)
 class MainScreen extends StatefulWidget {
   const MainScreen({Key? key}) : super(key: key);
 
@@ -12,7 +12,7 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor:Colors.indigoAccent,
-      body: Column(
+      body: Center(
         child: Text(
           'Hello World',
           style: TextStyle(

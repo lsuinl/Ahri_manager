@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+//내정보 조회, 배경테마설정
 class MainScreen extends StatefulWidget {
   const MainScreen({Key? key}) : super(key: key);
 
@@ -12,7 +12,7 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor:Colors.indigoAccent,
-      body: Column(
+      body: Center(
         child: Text(
           'Hello World',
           style: TextStyle(
