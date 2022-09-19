@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:ahri_manager/screen/tip.dart';
+import 'package:ahri_manager/screen/buy_object.dart';
 
 void main(){
   runApp(
     MaterialApp( //앱 스타일
-    home: MainScreen() //
+    home: Buy_object() //
     ),
   );
 }
