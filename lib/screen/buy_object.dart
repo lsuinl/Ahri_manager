@@ -18,18 +18,11 @@ class _MainScreenState extends State<Buy_object> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
-          Text(
-          '어쩔티비!',
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 20.0,
-          ),
-        ),
           _List(onPressed: (){
             Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context)=>Web_url()));
+                    builder: (context)=>Shop_url()));
             },
           ),
         ],

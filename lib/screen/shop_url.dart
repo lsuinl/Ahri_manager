@@ -1,26 +1,41 @@
 import 'package:flutter/material.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 
-class Web_url extends StatelessWidget {
-  const Web_url({Key? key}) : super(key: key);
+class Shop_url extends StatelessWidget {
+  WebViewController? controller;
 
+  Shop_url({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.end,
-        children:[
-          Text(
-          'Hello ',
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 20.0,
+      appBar: AppBar(
+        backgroundColor: Colors.black,
+        title: Text("안녕"),
+        centerTitle: true,
+        actions: [
+          // IconButton( //뒤로가기
+          //     onPressed:(){Navigator.pop(context);
+          //     },
+          //     icon: Icon(Icons.backspace,
+          //     ),
+          // ),
+          IconButton( //홈으로
+            onPressed: (){
+              if(controller == null){
+                return;
+              }
+              controller!.loadUrl('https://velog.io/@su96in43');
+              },
+            icon: Icon(Icons.home,),
           ),
-        ),
-          _Backbutton(onPressed: (){
-            Navigator.pop(context);
-          },
-          ),
-      ],
+        ],
+      ),
+      body: WebView(
+        onWebViewCreated: (WebViewController controller){
+          this.controller = controller;
+        },
+        initialUrl: 'https://velog.io/@su96in43',
+        javascriptMode: JavascriptMode.unrestricted,
       ),
     );
   }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ahri_manager/screen/buy_object.dart';
+import 'package:ahri_manager/screen/shop_url.dart';
 
 void main(){
   runApp(
