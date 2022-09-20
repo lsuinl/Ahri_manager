@@ -29,7 +29,7 @@ class _birdurl extends StatefulWidget {
 }
 
 class _birdurlState extends State<_birdurl> {
-  List birdshopname = ["와우버드", "버드소리", "아가새농장", "버드모"];
+  List birdshopname = ["와우버드", "버드소리", "아가새농장", "버드모아"];
   List hamshopname = ["햄토피아", "햄숲", "봄해농장", "햄찌네"];
   List rabbitshopname = ["달나라토끼농장", "토당마을", "청아농장", "미니미펫"];
   List pishshopname = ["라라아쿠아", "헬로아쿠아", "트로피쉬넷", "신세계수족관"];
