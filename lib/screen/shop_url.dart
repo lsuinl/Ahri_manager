@@ -1,10 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
+import 'package:ahri_manager/screen/buy_object.dart';
 
-class Shop_url extends StatelessWidget {
+class Shop_url extends StatefulWidget {
+  final String shopname;
+  const Shop_url({
+    required this.shopname,
+    Key? key}) : super(key: key);
+
+  @override
+  State<Shop_url> createState() => _Shop_urlState();
+}
+
+class _Shop_urlState extends State<Shop_url> {
   WebViewController? controller;
+  String shopname="";
 
-  Shop_url({Key? key}) : super(key: key);
+  @override //초기에 한번만 실행
+  void initState(){
+    shopname=widget.shopname;
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -13,19 +30,13 @@ class Shop_url extends StatelessWidget {
         title: Text("안녕"),
         centerTitle: true,
         actions: [
-          // IconButton( //뒤로가기
-          //     onPressed:(){Navigator.pop(context);
-          //     },
-          //     icon: Icon(Icons.backspace,
-          //     ),
-          // ),
           IconButton( //홈으로
             onPressed: (){
               if(controller == null){
                 return;
               }
               controller!.loadUrl('https://velog.io/@su96in43');
-              },
+            },
             icon: Icon(Icons.home,),
           ),
         ],
@@ -40,6 +51,7 @@ class Shop_url extends StatelessWidget {
     );
   }
 }
+
 
 
 class _Backbutton extends StatelessWidget {
