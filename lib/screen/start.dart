@@ -17,6 +17,7 @@ class StartScreen extends StatefulWidget {
   State<StartScreen> createState() => _StartScreenState();
 }
 
+
 class _StartScreenState extends State<StartScreen> {
   TextEditingController name = TextEditingController();
   TextEditingController birth = TextEditingController();
