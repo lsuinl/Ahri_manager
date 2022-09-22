@@ -38,6 +38,9 @@ dependencies:
   cupertino_icons: ^1.0.2
   webview_flutter: ^3.0.0
   image_picker: ^0.8.5+3
+  google_fonts: ^3.0.1
+  naver_map_plugin:
+    git: https://github.com/LBSTECH/naver_map_plugin.git
 
 dev_dependencies:
   flutter_test:
@@ -68,6 +71,7 @@ flutter:
   # assets:
   assets:
     - imgs/
+
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 
