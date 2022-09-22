@@ -5,7 +5,7 @@
     <application
         android:label="ahri_manager"
         android:name="${applicationName}"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/launcher_icon"
         android:usesCleartextTraffic="true">
        <meta-data android:name="com.google.android.geo.API_KEY"
            android:value="AIzaSyBEYNgwTFy7sGFVO5tvDG61iKlJIJxLtEQ"/>
