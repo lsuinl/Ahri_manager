@@ -1,10 +1,15 @@
+import 'package:ahri_manager/screen/buy_object.dart';
+import 'package:ahri_manager/screen/d_day.dart';
+import 'package:ahri_manager/screen/map_hospital.dart';
 import 'package:flutter/material.dart';
+
 //메인화면(탭 선택 화면)
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  State<Ho
+  meScreen> createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
@@ -20,23 +25,56 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            for (int i = 0; i < animalshop.length; i++)
-              ElevatedButton.icon(
-                icon: Icon(Icons.shopping_bag_outlined,
-                    size: 20, color: Colors.black),
-                label: Text(
-                  animalshop[i],
-                  style: TextStyle(color: Colors.black),
-                ),
-                style: ElevatedButton.styleFrom(primary: Colors.white),
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) =>
-                              Shop_url(shopname: animalshop[i])));
-                },
+            IconButton(
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            Map_hospital()));
+              },
+              icon: Image.asset('/Users/kimsu-in/Desktop/icecream/flutter-sw/imgs/hospital.png'),
+            iconSize: 100,),
+            Text("병원찾기"),
+            IconButton(
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            Buy_object()));
+              },
+              icon: Image.asset('/Users/kimsu-in/Desktop/icecream/flutter-sw/imgs/pet-food.png'),
+              iconSize: 100,),
+            Text("물품구매"),
+            IconButton(
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            D_day()));
+              },
+              icon: Image.asset('/Users/kimsu-in/Desktop/icecream/flutter-sw/imgs/schedule.png'),
+            iconSize: 100,
+              //padding,
+            ),
+            Text("기록장"),
+            //설정으로
+            ElevatedButton(
+              child: Text(
+                "설정",
+                style: TextStyle(color: Colors.black),
               ),
+              style: ElevatedButton.styleFrom(primary: Colors.white),
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            Buy_object()));
+              },
+            ),
           ],
         ),
       ),
