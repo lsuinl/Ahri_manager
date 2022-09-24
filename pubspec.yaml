@@ -38,6 +38,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   webview_flutter: ^3.0.0
   image_picker: ^0.8.5+3
+  shared_preferences: ^2.0.15
   google_fonts: ^3.0.1
   naver_map_plugin:
     git: https://github.com/LBSTECH/naver_map_plugin.git
