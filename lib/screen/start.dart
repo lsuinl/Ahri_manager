@@ -249,8 +249,11 @@ class _StartScreenState extends State<StartScreen> {
                     child: const Text('저장'),
                     style: ButtonStyle(
                         backgroundColor: MaterialStateProperty.all(Colors.green)),
-                    onPressed: () {saveUserInformation();
-                      },
+                    onPressed: (){
+                      if(weight.text==""||name.text==""){Text("하이");}
+                        else{
+                        saveUserInformation();
+                      }},
                   ),
                   ElevatedButton(
                     child: const Text('취소'),
@@ -261,6 +264,7 @@ class _StartScreenState extends State<StartScreen> {
                       SystemChannels.platform.invokeMethod('SystemNavigator.pop');
                     },
                   ),
+
                 ],
               ),
             ),
@@ -269,13 +273,17 @@ class _StartScreenState extends State<StartScreen> {
   }
 
   Future saveUserInformation() async{
-    String selecteddate= '${selectedDate.year}-${selectedDate.month}-${selectedDate.day}';
+    int selectedyear=selectedDate.year;
+    int selectedmonth=selectedDate.month;
+    int selectedday=selectedDate.day;
     user_information newUser_Information= user_information(
         1,
         name.text,
         weight.text,
         _genderbuttonText.toString(),
-        selecteddate,
+        selectedyear,
+        selectedmonth,
+        selectedday,
         _neubuttonText.toString(),
         _speciesText.toString()
     );
