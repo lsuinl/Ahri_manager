@@ -38,6 +38,11 @@ dependencies:
   cupertino_icons: ^1.0.2
   webview_flutter: ^3.0.0
   image_picker: ^0.8.5+3
+  table_calendar: ^3.0.7
+  intl: ^0.17.0
+  drift: ^2.1.0
+  sqlite3_flutter_libs: ^0.5.0
+  path_provider: ^2.0.0
 
 dev_dependencies:
   flutter_test:
@@ -50,7 +55,11 @@ dev_dependencies:
   # rules and activating additional ones.
   flutter_lints: ^2.0.0
   flutter_launcher_icons: ^0.10.0
+  drift_dev: ^2.1.0
+  build_runner: ^2.2.0
 
+dependency_overrides:
+  path: ^1.8.2
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
@@ -67,7 +76,7 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   # assets:
   assets:
-    - imgs/
+    - asset/imgs/
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 
@@ -76,6 +85,22 @@ flutter:
 
   # For details regarding adding assets from package dependencies, see
   # https://flutter.dev/assets-and-images/#from-packages
+
+  fonts:
+    - family: NotoSans
+      fonts:
+        - asset: asset/font/NotoSansKR-Black.otf
+          weight: 900
+        - asset: asset/font/NotoSansKR-Bold.otf
+          weight: 700
+        - asset: asset/font/NotoSansKR-Medium.otf
+          weight: 500
+        - asset: asset/font/NotoSansKR-Regular.otf
+          weight: 400
+        - asset: asset/font/NotoSansKR-Light.otf
+          weight: 300
+        - asset: asset/font/NotoSansKR-Thin.otf
+          weight: 100
 
   # To add custom fonts to your application, add a fonts section here,
   # in this "flutter" section. Each entry in this list should have a

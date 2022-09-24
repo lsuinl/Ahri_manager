@@ -1,7 +1,8 @@
 import 'package:ahri_manager/screen/buy_object.dart';
-import 'package:ahri_manager/screen/d_day.dart';
 import 'package:ahri_manager/screen/map_hospital.dart';
 import 'package:flutter/material.dart';
+
+import 'calendar_scr.dart';
 
 //메인화면(탭 선택 화면)
 class HomeScreen extends StatefulWidget {
@@ -32,7 +33,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         builder: (context) =>
                             Map_hospital()));
               },
-              icon: Image.asset('/Users/kimsu-in/Desktop/icecream/flutter-sw/imgs/hospital.png'),
+              icon: Image.asset('asset/imgs/hospital.png'),
             iconSize: 100,),
             Text("병원찾기"),
             IconButton(
@@ -43,7 +44,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         builder: (context) =>
                             Buy_object()));
               },
-              icon: Image.asset('/Users/kimsu-in/Desktop/icecream/flutter-sw/imgs/pet-food.png'),
+              icon: Image.asset('asset/imgs/pet-food.png'),
               iconSize: 100,),
             Text("물품구매"),
             IconButton(
@@ -52,9 +53,9 @@ class _HomeScreenState extends State<HomeScreen> {
                     context,
                     MaterialPageRoute(
                         builder: (context) =>
-                            D_day()));
+                            CalendarScreen()));
               },
-              icon: Image.asset('/Users/kimsu-in/Desktop/icecream/flutter-sw/imgs/schedule.png'),
+              icon: Image.asset('asset/imgs/schedule.png'),
             iconSize: 100,
               //padding,
             ),
