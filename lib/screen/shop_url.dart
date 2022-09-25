@@ -72,29 +72,3 @@ class _Shop_urlState extends State<Shop_url> {
     );
   }
 }
-
-class _Backbutton extends StatelessWidget {
-  final VoidCallback onPressed;
-
-  const _Backbutton({
-    required this.onPressed,
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [
-        IconButton(
-          iconSize: 60,
-          onPressed: onPressed,
-          icon: Icon(
-            Icons.backspace,
-            color: Colors.blue,
-          ),
-        )
-      ],
-    );
-  }
-}
