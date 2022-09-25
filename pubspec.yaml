@@ -70,6 +70,10 @@ flutter:
     - imgs/
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
+  fonts:
+    - family: jua
+      fonts:
+        - asset: fonts/Jua-Regular.ttf
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

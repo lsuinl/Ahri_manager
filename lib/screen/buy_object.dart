@@ -45,8 +45,20 @@ class _birdurlState extends State<_birdurl> {
     if (widget.animalname == "도마뱀") animalshop = lizardshopname;
     return Scaffold(
       appBar: AppBar(
-        title: Text("자본을 뿌려보아요"),
+        backgroundColor: Colors.lightGreen,
+        title: Padding(
+          padding: const EdgeInsets.only(top: 8.0),
+          child: Text(
+            "자본을 뿌려보아요",
+            style: TextStyle(
+              color: Colors.white,
+              fontFamily: 'jua',
+              fontSize: 30.0,
+            ),
+          ),
+        ),
       ),
+
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
@@ -54,21 +66,28 @@ class _birdurlState extends State<_birdurl> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             for (int i = 0; i < animalshop.length; i++)
-              ElevatedButton.icon(
-                icon: Icon(Icons.shopping_bag_outlined,
-                    size: 20, color: Colors.black),
-                label: Text(
-                  animalshop[i],
-                  style: TextStyle(color: Colors.black),
+              Padding(
+                padding: const EdgeInsets.only(top: 30.0),
+                child: ElevatedButton.icon(
+                  icon: Icon(Icons.shopping_bag_outlined,
+                      size: 20, color: Colors.black),
+                  label: Text(
+                      animalshop[i],
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontFamily: 'jua',
+                        fontSize: 25.0,
+                      ),
+                    ),
+                  style: ElevatedButton.styleFrom(primary: Colors.white),
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                Shop_url(shopname: animalshop[i])));
+                  },
                 ),
-                style: ElevatedButton.styleFrom(primary: Colors.white),
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) =>
-                              Shop_url(shopname: animalshop[i])));
-                },
               ),
           ],
         ),
