@@ -229,13 +229,16 @@ class _StartScreenState extends State<StartScreen> {
                        */
                     },
                   ),
-                  ElevatedButton(
-                    child: const Text('취소'),
-                    style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all(Colors.green)),
-                    onPressed: () {
-                      // 앱 종료 기능을 만들고 싶었어요.
-                    },
+                  Padding(
+                    padding: const EdgeInsets.only(left: 15.0),
+                    child: ElevatedButton(
+                      child: const Text('취소'),
+                      style: ButtonStyle(
+                          backgroundColor: MaterialStateProperty.all(Colors.green)),
+                      onPressed: () {
+                        // 앱 종료 기능을 만들고 싶었어요.
+                      },
+                    ),
                   ),
                 ],
               ),
