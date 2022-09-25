@@ -13,6 +13,7 @@ class Map_hospital extends StatefulWidget {
 
 class _Map_hospitalState extends State<Map_hospital> {
   Set<Marker> _markers=new Set();
+  final String animalname = "앵무새";
   GoogleMapController? mapController;
 
 
@@ -23,7 +24,7 @@ class _Map_hospitalState extends State<Map_hospital> {
       _markers.add(Marker(
         markerId: MarkerId(i.toString()),
         position: LatLng(
-          37.223+i-0.99,
+          37.223+i*0.001,
           127.1873556838689,
         ),
         onTap: () {
