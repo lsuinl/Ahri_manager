@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:ahri_manager/data/hospital_information.dart'; //데이터 가져오기
 
 class Map_hospital extends StatefulWidget {
   const Map_hospital({Key? key}) : super(key: key);
@@ -9,129 +10,127 @@ class Map_hospital extends StatefulWidget {
   State<Map_hospital> createState() => _Map_hospitalState();
 }
 
+
 class _Map_hospitalState extends State<Map_hospital> {
+  Set<Marker> _markers=new Set();
+  final String animalname = "앵무새";
   GoogleMapController? mapController;
 
-  //latitude -위도, longitude-경도
-  //병원좌표
-  static final LatLng companyLatlng = LatLng(
-    37.22310017857214,
-    127.1873556838689,
-  );
-  //?
-  static final double okdistance = 100;
-  //마커.
-  static final Marker marker = Marker(
-    markerId: MarkerId('marker'),
-    position: companyLatlng,
-  );
 
-  //줌 레벨(확대된 정도)설정, 초기위치.설정
-  static final CameraPosition initionlposition = CameraPosition(
-    target: companyLatlng,
-    zoom: 15,
-  );
-//-----------------------------------------------------------------------------------
   @override
   Widget build(BuildContext context) {
+    //마커. map를 활용한 넘버.
+    for(int i=0; i<6;i++) {
+      _markers.add(Marker(
+        markerId: MarkerId(i.toString()),
+        position: LatLng(
+          37.223+i*0.001,
+          127.1873556838689,
+        ),
+        onTap: () {
+          showModalBottomSheet<void>(
+            context: context,
+            builder: (context) {
+              return Container(
+                height: 200,
+                color: Colors.amber,
+                child: Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      const Text('Modal BottomSheet'),
+                    ],
+                  ),
+                ),
+              );
+            }, // builder
+          );
+        },
+        infoWindow: InfoWindow(
+          title: "안녕하세요",
+        ),
+      ));
+    }
     return Scaffold(
-        appBar: renderAppBar(),
+        appBar: AppBar(
+          //타이틀
+          title: Text(
+            '지도찾기',
+            style: TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.w700,
+            ),
+          ),
+          backgroundColor: Colors.pink,
+        ),
         body: FutureBuilder<String>(
           future: checkPermission(),
           builder: (BuildContext context, AsyncSnapshot snapshot) {
+            //로딩중,,
             if (snapshot.connectionState == ConnectionState.waiting) {
               return Center(child: CircularProgressIndicator());
             }
-
+            //권한을 얻었을 시에 작동
             if (snapshot.data == '위치 권한이 허가되었습니다.') {
               return StreamBuilder<Position>(
-                  stream: Geolocator.getPositionStream(),
+                  stream: Geolocator.getPositionStream(), //내 현재위치 가져오기
                   builder: (context, snapshot) {
-
-                    if (snapshot.hasData) {
-                      final start = snapshot.data!;
-                      final end = companyLatlng; //현재 회사의 위치.
-                      //start와 end 둘 사이의 거리가 100m 미만이 맞는지 확인.
-
-                      final distance = Geolocator.distanceBetween(
-                        start.latitude,
-                        start.longitude,
-                        end.latitude,
-                        end.longitude,
-                      );
-                    }
-
                     return Column(
                       children: [
-                        _CustomGoogleMap(
-                          onmapcreated: onMapCreated,
-                          marker: marker,
-                          initialPostion: initionlposition,
-                        ),
+                      Expanded(
+                      flex: 3,
+                      child: GoogleMap(
+                        initialCameraPosition:  CameraPosition(
+                                target: LatLng(
+                                  37.22310017857214,
+                                  127.1873556838689,
+                                ),zoom: 15),
+                        //초기 카메라 위치
+                        myLocationEnabled: true,
+                        //내위치표시
+                        myLocationButtonEnabled: true,
+                        //내위치로가기버튼
+                        mapType: MapType.normal,
+                        //맵타입형식 위성지도 등등 설정 가능, //**************************
+                        //줌 동작 활성화
+                        zoomGesturesEnabled: true,
+                        //컨트롤러 조작
+                        onMapCreated: onMapCreated,
+                        markers: _markers,
+                      ),
+                    ),
+                        // _CustomGoogleMap(
+                        //   onmapcreated: onMapCreated, //컨트롤러설정
+                        //   marker: list, //마커
+                        //   initialPostion: CameraPosition(
+                        //       target: LatLng(
+                        //         37.22310017857214,
+                        //         127.1873556838689,
+                        //       ),
+                        //       zoom: 15), //초기 위치
+                        // ),
                       ],
                     );
-                  }
-              );
+                  });
             }
+            //권한 설정이 안 되어있는 경우
             return Center(
               child: Text(snapshot.data),
             );
           },
-        )
-    );
+        ));
   }
 
   onMapCreated(GoogleMapController controller) {
     mapController = controller;
   }
-
-  AppBar renderAppBar() {
-    return AppBar(
-      //타이틀
-      title: Text(
-        '지도찾기',
-        style: TextStyle(
-          color: Colors.white,
-          fontWeight: FontWeight.w700,
-        ),
-      ),
-      backgroundColor: Colors.blue,
-    );
-  }
 }
 
-class _CustomGoogleMap extends StatelessWidget {
-  final CameraPosition initialPostion;
-  final Marker marker;
-  final MapCreatedCallback onmapcreated;
-  const _CustomGoogleMap(
-      {required this.initialPostion,
-        required this.onmapcreated,
-        required this.marker,
-        Key? key})
-      : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Expanded(
-      flex: 3,
-      child: GoogleMap(
-        initialCameraPosition: initialPostion, //초기 카메라 위치
-        myLocationEnabled: true, //내위치표시
-        myLocationButtonEnabled: true, //내위치로가기버튼(커스텀할 예정)
-        mapType: MapType.normal, //맵타입형식 위성지도 등등 설정 가능
-        markers: Set.from([marker]),
-        onMapCreated: onmapcreated,
-      ),
-    );
-  }
-}
-
-
+//------------------------------------------------------
 // 권한과 관련된 모든 값은 미래의 값을 받아오는 async로 작업
-//*****가능하면 start.dart에서 미리 권한 요청 허가 받아놓을 것.
 Future<String> checkPermission() async {
-  //권한을 사용할 수 있는지를 확인
+  //권한 확인
   final isLocationEnabled = await Geolocator.isLocationServiceEnabled();
 
   if (!isLocationEnabled) {
@@ -144,11 +143,11 @@ Future<String> checkPermission() async {
     checkPermission = await Geolocator.requestPermission();
 
     if (checkPermission == LocationPermission.denied) {
-      return '위치 권한을 허가해주세요';
+      return '위치 권한을 설정합니다';
     }
   }
   if (checkPermission == LocationPermission.deniedForever) {
-    return '앱의 위치 권한을 셋팅에서 허가해주세요';
+    return '앱의 위치 권한을 설정에서 허가해주세요';
   }
   return '위치 권한이 허가되었습니다.';
 }

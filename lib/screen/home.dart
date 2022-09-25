@@ -1,6 +1,9 @@
 import 'package:ahri_manager/screen/buy_object.dart';
 import 'package:ahri_manager/screen/map_hospital.dart';
 import 'package:flutter/material.dart';
+import 'package:ahri_manager/plus/user_helper.dart';
+import 'package:ahri_manager/data/user_data.dart';
+
 
 import 'calendar_scr.dart';
 
@@ -10,14 +13,24 @@ class HomeScreen extends StatefulWidget {
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
+
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  List<user_information> user_infotmations=[]; //유저정보 리스트
+  final UserHelper helper=UserHelper();
+  @override
+  void initState(){
+    helper.init().then((value){
+     updateScreen();
+    });
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("놀러와 우리홈"),
+        title: Text("${user_infotmations.first.species}${user_infotmations.first.name}의 집"),
       ),
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
@@ -66,7 +79,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 "설정",
                 style: TextStyle(color: Colors.black),
               ),
-              style: ElevatedButton.styleFrom(primary: Colors.white),
+              style: ElevatedButton.styleFrom(),
               onPressed: () {
                 Navigator.push(
                     context,
@@ -79,6 +92,10 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
     );
+  }
+  void updateScreen(){
+    user_infotmations=helper.getuserinformation();
+    setState(() {});
   }
 }
 
