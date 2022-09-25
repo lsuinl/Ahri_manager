@@ -1,6 +1,5 @@
 import 'package:ahri_manager/screen/buy_object.dart';
 import 'package:ahri_manager/screen/map_hospital.dart';
-import 'package:ahri_manager/screen/my.dart';
 import 'package:flutter/material.dart';
 import 'package:ahri_manager/plus/user_helper.dart';
 import 'package:ahri_manager/data/user_data.dart';
@@ -93,6 +92,10 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
     );
+  }
+  void updateScreen(){
+    user_infotmations=helper.getuserinformation();
+    setState(() {});
   }
 }
 
