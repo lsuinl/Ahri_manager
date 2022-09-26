@@ -33,7 +33,9 @@ class _Map_hospitalState extends State<Map_hospital> {
   Widget build(BuildContext context) {
     String animalspecies= user_infotmations.first.species;
 
-    //마커. map를 활용한 넘버.
+    //페이지 뷰에소의 박스
+
+    //마커.
     for(int i=0; i<hospitalinf.length;i++) {
       if(hospitalinf[i].animal.contains(animalspecies)) { //해당반려동물을 진료하는 병원만
         _markers.add(Marker(

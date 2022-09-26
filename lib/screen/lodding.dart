@@ -43,7 +43,7 @@ class _LoddingState extends State<Lodding> {
 //         ],
 //       ),
 //     );
-// //
+//
 // Future<String> checkPermission() async {
 //   //권한을 사용할 수 있는지를 확인
 //   final isLocationEnabled = await Geolocator.isLocationServiceEnabled();
