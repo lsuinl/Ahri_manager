@@ -173,24 +173,31 @@ class _StartScreenState extends State<StartScreen> {
               ),
             ),
 
+            //Column으로 묶고 두개를 Row로 하면 될 거 같긴 한데 왜 안되는진 모르겠음여
+            Column( //'몸무게' 텍스트
+              children: [
+                Text('몸무게'),
+                TextField(
+                  controller: weight,
+                  decoration: InputDecoration(
+                    labelText: 'Weight',
+                  ),
+                ),
+                Text(
+                  'Kg',
+                  textAlign: TextAlign.right,
+                ),
+              ],
+            ),
 
-            Padding(//무게
-              padding: EdgeInsets.fromLTRB(100, 10, 30, 0),
-              child: Column(
-                children: [
-                  Text('몸무게'),
-                  TextField(
-                    controller: weight,
-                    decoration: InputDecoration(
-                      labelText: 'Weight',
-                    ),
-                  ),
-                  Text(
-                    'Kg',
-                    textAlign: TextAlign.right,
-                  ),
-                ],
-              ),
+            Column( //몸무게 설정
+              children: [
+                Padding(
+                  padding: EdgeInsets.fromLTRB(100, 10, 30, 0), //왼쪽, 위, 오르쪽, 밑
+                  //padding: EdgeInsets.only(left: 100, right: 100),
+                  //child:
+                ),
+              ],
             ),
 
 

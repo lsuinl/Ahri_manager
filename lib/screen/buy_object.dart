@@ -58,20 +58,23 @@ class _birdurlState extends State<_birdurl> {
           ),
         ),
       ),
-
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            for (int i = 0; i < animalshop.length; i++)
-              Padding(
-                padding: const EdgeInsets.only(top: 30.0),
-                child: ElevatedButton.icon(
-                  icon: Icon(Icons.shopping_bag_outlined,
-                      size: 20, color: Colors.black),
-                  label: Text(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+          child: Column(
+            //mainAxisAlignment: MainAxisAlignment.center, //왜 중간으로 안 가는겨
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              for (int i = 0; i < animalshop.length; i++)
+                Padding(
+                  padding: const EdgeInsets.only(top: 30.0),
+                  child: ElevatedButton.icon(
+                    //버튼!!!
+                    icon: Icon(Icons.shopping_bag_outlined,
+                        size: 20, color: Colors.black),
+                    label: Text(
                       animalshop[i],
                       style: TextStyle(
                         color: Colors.black,
@@ -79,17 +82,28 @@ class _birdurlState extends State<_birdurl> {
                         fontSize: 25.0,
                       ),
                     ),
-                  style: ElevatedButton.styleFrom(primary: Colors.white),
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                                Shop_url(shopname: animalshop[i])));
-                  },
+                    style: ElevatedButton.styleFrom(
+                      primary: Colors.lightGreen,
+                      onPrimary: Colors.black, //애니메이션 색깔
+                      shadowColor: Colors.black,
+                      elevation: 5.0,
+                      padding: EdgeInsets.all(15.0),
+                      side: BorderSide( //테두리
+                        color: Colors.black,
+                        width: 1.0,
+                      ),
+                    ),
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  Shop_url(shopname: animalshop[i])));
+                    },
+                  ),
                 ),
-              ),
-          ],
+            ],
+          ),
         ),
       ),
     );
