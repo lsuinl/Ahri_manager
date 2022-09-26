@@ -3,9 +3,11 @@
 동물 사진 등록
 이름, 성별, 생일, 몸무게, 중성화 여부
  */
-
-import 'package:flutter/gestures.dart';
+import 'package:ahri_manager/plus/user_helper.dart';
+import 'package:ahri_manager/data/user_data.dart';
+import 'package:ahri_manager/screen/home.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 import 'package:flutter/cupertino.dart';
@@ -18,28 +20,34 @@ class StartScreen extends StatefulWidget {
   State<StartScreen> createState() => _StartScreenState();
 }
 
+
 class _StartScreenState extends State<StartScreen> {
   TextEditingController name = TextEditingController();
   TextEditingController weight = TextEditingController();
+  DateTime selectedDate = DateTime.now();
+  String? _genderbuttonText;
+  String? _neubuttonText;
+  String? _speciesText;
 
-  DateTime selectedDate = DateTime.now(); //기본값은 현재날짜로
+  final UserHelper helper =UserHelper();
 
   var userImage;
-  addUI(u) {
-    userImage = u;
-  }
+  addUI(u) {userImage = u;} //이미지 띄우기
 
   List _GenderType = ['수컷', '암컷'];
   List _SurgeryMenu = ['O', 'X'];
+  List _SpeciesList = ['앵무새', '햄스터', '토끼', '물고기', '도마뱀'];
   List<DropdownMenuItem<String>> _dropDownGenderItems =
       new List.empty(growable: true);
   List<DropdownMenuItem<String>> _dropDownSurItems =
-      new List.empty(growable: true);
-  String? _genderbuttonText;
-  String? _neubuttonText;
+  new List.empty(growable: true);
+  List<DropdownMenuItem<String>> _dropDownSpeciesItems =
+  new List.empty(growable: true);
 
   @override
   void initState() {
+      helper.init();
+
     super.initState();
     for (var item in _GenderType) {
       _dropDownGenderItems
@@ -48,8 +56,12 @@ class _StartScreenState extends State<StartScreen> {
     for (var item in _SurgeryMenu) {
       _dropDownSurItems.add(DropdownMenuItem(value: item, child: Text(item)));
     }
+    for (var item in _SpeciesList) {
+      _dropDownSpeciesItems.add(DropdownMenuItem(value: item, child: Text(item)));
+    }
     _genderbuttonText = _dropDownGenderItems[0].value;
     _neubuttonText = _dropDownSurItems[0].value;
+    _speciesText = _dropDownSpeciesItems[0].value;
   }
 
   @override
@@ -74,7 +86,7 @@ class _StartScreenState extends State<StartScreen> {
                 onPressed: () async {
                   var picker = ImagePicker();
                   dynamic image =
-                      await picker.pickImage(source: ImageSource.gallery);
+                  await picker.pickImage(source: ImageSource.gallery);
 
                   if (image != null) {
                     setState(() {
@@ -82,14 +94,9 @@ class _StartScreenState extends State<StartScreen> {
                       addUI(ui);
                     });
                   }
-                  Widget userima() {
-                    //저장한 이미지를 띄우는 친구였어요... 새로운 페이지로 띄우는 건 가능했는데요? 이 페이지 안에 띄우는 건 못하겠어요.
+                  Widget userima(){ //저장한 이미지를 띄우는 친구였어요... 새로운 페이지로 띄우는 건 가능했는데요? 이 페이지 안에 띄우는 건 못하겠어요.
                     //서칭해서 찾아보니까 return Container(body:어쩌구)) 하던데 응 안돼
-                    return Image.file(
-                      userImage,
-                      height: 100,
-                      width: 100,
-                    );
+                    return Image.file(userImage, height: 100, width: 100,);
                   }
                 },
               ),
@@ -97,13 +104,30 @@ class _StartScreenState extends State<StartScreen> {
             Padding( //이름
               padding: EdgeInsets.fromLTRB(100, 10, 30, 20),
               child: TextField(
-                controller: name,
+                controller: name, //name
                 decoration: InputDecoration(
                   labelText: 'Name',
                 ),
               ),
             ),
-
+            Padding( //동물종
+              padding: EdgeInsets.fromLTRB(26, 5, 30, 10),
+              child: Row(
+                children: [
+                  Text('동물종', style: TextStyle(fontSize: 17),),
+                  Text('           '),
+                  DropdownButton(
+                    items: _dropDownSpeciesItems,
+                    onChanged: (String? value) {
+                      setState(() {
+                        _speciesText = value;
+                      });
+                    },
+                    value: _speciesText,
+                  ),
+                ],
+              ),
+            ),
             Padding(
               //성별
               padding: EdgeInsets.fromLTRB(30, 5, 30, 10),
@@ -187,6 +211,7 @@ class _StartScreenState extends State<StartScreen> {
                 children: [
                   Text('몸무게'),
                   TextField(
+                    keyboardType: TextInputType.number,
                     controller: weight,
                     decoration: InputDecoration(
                       labelText: 'Weight',
@@ -199,6 +224,7 @@ class _StartScreenState extends State<StartScreen> {
                 ],
               ),
             ),
+
 
             Padding(
               //중성화여부
@@ -229,33 +255,49 @@ class _StartScreenState extends State<StartScreen> {
                   ElevatedButton(
                     child: const Text('저장'),
                     style: ButtonStyle(
-                        backgroundColor:
-                            MaterialStateProperty.all(Colors.green)),
+                        backgroundColor: MaterialStateProperty.all(Colors.green)),
+                    onPressed: (){
+                      if(weight.text==""||name.text==""){Text("하이");}
+                        else{
+                        saveUserInformation();
+                      }},
+                  ),
+                  ElevatedButton(
+                    child: const Text('취소'),
+                    style: ButtonStyle(
+                        backgroundColor: MaterialStateProperty.all(Colors.green)),
                     onPressed: () {
-                      //홈화면으로 넘어가는 코드 이거 맞니? 이거 맞으면 /**/만 없애면 됨 굿~~
-                      /*Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => HomeScreen()),
-                      );
-                       */
+                      // 앱 종료 기능
+                      SystemChannels.platform.invokeMethod('SystemNavigator.pop');
                     },
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 15.0),
-                    child: ElevatedButton(
-                      child: const Text('취소'),
-                      style: ButtonStyle(
-                          backgroundColor:
-                              MaterialStateProperty.all(Colors.green)),
-                      onPressed: () {
-                        // 앱 종료 기능을 만들고 싶었어요.
-                      },
-                    ),
-                  ),
+
                 ],
               ),
             ),
           ]),
+    );
+  }
+
+  Future saveUserInformation() async{
+    int selectedyear=selectedDate.year;
+    int selectedmonth=selectedDate.month;
+    int selectedday=selectedDate.day;
+    user_information newUser_Information= user_information(
+        1,
+        name.text,
+        weight.text,
+        _genderbuttonText.toString(),
+        selectedyear,
+        selectedmonth,
+        selectedday,
+        _neubuttonText.toString(),
+        _speciesText.toString()
+    );
+    helper.writeusesinformation(newUser_Information);
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => HomeScreen()),
     );
   }
 }

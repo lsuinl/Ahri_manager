@@ -1,7 +1,12 @@
 import 'package:ahri_manager/screen/buy_object.dart';
-import 'package:ahri_manager/screen/d_day.dart';
+import 'package:ahri_manager/screen/calendar_scr.dart';
 import 'package:ahri_manager/screen/map_hospital.dart';
 import 'package:flutter/material.dart';
+import 'package:ahri_manager/plus/user_helper.dart';
+import 'package:ahri_manager/data/user_data.dart';
+
+
+import 'calendar_scr.dart';
 
 //메인화면(탭 선택 화면)
 class HomeScreen extends StatefulWidget {
@@ -12,6 +17,15 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  List<user_information> user_infotmations=[]; //유저정보 리스트
+  final UserHelper helper=UserHelper();
+  @override
+  void initState(){
+    helper.init().then((value){
+     updateScreen();
+    });
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -156,4 +170,9 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
     );
   }
+  void updateScreen(){
+    user_infotmations=helper.getuserinformation();
+    setState(() {});
+  }
 }
+
