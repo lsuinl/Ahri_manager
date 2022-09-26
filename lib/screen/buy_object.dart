@@ -45,32 +45,65 @@ class _birdurlState extends State<_birdurl> {
     if (widget.animalname == "도마뱀") animalshop = lizardshopname;
     return Scaffold(
       appBar: AppBar(
-        title: Text("자본을 뿌려보아요"),
+        backgroundColor: Colors.lightGreen,
+        title: Padding(
+          padding: const EdgeInsets.only(top: 8.0),
+          child: Text(
+            "자본을 뿌려보아요",
+            style: TextStyle(
+              color: Colors.white,
+              fontFamily: 'jua',
+              fontSize: 30.0,
+            ),
+          ),
+        ),
       ),
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            for (int i = 0; i < animalshop.length; i++)
-              ElevatedButton.icon(
-                icon: Icon(Icons.shopping_bag_outlined,
-                    size: 20, color: Colors.black),
-                label: Text(
-                  animalshop[i],
-                  style: TextStyle(color: Colors.black),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8.0), //버튼 양옆 조금씩 띄우기
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center, //왜 중간으로 안 가는겨
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              for (int i = 0; i < animalshop.length; i++)
+                Padding(
+                  padding: const EdgeInsets.only(top: 30.0),
+                  child: ElevatedButton.icon(
+                    //버튼!!!
+                    icon: Icon(Icons.shopping_bag_outlined,
+                        size: 20, color: Colors.black),
+                    label: Text(
+                      animalshop[i],
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontFamily: 'jua',
+                        fontSize: 25.0,
+                      ),
+                    ),
+                    style: ElevatedButton.styleFrom(
+                      primary: Colors.lightGreen,
+                      onPrimary: Colors.lightGreen, //애니메이션 색깔
+                      shadowColor: Colors.black,
+                      elevation: 5.0,
+                      padding: EdgeInsets.all(15.0),
+                      side: BorderSide( //테두리
+                        color: Colors.black,
+                        width: 1.0,
+                      ),
+                    ),
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  Shop_url(shopname: animalshop[i])));
+                    },
+                  ),
                 ),
-                style: ElevatedButton.styleFrom(primary: Colors.white),
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) =>
-                              Shop_url(shopname: animalshop[i])));
-                },
-              ),
-          ],
+            ],
+          ),
         ),
       ),
     );

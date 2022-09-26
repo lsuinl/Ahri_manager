@@ -38,7 +38,7 @@ class _StartScreenState extends State<StartScreen> {
   List _SurgeryMenu = ['O', 'X'];
   List _SpeciesList = ['앵무새', '햄스터', '토끼', '물고기', '도마뱀'];
   List<DropdownMenuItem<String>> _dropDownGenderItems =
-  new List.empty(growable: true);
+      new List.empty(growable: true);
   List<DropdownMenuItem<String>> _dropDownSurItems =
   new List.empty(growable: true);
   List<DropdownMenuItem<String>> _dropDownSpeciesItems =
@@ -101,8 +101,7 @@ class _StartScreenState extends State<StartScreen> {
                 },
               ),
             ),
-            Padding(
-              //이름
+            Padding( //이름
               padding: EdgeInsets.fromLTRB(100, 10, 30, 20),
               child: TextField(
                 controller: name, //name
@@ -134,7 +133,10 @@ class _StartScreenState extends State<StartScreen> {
               padding: EdgeInsets.fromLTRB(30, 5, 30, 10),
               child: Row(
                 children: [
-                  Text('성별', style: TextStyle(fontSize: 17),),
+                  Text(
+                    '성별',
+                    style: TextStyle(fontSize: 17),
+                  ),
                   Text('          '),
                   DropdownButton(
                     items: _dropDownGenderItems,
@@ -201,6 +203,7 @@ class _StartScreenState extends State<StartScreen> {
               ),
             ),
 
+            //Column으로 묶고 두개를 Row로 하면 될 거 같긴 한데 왜 안되는진 모르겠다 ㅏ아아!!!!!!!
 
             Padding(//무게
               padding: EdgeInsets.fromLTRB(100, 10, 30, 0),
@@ -222,12 +225,16 @@ class _StartScreenState extends State<StartScreen> {
               ),
             ),
 
+
             Padding(
               //중성화여부
               padding: EdgeInsets.fromLTRB(30, 10, 30, 5),
               child: Row(
                 children: [
-                  Text('중성화', style: TextStyle(fontSize: 17),),
+                  Text(
+                    '중성화',
+                    style: TextStyle(fontSize: 17),
+                  ),
                   Text('        '),
                   DropdownButton(
                     items: _dropDownSurItems,
