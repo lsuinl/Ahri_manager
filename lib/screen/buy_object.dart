@@ -62,9 +62,9 @@ class _birdurlState extends State<_birdurl> {
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+          padding: const EdgeInsets.symmetric(horizontal: 8.0), //버튼 양옆 조금씩 띄우기
           child: Column(
-            //mainAxisAlignment: MainAxisAlignment.center, //왜 중간으로 안 가는겨
+            mainAxisAlignment: MainAxisAlignment.center, //왜 중간으로 안 가는겨
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               for (int i = 0; i < animalshop.length; i++)
@@ -84,7 +84,7 @@ class _birdurlState extends State<_birdurl> {
                     ),
                     style: ElevatedButton.styleFrom(
                       primary: Colors.lightGreen,
-                      onPrimary: Colors.black, //애니메이션 색깔
+                      onPrimary: Colors.lightGreen, //애니메이션 색깔
                       shadowColor: Colors.black,
                       elevation: 5.0,
                       padding: EdgeInsets.all(15.0),

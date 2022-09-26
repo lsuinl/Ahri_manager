@@ -4,7 +4,6 @@
 이름, 성별, 생일, 몸무게, 중성화 여부
  */
 
-
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -33,9 +32,9 @@ class _StartScreenState extends State<StartScreen> {
   List _GenderType = ['수컷', '암컷'];
   List _SurgeryMenu = ['O', 'X'];
   List<DropdownMenuItem<String>> _dropDownGenderItems =
-  new List.empty(growable: true);
+      new List.empty(growable: true);
   List<DropdownMenuItem<String>> _dropDownSurItems =
-  new List.empty(growable: true);
+      new List.empty(growable: true);
   String? _genderbuttonText;
   String? _neubuttonText;
 
@@ -75,7 +74,7 @@ class _StartScreenState extends State<StartScreen> {
                 onPressed: () async {
                   var picker = ImagePicker();
                   dynamic image =
-                  await picker.pickImage(source: ImageSource.gallery);
+                      await picker.pickImage(source: ImageSource.gallery);
 
                   if (image != null) {
                     setState(() {
@@ -83,15 +82,19 @@ class _StartScreenState extends State<StartScreen> {
                       addUI(ui);
                     });
                   }
-                  Widget userima(){ //저장한 이미지를 띄우는 친구였어요... 새로운 페이지로 띄우는 건 가능했는데요? 이 페이지 안에 띄우는 건 못하겠어요.
+                  Widget userima() {
+                    //저장한 이미지를 띄우는 친구였어요... 새로운 페이지로 띄우는 건 가능했는데요? 이 페이지 안에 띄우는 건 못하겠어요.
                     //서칭해서 찾아보니까 return Container(body:어쩌구)) 하던데 응 안돼
-                    return Image.file(userImage, height: 100, width: 100,);
+                    return Image.file(
+                      userImage,
+                      height: 100,
+                      width: 100,
+                    );
                   }
                 },
               ),
             ),
-            Padding(
-              //이름
+            Padding( //이름
               padding: EdgeInsets.fromLTRB(100, 10, 30, 20),
               child: TextField(
                 controller: name,
@@ -106,7 +109,10 @@ class _StartScreenState extends State<StartScreen> {
               padding: EdgeInsets.fromLTRB(30, 5, 30, 10),
               child: Row(
                 children: [
-                  Text('성별', style: TextStyle(fontSize: 17),),
+                  Text(
+                    '성별',
+                    style: TextStyle(fontSize: 17),
+                  ),
                   Text('          '),
                   DropdownButton(
                     items: _dropDownGenderItems,
@@ -173,40 +179,36 @@ class _StartScreenState extends State<StartScreen> {
               ),
             ),
 
-            //Column으로 묶고 두개를 Row로 하면 될 거 같긴 한데 왜 안되는진 모르겠음여
-            Column( //'몸무게' 텍스트
-              children: [
-                Text('몸무게'),
-                TextField(
-                  controller: weight,
-                  decoration: InputDecoration(
-                    labelText: 'Weight',
+            //Column으로 묶고 두개를 Row로 하면 될 거 같긴 한데 왜 안되는진 모르겠다 ㅏ아아!!!!!!!
+
+            Padding(//무게
+              padding: EdgeInsets.fromLTRB(100, 10, 30, 0),
+              child: Column(
+                children: [
+                  Text('몸무게'),
+                  TextField(
+                    controller: weight,
+                    decoration: InputDecoration(
+                      labelText: 'Weight',
+                    ),
                   ),
-                ),
-                Text(
-                  'Kg',
-                  textAlign: TextAlign.right,
-                ),
-              ],
+                  Text(
+                    'Kg',
+                    textAlign: TextAlign.right,
+                  ),
+                ],
+              ),
             ),
-
-            Column( //몸무게 설정
-              children: [
-                Padding(
-                  padding: EdgeInsets.fromLTRB(100, 10, 30, 0), //왼쪽, 위, 오르쪽, 밑
-                  //padding: EdgeInsets.only(left: 100, right: 100),
-                  //child:
-                ),
-              ],
-            ),
-
 
             Padding(
               //중성화여부
               padding: EdgeInsets.fromLTRB(30, 10, 30, 5),
               child: Row(
                 children: [
-                  Text('중성화', style: TextStyle(fontSize: 17),),
+                  Text(
+                    '중성화',
+                    style: TextStyle(fontSize: 17),
+                  ),
                   Text('        '),
                   DropdownButton(
                     items: _dropDownSurItems,
@@ -227,8 +229,10 @@ class _StartScreenState extends State<StartScreen> {
                   ElevatedButton(
                     child: const Text('저장'),
                     style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all(Colors.green)),
-                    onPressed: () { //홈화면으로 넘어가는 코드 이거 맞니? 이거 맞으면 /**/만 없애면 됨 굿~~
+                        backgroundColor:
+                            MaterialStateProperty.all(Colors.green)),
+                    onPressed: () {
+                      //홈화면으로 넘어가는 코드 이거 맞니? 이거 맞으면 /**/만 없애면 됨 굿~~
                       /*Navigator.push(
                         context,
                         MaterialPageRoute(builder: (context) => HomeScreen()),
@@ -241,7 +245,8 @@ class _StartScreenState extends State<StartScreen> {
                     child: ElevatedButton(
                       child: const Text('취소'),
                       style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all(Colors.green)),
+                          backgroundColor:
+                              MaterialStateProperty.all(Colors.green)),
                       onPressed: () {
                         // 앱 종료 기능을 만들고 싶었어요.
                       },
