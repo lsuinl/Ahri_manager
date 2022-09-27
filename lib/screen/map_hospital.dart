@@ -72,6 +72,7 @@ class _Map_hospitalState extends State<Map_hospital> {
         ));
       }//if
     }//for
+
     return Scaffold(
         appBar: AppBar(
           //타이틀
@@ -105,7 +106,7 @@ class _Map_hospitalState extends State<Map_hospital> {
                                 target: LatLng(
                                   37.22310017857214,
                                   127.1873556838689,
-                                ),zoom: 15),
+                                ),zoom: 16),
                         //초기 카메라 위치
                         myLocationEnabled: true,
                         //내위치표시
@@ -120,23 +121,13 @@ class _Map_hospitalState extends State<Map_hospital> {
                         markers: _markers,
                       ),
                     ),
-                        // _CustomGoogleMap(
-                        //   onmapcreated: onMapCreated, //컨트롤러설정
-                        //   marker: list, //마커
-                        //   initialPostion: CameraPosition(
-                        //       target: LatLng(
-                        //         37.22310017857214,
-                        //         127.1873556838689,
-                        //       ),
-                        //       zoom: 15), //초기 위치
-                        // ),
                       ],
                     );
                   });
             }
             //권한 설정이 안 되어있는 경우
             return Center(
-              child: Text(snapshot.data),
+              child:(snapshot.data),
             );
           },
         ));
@@ -150,8 +141,6 @@ class _Map_hospitalState extends State<Map_hospital> {
     setState(() {});
   }
 }
-
-
 
 //------------------------------------------------------
 // 권한과 관련된 모든 값은 미래의 값을 받아오는 async로 작업

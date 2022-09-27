@@ -1,6 +1,7 @@
 import 'package:ahri_manager/screen/buy_object.dart';
 import 'package:ahri_manager/screen/calendar_scr.dart';
 import 'package:ahri_manager/screen/map_hospital.dart';
+import 'package:ahri_manager/screen/my.dart';
 import 'package:flutter/material.dart';
 import 'package:ahri_manager/plus/user_helper.dart';
 import 'package:ahri_manager/data/user_data.dart';
@@ -56,13 +57,13 @@ class _HomeScreenState extends State<HomeScreen> {
                     padding: const EdgeInsets.only(left: 50.0),
                     child: ElevatedButton(
                       child: Text(
-                        "설정",
+                        "내정보",
                         style: TextStyle(color: Colors.black),
                       ),
                       style: ElevatedButton.styleFrom(primary: Colors.white),
                       onPressed: () {
                         Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => Buy_object()));
+                            MaterialPageRoute(builder: (context) => My()));
                       },
                     ),
                   ),
