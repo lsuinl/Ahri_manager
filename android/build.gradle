@@ -17,7 +17,7 @@ allprojects {
         mavenCentral()
 
         maven {
-            url 'https://navercorp.bintray.com/maps'
+            url 'https://navercorp.bintray.com/maps' //이거지워
         }
     }
 }

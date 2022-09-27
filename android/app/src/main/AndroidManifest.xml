@@ -38,6 +38,6 @@
             android:value="2" />
         <meta-data
             android:name="com.naver.maps.map.CLIENT_ID"
-            android:value="gie0i93lub" />
+            android:value="gie0i93lub" /> <!-- 이거지워-->
     </application>
 </manifest>

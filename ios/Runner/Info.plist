@@ -58,6 +58,8 @@
     <string>위치 정보가 필요합니다.</string>
     <key>NSLocationAlwaysUsageDescription</key>
     <string>위치 정보가 필요합니다.</string>
+    <key>NSLocationUsageDescription</key>
+    <string>위치 정보가 필요합니다잉.</string>
     <key>NSPhotoLibraryUsageDescription</key>
     <string>사진첩에 있는 사진을 가져오게 허락해주십쇼</string>
     <key>NSCameraUsageDescription</key>
