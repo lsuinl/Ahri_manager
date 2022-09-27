@@ -93,7 +93,7 @@ class _StartScreenState extends State<StartScreen> {
                     setState(() {
                       dynamic ui = File(image.path);
                       addUI(ui);
-                    });
+                    });//
                   }
                 },
               ),
