@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ahri_manager/screen/shop_url.dart';
+import 'package:ahri_manager/data/user_data.dart';
+import 'package:ahri_manager/plus/user_helper.dart';
 
 //물건판매리스트(동물별로 다르게 표기)
 //목록 중 하나를 선택 시, 웹사이트로 이동
@@ -11,18 +13,14 @@ class Buy_object extends StatefulWidget {
 }
 
 class _Buy_objectState extends State<Buy_object> {
-  final String animalname = "앵무새";
-
   @override
   Widget build(BuildContext context) {
-    return _birdurl(animalname: animalname);
+    return _birdurl();
   }
 }
 
 class _birdurl extends StatefulWidget {
-  final String animalname;
-
-  const _birdurl({required this.animalname, Key? key}) : super(key: key);
+  const _birdurl({Key? key}) : super(key: key);
 
   @override
   State<_birdurl> createState() => _birdurlState();
@@ -34,15 +32,25 @@ class _birdurlState extends State<_birdurl> {
   List rabbitshopname = ["달나라토끼농장", "토당마을", "청아농장", "미니미펫"];
   List pishshopname = ["라라아쿠아", "헬로아쿠아", "트로피쉬넷", "신세계수족관"];
   List lizardshopname = ["줄스샵", "반모리", "밀림펫"];
+  List<user_information> user_infotmations = []; //유저정보 리스트
+  final UserHelper helper = UserHelper();
+
+  @override
+  void initState() {
+    helper.init().then((value) {
+      updateScreen();
+    });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     List animalshop = [];
-    if (widget.animalname == "앵무새") animalshop = birdshopname;
-    if (widget.animalname == "햄스터") animalshop = hamshopname;
-    if (widget.animalname == "토끼") animalshop = rabbitshopname;
-    if (widget.animalname == "물고기") animalshop = pishshopname;
-    if (widget.animalname == "도마뱀") animalshop = lizardshopname;
+    if (user_infotmations.first.species == "앵무새") animalshop = birdshopname;
+    if (user_infotmations.first.species == "햄스터") animalshop = hamshopname;
+    if (user_infotmations.first.species == "토끼") animalshop = rabbitshopname;
+    if (user_infotmations.first.species == "물고기") animalshop = pishshopname;
+    if (user_infotmations.first.species == "도마뱀") animalshop = lizardshopname;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.lightGreen,
@@ -84,11 +92,13 @@ class _birdurlState extends State<_birdurl> {
                     ),
                     style: ElevatedButton.styleFrom(
                       primary: Colors.lightGreen,
-                      onPrimary: Colors.lightGreen, //애니메이션 색깔
+                      onPrimary: Colors.lightGreen,
+                      //애니메이션 색깔
                       shadowColor: Colors.black,
                       elevation: 5.0,
                       padding: EdgeInsets.all(15.0),
-                      side: BorderSide( //테두리
+                      side: BorderSide(
+                        //테두리
                         color: Colors.black,
                         width: 1.0,
                       ),
@@ -107,5 +117,10 @@ class _birdurlState extends State<_birdurl> {
         ),
       ),
     );
+  }
+
+  void updateScreen() {
+    user_infotmations = helper.getuserinformation();
+    setState(() {});
   }
 }
