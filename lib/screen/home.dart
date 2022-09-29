@@ -33,7 +33,7 @@ class _HomeScreenState extends State<HomeScreen> {
       decoration: BoxDecoration( //배경이미지
         image: DecorationImage(
           fit: BoxFit.cover,
-          image: AssetImage('/Users/kimsu-in/Desktop/icecream/flutter-sw/asset/imgs/background3.jpg'),
+          image: AssetImage('asset/imgs/background3.jpg'),
         ),
       ),
       child: Scaffold(
@@ -89,7 +89,8 @@ class _HomeScreenState extends State<HomeScreen> {
                             Navigator.push(context,
                                 MaterialPageRoute(builder: (context) => Buy_object()));
                           },
-                          icon: Image.asset('/Users/kimsu-in/Desktop/icecream/flutter-sw/asset/imgs/schedule.png'),
+                          icon: Image.asset('asset/imgs/schedule.png'),
+                         
                           iconSize: 70,
                           //padding,
                         ),
@@ -118,7 +119,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             Navigator.push(context,
                                 MaterialPageRoute(builder: (context) => Map_hospital()));
                           },
-                          icon: Image.asset('/Users/kimsu-in/Desktop/icecream/flutter-sw/asset/imgs/hospital.png'),
+                          icon: Image.asset('asset/imgs/hospital.png'),
                           iconSize: 70,
                         ),
 
@@ -148,7 +149,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           Navigator.push(context,
                               MaterialPageRoute(builder: (context) => Buy_object()));
                           },
-                        icon: Image.asset('/Users/kimsu-in/Desktop/icecream/flutter-sw/asset/imgs/pet-food.png'),
+                        icon: Image.asset('asset/imgs/pet-food.png'),
                         iconSize: 70,
                       ),
 
