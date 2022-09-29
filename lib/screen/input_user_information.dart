@@ -28,10 +28,12 @@ class _StartScreenState extends State<StartScreen> {
   String? _neubuttonText;
   String? _speciesText;
 
-  final UserHelper helper =UserHelper();
+  final UserHelper helper = UserHelper();
 
   var userImage;
-  addUI(u) {userImage = u;} //이미지 띄우기
+  addUI(u) {
+    userImage = u;
+  } //이미지 띄우기
 
   List _GenderType = ['수컷', '암컷'];
   List _SurgeryMenu = ['O', 'X'];
@@ -39,13 +41,13 @@ class _StartScreenState extends State<StartScreen> {
   List<DropdownMenuItem<String>> _dropDownGenderItems =
       new List.empty(growable: true);
   List<DropdownMenuItem<String>> _dropDownSurItems =
-  new List.empty(growable: true);
+      new List.empty(growable: true);
   List<DropdownMenuItem<String>> _dropDownSpeciesItems =
-  new List.empty(growable: true);
+      new List.empty(growable: true);
 
   @override
   void initState() {
-      helper.init();
+    helper.init();
 
     super.initState();
     for (var item in _GenderType) {
@@ -56,7 +58,8 @@ class _StartScreenState extends State<StartScreen> {
       _dropDownSurItems.add(DropdownMenuItem(value: item, child: Text(item)));
     }
     for (var item in _SpeciesList) {
-      _dropDownSpeciesItems.add(DropdownMenuItem(value: item, child: Text(item)));
+      _dropDownSpeciesItems
+          .add(DropdownMenuItem(value: item, child: Text(item)));
     }
     _genderbuttonText = _dropDownGenderItems[0].value;
     _neubuttonText = _dropDownSurItems[0].value;
@@ -68,52 +71,106 @@ class _StartScreenState extends State<StartScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.lightGreen,
-        title: Text('동물 등록하기'),
+        title: Padding(
+          padding: const EdgeInsets.only(top: 5.0),
+          child: Text(
+            '동물 등록하기',
+            style: TextStyle(
+              color: Colors.white,
+              fontFamily: 'jua',
+              fontSize: 28.0,
+            ),
+          ),
+        ),
         centerTitle: true, //중간에 오도록
-        leading: Icon(Icons.home),
       ),
       body: ListView(
           scrollDirection: Axis.vertical,
           padding: const EdgeInsets.all(10.0),
           children: <Widget>[
-            if(userImage!=null)
-              Image.file(userImage, height: 100, width: 100,),
+            Text(
+              '더 자세한 정보를 위해 해당 동물 정보를 입력해주세요.',
+              style: TextStyle(
+                fontFamily: 'jua',
+                fontSize: 18.0,
+              ),
+            ),
+            SizedBox(height: 10.0),
             Padding(
-              padding: EdgeInsets.all(15),
+              padding: EdgeInsets.symmetric(horizontal: 60.0),
               child: ElevatedButton(
-                child: const Text('이미지를 올리쇼'),
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 3.0),
+                  child: const Text(
+                    '동물 이미지 올리기',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontFamily: 'jua',
+                      fontSize: 23.0,
+                    ),
+                  ),
+                ),
                 style: ButtonStyle(
                     backgroundColor: MaterialStateProperty.all(Colors.green)),
                 onPressed: () async {
                   var picker = ImagePicker();
                   dynamic image =
-                  await picker.pickImage(source: ImageSource.gallery);
+                      await picker.pickImage(source: ImageSource.gallery);
 
                   if (image != null) {
                     setState(() {
                       dynamic ui = File(image.path);
                       addUI(ui);
-                    });//
+                    });
+                  }
+                  Widget userima() {
+                    //저장한 이미지를 띄우는 친구였어요... 새로운 페이지로 띄우는 건 가능했는데요? 이 페이지 안에 띄우는 건 못하겠어요.
+                    //서칭해서 찾아보니까 return Container(body:어쩌구)) 하던데 응 안돼
+                    return Image.file(
+                      userImage,
+                      height: 100,
+                      width: 100,
+                    );
+
                   }
                 },
               ),
             ),
-            Padding( //이름
-              padding: EdgeInsets.fromLTRB(100, 10, 30, 20),
-              child: TextField(
-                controller: name, //name
-                decoration: InputDecoration(
-                  labelText: 'Name',
-                ),
+
+            Padding(
+              //이름
+              padding: EdgeInsets.fromLTRB(40, 20, 150, 10),
+              child: Row(
+                children: <Widget>[
+                  new Text(
+                    "이름",
+                    textAlign: TextAlign.left,
+                    style: TextStyle(fontFamily: 'jua', fontSize: 20),
+                  ),
+                  new Text('        '),
+                  new Flexible(
+                      child: new TextField(
+                    controller: name,
+                    style: Theme.of(context).textTheme.bodyText1,
+                  )),
+                ],
               ),
             ),
-            Padding( //동물종
+
+            SizedBox(height: 10.0),
+
+            Padding(
+              //동물종
               padding: EdgeInsets.fromLTRB(26, 5, 30, 10),
               child: Row(
                 children: [
-                  Text('동물종', style: TextStyle(fontSize: 17),),
-                  Text('           '),
+                  Text(
+                    '  동물종',
+                    style: TextStyle(fontFamily: 'jua', fontSize: 20),
+                  ),
+                  Text('         '),
                   DropdownButton(
+                    style: TextStyle(fontFamily: 'jua'),
                     items: _dropDownSpeciesItems,
                     onChanged: (String? value) {
                       setState(() {
@@ -125,16 +182,17 @@ class _StartScreenState extends State<StartScreen> {
                 ],
               ),
             ),
+
             Padding(
               //성별
-              padding: EdgeInsets.fromLTRB(30, 5, 30, 10),
+              padding: EdgeInsets.fromLTRB(30, 15, 30, 10),
               child: Row(
                 children: [
                   Text(
-                    '성별',
-                    style: TextStyle(fontSize: 17),
+                    '  성별',
+                    style: TextStyle(fontFamily: 'jua', fontSize: 20),
                   ),
-                  Text('          '),
+                  Text('           '),
                   DropdownButton(
                     items: _dropDownGenderItems,
                     onChanged: (String? value) {
@@ -149,16 +207,17 @@ class _StartScreenState extends State<StartScreen> {
             ),
 
             Padding(
-              padding: EdgeInsets.fromLTRB(30, 10, 30, 5),
+              padding: EdgeInsets.fromLTRB(30, 20, 30, 5),
               child: Row(
                 children: [
                   Text(
-                    '생일',
+                    '  생일',
                     textAlign: TextAlign.left,
-                    style: TextStyle(fontSize: 17),
+                    style: TextStyle(fontFamily: 'jua', fontSize: 20),
                   ),
                   Text('      '),
-                  IconButton( //생일
+                  IconButton(
+                    //생일
                     iconSize: 30.0,
                     onPressed: () {
                       showCupertinoDialog(
@@ -187,50 +246,54 @@ class _StartScreenState extends State<StartScreen> {
                       );
                     },
                     icon: Icon(
-                      Icons.favorite,
-                      color: Colors.red,
+                      Icons.cake,
+                      color: Colors.pinkAccent,
                     ),
                   ),
                   Text(
                     '${selectedDate.year}.${selectedDate.month}.${selectedDate.day}',
                     textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 20),
+                    style: TextStyle(fontFamily: 'jua', fontSize: 20),
                   ),
                 ],
               ),
             ),
 
-            //Column으로 묶고 두개를 Row로 하면 될 거 같긴 한데 왜 안되는진 모르겠다 ㅏ아아!!!!!!!
-
-            Padding(//무게
-              padding: EdgeInsets.fromLTRB(100, 10, 30, 0),
-              child: Column(
-                children: [
-                  Text('몸무게'),
-                  TextField(
-                    keyboardType: TextInputType.number,
-                    controller: weight,
-                    decoration: InputDecoration(
-                      labelText: 'Weight',
+            Padding(
+              //무게
+              padding: EdgeInsets.fromLTRB(30, 17, 210, 0),
+              child: Row(
+                children: <Widget>[
+                  new Text(
+                    " 몸무게",
+                    textAlign: TextAlign.left,
+                    style: TextStyle(fontFamily: 'jua', fontSize: 20),
+                  ),
+                  new Text('       '),
+                  new Flexible(
+                    child: new TextField(
+                      keyboardType: TextInputType.number,
+                      controller: weight,
+                      style: Theme.of(context).textTheme.bodyText1,
                     ),
                   ),
-                  Text(
-                    'Kg',
-                    textAlign: TextAlign.right,
+                  new Text(
+                    "kg",
+                    textAlign: TextAlign.left,
+                    style: TextStyle(fontSize: 17),
                   ),
                 ],
               ),
             ),
-
 
             Padding(
               //중성화여부
-              padding: EdgeInsets.fromLTRB(30, 10, 30, 5),
+              padding: EdgeInsets.fromLTRB(30, 25, 30, 5),
               child: Row(
                 children: [
                   Text(
-                    '중성화',
-                    style: TextStyle(fontSize: 17),
+                    '  중성화',
+                    style: TextStyle(fontFamily: 'jua', fontSize: 20),
                   ),
                   Text('        '),
                   DropdownButton(
@@ -245,24 +308,43 @@ class _StartScreenState extends State<StartScreen> {
                 ],
               ),
             ),
+
+            //버튼
             Padding(
-              padding: EdgeInsets.only(left: 100, right: 100),
+              padding: EdgeInsets.fromLTRB(120, 15, 100, 0),
               child: Row(
                 children: [
                   ElevatedButton(
-                    child: const Text('저장'),
+                    child: const Text(
+                      '저장',
+                      style: TextStyle(
+                        fontFamily: 'jua',
+                      ),
+                    ),
                     style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all(Colors.green)),
-                    onPressed: (){
-                      if(weight.text==""||name.text==""){Text("하이dddddkdkjlakdjflkdsafjlkadsfjlaks;fjl;aksdjfl;asdjfklasdjflk;dsajflk;dsajflkas");}
-                        else{
+                        backgroundColor:
+                            MaterialStateProperty.all(Colors.green)),
+                    onPressed: () {
+                      if (weight.text == "" || name.text == "") {
+                        Text("하이");
+                      } else {
                         saveUserInformation();
-                      }},
+                      }
+                    },
+                  ),
+                  SizedBox(
+                    width: 30.0,
                   ),
                   ElevatedButton(
-                    child: const Text('취소'),
+                    child: const Text(
+                      '취소',
+                      style: TextStyle(
+                        fontFamily: 'jua',
+                      ),
+                    ),
                     style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all(Colors.green)),
+                        backgroundColor:
+                            MaterialStateProperty.all(Colors.green)),
                     onPressed: () {
                       // 앱 종료 기능(정보수정창인 경우에는 이전화면으로 돌아감.
                       if(weight.text!=""||name.text!=""){
@@ -272,7 +354,6 @@ class _StartScreenState extends State<StartScreen> {
                       SystemChannels.platform.invokeMethod('SystemNavigator.pop');
                     },
                   ),
-
                 ],
               ),
             ),
@@ -280,11 +361,11 @@ class _StartScreenState extends State<StartScreen> {
     );
   }
 
-  Future saveUserInformation() async{
-    int selectedyear=selectedDate.year;
-    int selectedmonth=selectedDate.month;
-    int selectedday=selectedDate.day;
-    user_information newUser_Information= user_information(
+  Future saveUserInformation() async {
+    int selectedyear = selectedDate.year;
+    int selectedmonth = selectedDate.month;
+    int selectedday = selectedDate.day;
+    user_information newUser_Information = user_information(
         1,
         name.text,
         weight.text,
@@ -293,8 +374,7 @@ class _StartScreenState extends State<StartScreen> {
         selectedmonth,
         selectedday,
         _neubuttonText.toString(),
-        _speciesText.toString()
-    );
+        _speciesText.toString());
     helper.writeusesinformation(newUser_Information);
     Navigator.push(
       context,
