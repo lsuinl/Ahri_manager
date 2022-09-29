@@ -66,9 +66,16 @@ flutter {
     source '../..'
 }
 
+android {
+    defaultConfig {
+        minSdkVersion 20
+        targetSdkVersion 28
+        multiDexEnabled true
+    }
+}
+
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation 'com.naver.maps:map-sdk:3.7.1'
 }
 android {
     compileSdkVersion 33

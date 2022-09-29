@@ -15,10 +15,6 @@ allprojects {
     repositories {
         google()
         mavenCentral()
-
-        maven {
-            url 'https://navercorp.bintray.com/maps'
-        }
     }
 }
 
