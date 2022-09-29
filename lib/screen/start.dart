@@ -20,7 +20,6 @@ class StartScreen extends StatefulWidget {
   State<StartScreen> createState() => _StartScreenState();
 }
 
-
 class _StartScreenState extends State<StartScreen> {
   TextEditingController name = TextEditingController();
   TextEditingController weight = TextEditingController();
@@ -77,6 +76,8 @@ class _StartScreenState extends State<StartScreen> {
           scrollDirection: Axis.vertical,
           padding: const EdgeInsets.all(10.0),
           children: <Widget>[
+            if(userImage!=null)
+              Image.file(userImage, height: 100, width: 100,),
             Padding(
               padding: EdgeInsets.all(15),
               child: ElevatedButton(
@@ -92,11 +93,7 @@ class _StartScreenState extends State<StartScreen> {
                     setState(() {
                       dynamic ui = File(image.path);
                       addUI(ui);
-                    });
-                  }
-                  Widget userima(){ //저장한 이미지를 띄우는 친구였어요... 새로운 페이지로 띄우는 건 가능했는데요? 이 페이지 안에 띄우는 건 못하겠어요.
-                    //서칭해서 찾아보니까 return Container(body:어쩌구)) 하던데 응 안돼
-                    return Image.file(userImage, height: 100, width: 100,);
+                    });//
                   }
                 },
               ),
@@ -257,7 +254,7 @@ class _StartScreenState extends State<StartScreen> {
                     style: ButtonStyle(
                         backgroundColor: MaterialStateProperty.all(Colors.green)),
                     onPressed: (){
-                      if(weight.text==""||name.text==""){Text("하이");}
+                      if(weight.text==""||name.text==""){Text("하이dddddkdkjlakdjflkdsafjlkadsfjlaks;fjl;aksdjfl;asdjfklasdjflk;dsajflk;dsajflkas");}
                         else{
                         saveUserInformation();
                       }},
@@ -267,7 +264,11 @@ class _StartScreenState extends State<StartScreen> {
                     style: ButtonStyle(
                         backgroundColor: MaterialStateProperty.all(Colors.green)),
                     onPressed: () {
-                      // 앱 종료 기능
+                      // 앱 종료 기능(정보수정창인 경우에는 이전화면으로 돌아감.
+                      if(weight.text!=""||name.text!=""){
+                          Navigator.pop(context);
+                      }
+                      else
                       SystemChannels.platform.invokeMethod('SystemNavigator.pop');
                     },
                   ),

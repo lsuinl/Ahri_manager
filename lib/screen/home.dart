@@ -1,6 +1,7 @@
 import 'package:ahri_manager/screen/buy_object.dart';
 import 'package:ahri_manager/screen/calendar_scr.dart';
 import 'package:ahri_manager/screen/map_hospital.dart';
+import 'package:ahri_manager/screen/my.dart';
 import 'package:flutter/material.dart';
 import 'package:ahri_manager/plus/user_helper.dart';
 import 'package:ahri_manager/data/user_data.dart';
@@ -32,7 +33,7 @@ class _HomeScreenState extends State<HomeScreen> {
       decoration: BoxDecoration( //배경이미지
         image: DecorationImage(
           fit: BoxFit.cover,
-          image: AssetImage('imgs/background3.jpg'),
+          image: AssetImage('/Users/kimsu-in/Desktop/icecream/flutter-sw/asset/imgs/background3.jpg'),
         ),
       ),
       child: Scaffold(
@@ -56,13 +57,13 @@ class _HomeScreenState extends State<HomeScreen> {
                     padding: const EdgeInsets.only(left: 50.0),
                     child: ElevatedButton(
                       child: Text(
-                        "설정",
+                        "내정보",
                         style: TextStyle(color: Colors.black),
                       ),
                       style: ElevatedButton.styleFrom(primary: Colors.white),
                       onPressed: () {
                         Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => Buy_object()));
+                            MaterialPageRoute(builder: (context) => My()));
                       },
                     ),
                   ),
@@ -88,7 +89,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             Navigator.push(context,
                                 MaterialPageRoute(builder: (context) => Buy_object()));
                           },
-                          icon: Image.asset('imgs/schedule.png'),
+                          icon: Image.asset('/Users/kimsu-in/Desktop/icecream/flutter-sw/asset/imgs/schedule.png'),
                           iconSize: 70,
                           //padding,
                         ),
@@ -117,7 +118,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             Navigator.push(context,
                                 MaterialPageRoute(builder: (context) => Map_hospital()));
                           },
-                          icon: Image.asset('imgs/hospital.png'),
+                          icon: Image.asset('/Users/kimsu-in/Desktop/icecream/flutter-sw/asset/imgs/hospital.png'),
                           iconSize: 70,
                         ),
 
@@ -147,7 +148,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           Navigator.push(context,
                               MaterialPageRoute(builder: (context) => Buy_object()));
                           },
-                        icon: Image.asset('imgs/pet-food.png'),
+                        icon: Image.asset('/Users/kimsu-in/Desktop/icecream/flutter-sw/asset/imgs/pet-food.png'),
                         iconSize: 70,
                       ),
 
