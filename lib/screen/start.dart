@@ -131,6 +131,7 @@ class _StartScreenState extends State<StartScreen> {
                       height: 100,
                       width: 100,
                     );
+
                   }
                 },
               ),
@@ -345,9 +346,12 @@ class _StartScreenState extends State<StartScreen> {
                         backgroundColor:
                             MaterialStateProperty.all(Colors.green)),
                     onPressed: () {
-                      // 앱 종료 기능
-                      SystemChannels.platform
-                          .invokeMethod('SystemNavigator.pop');
+                      // 앱 종료 기능(정보수정창인 경우에는 이전화면으로 돌아감.
+                      if(weight.text!=""||name.text!=""){
+                          Navigator.pop(context);
+                      }
+                      else
+                      SystemChannels.platform.invokeMethod('SystemNavigator.pop');
                     },
                   ),
                 ],

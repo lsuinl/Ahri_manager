@@ -1,7 +1,10 @@
+import 'package:ahri_manager/data/user_data.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:ahri_manager/data/hospital_information.dart'; //데이터 가져오기
+import 'package:ahri_manager/data/hospital_information.dart';
+
+import '../plus/user_helper.dart'; //데이터 가져오기
 
 class Map_hospital extends StatefulWidget {
   const Map_hospital({Key? key}) : super(key: key);
@@ -13,45 +16,63 @@ class Map_hospital extends StatefulWidget {
 
 class _Map_hospitalState extends State<Map_hospital> {
   Set<Marker> _markers=new Set();
-  final String animalname = "앵무새";
   GoogleMapController? mapController;
-
+  List<information> hospitalinf =[];
+  List<user_information> user_infotmations=[];
+  final UserHelper helper=UserHelper();
 
   @override
+  void initState(){
+    hospitalinf=hospitialinf;
+    helper.init().then((value){
+      updateScreen();
+    });
+    super.initState();
+  }
+  @override
   Widget build(BuildContext context) {
-    //마커. map를 활용한 넘버.
-    for(int i=0; i<6;i++) {
-      _markers.add(Marker(
-        markerId: MarkerId(i.toString()),
-        position: LatLng(
-          37.223+i*0.001,
-          127.1873556838689,
-        ),
-        onTap: () {
-          showModalBottomSheet<void>(
-            context: context,
-            builder: (context) {
-              return Container(
-                height: 200,
-                color: Colors.amber,
-                child: Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    mainAxisSize: MainAxisSize.min,
-                    children: <Widget>[
-                      const Text('Modal BottomSheet'),
-                    ],
+    String animalspecies= user_infotmations.first.species;
+
+    //페이지 뷰에소의 박스
+
+    //마커.
+    for(int i=0; i<hospitalinf.length;i++) {
+      if(hospitalinf[i].animal.contains(animalspecies)) { //해당반려동물을 진료하는 병원만
+        _markers.add(Marker(
+          markerId: MarkerId(hospitalinf[i].name),
+          position: LatLng(
+            hospitalinf[i].xy.longitude,
+            hospitalinf[i].xy.latitude,
+          ),
+          onTap: () {
+            showModalBottomSheet<void>(
+              context: context,
+              builder: (context) {
+                return Container(
+                  height: 200,
+                  color: Colors.amber,
+                  child: Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      mainAxisSize: MainAxisSize.min,
+                      children: <Widget>[
+                        Text("${hospitalinf[i].name}"),
+                        Text("${hospitalinf[i].phone}"),
+                        Text("${hospitalinf[i].adress}"),
+                      ],
+                    ),
                   ),
-                ),
-              );
-            }, // builder
-          );
-        },
-        infoWindow: InfoWindow(
-          title: "안녕하세요",
-        ),
-      ));
-    }
+                );
+              }, // builder
+            );
+          },
+          infoWindow: InfoWindow(
+            title: hospitalinf[i].name,
+          ),
+        ));
+      }//if
+    }//for
+
     return Scaffold(
         appBar: AppBar(
           //타이틀
@@ -85,7 +106,7 @@ class _Map_hospitalState extends State<Map_hospital> {
                                 target: LatLng(
                                   37.22310017857214,
                                   127.1873556838689,
-                                ),zoom: 15),
+                                ),zoom: 16),
                         //초기 카메라 위치
                         myLocationEnabled: true,
                         //내위치표시
@@ -100,23 +121,13 @@ class _Map_hospitalState extends State<Map_hospital> {
                         markers: _markers,
                       ),
                     ),
-                        // _CustomGoogleMap(
-                        //   onmapcreated: onMapCreated, //컨트롤러설정
-                        //   marker: list, //마커
-                        //   initialPostion: CameraPosition(
-                        //       target: LatLng(
-                        //         37.22310017857214,
-                        //         127.1873556838689,
-                        //       ),
-                        //       zoom: 15), //초기 위치
-                        // ),
                       ],
                     );
                   });
             }
             //권한 설정이 안 되어있는 경우
             return Center(
-              child: Text(snapshot.data),
+              child:(snapshot.data),
             );
           },
         ));
@@ -124,6 +135,10 @@ class _Map_hospitalState extends State<Map_hospital> {
 
   onMapCreated(GoogleMapController controller) {
     mapController = controller;
+  }
+  void updateScreen(){
+    user_infotmations=helper.getuserinformation();
+    setState(() {});
   }
 }
 
