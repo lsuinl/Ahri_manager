@@ -1,8 +1,8 @@
 import 'package:ahri_manager/screen/home.dart';
-import 'package:ahri_manager/screen/start.dart';
+import 'package:ahri_manager/screen/input_user_information.dart';
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:ahri_manager/data/user_data.dart';
+import 'package:ahri_manager/data/user_information.dart';
 import 'package:ahri_manager/plus/user_helper.dart';
 
 class Lodding extends StatefulWidget {

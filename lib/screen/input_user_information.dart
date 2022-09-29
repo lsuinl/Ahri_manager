@@ -4,7 +4,7 @@
 이름, 성별, 생일, 몸무게, 중성화 여부
  */
 import 'package:ahri_manager/plus/user_helper.dart';
-import 'package:ahri_manager/data/user_data.dart';
+import 'package:ahri_manager/data/user_information.dart';
 import 'package:ahri_manager/screen/home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
