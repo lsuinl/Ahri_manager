@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
 
 // 캘린더 밑에 일정 리스트 관리
-// 일정시간 | 일정 제목 | 카테고리 색상
+// 일정 제목 | 카테고리 색상
 
 class ScheduleCard extends StatelessWidget {
-  final DateTime startTime; //일정 시작시간
   final String title; //일정 제목
   final Color color; //일정 카테고리 색깔
 
   const ScheduleCard({
-    required this.startTime,
     required this.title,
     required this.color,
     Key? key}) : super(key: key);
@@ -30,7 +28,6 @@ class ScheduleCard extends StatelessWidget {
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              _Time(startTime: startTime), //시작 시간
               SizedBox(width: 16.0),
               _Title(title: title), //일정 제목
               SizedBox(width: 16.0),
@@ -39,31 +36,6 @@ class ScheduleCard extends StatelessWidget {
           ),
         ),
       ),
-    );
-  }
-}
-
-class _Time extends StatelessWidget { //시작 시간
-  final DateTime startTime; //받아줘요
-
-  const _Time({
-    required this.startTime,
-    Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) { //시간 style
-    final textStyle = TextStyle(
-      fontWeight: FontWeight.w600,
-      color: Colors.pinkAccent, //시간 색깔
-      fontSize: 16.0,
-    );
-
-    return Column( //시간 띄우기
-      children: [
-        Text('${startTime.hour.toString().padLeft(2, '0')}:${startTime.minute.toString().padLeft(2, '0')}',
-        style: textStyle,
-        ),
-      ],
     );
   }
 }

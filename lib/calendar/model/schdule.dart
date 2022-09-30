@@ -15,14 +15,11 @@ class Schedules extends Table {
   // 일정 날짜
   DateTimeColumn get date => dateTime()();
 
-  // 시작 시간
-  DateTimeColumn get startTime => dateTime()();
-
   // Category Color Table ID
   IntColumn get colorId => integer()();
 
   // 생성날짜
   DateTimeColumn get createAt => dateTime().clientDefault(
         () => DateTime.now(),
-      )();
+  )();
 }

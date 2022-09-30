@@ -55,13 +55,6 @@ class LocalDatabase extends _$LocalDatabase {
     ]);
 
     query.where(schedules.date.equals(date));
-    query.orderBy(
-      [
-        // asc -> ascending 오름차순
-        // desc -> descending 내림차순
-        OrderingTerm.asc(schedules.startTime),
-      ],
-    );
 
     return query.watch().map(
           (rows) => rows
@@ -80,11 +73,11 @@ class LocalDatabase extends _$LocalDatabase {
 
 }
 
-LazyDatabase _openConnection(){
-  return LazyDatabase(() async{
+LazyDatabase _openConnection() {
+  return LazyDatabase(() async {
     final dbFolder = await getApplicationDocumentsDirectory();
     //데이터 베이스를 저장할 폴더
-    final file = File(p.join(dbFolder.path, 'db.sqlite'));//데이터 베이스를 저장할 파일
+    final file = File(p.join(dbFolder.path, 'db.sqlite')); //데이터 베이스를 저장할 파일
     return NativeDatabase(file);
   });
 }
