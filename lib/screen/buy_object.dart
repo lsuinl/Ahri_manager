@@ -65,6 +65,8 @@ class _birdurlState extends State<_birdurl> {
             ),
           ),
         ),
+        centerTitle: true, //가운데 정렬
+        elevation: 0.0,
       ),
       backgroundColor: Colors.white,
       body: SingleChildScrollView(

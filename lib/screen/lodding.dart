@@ -17,24 +17,28 @@ class _LoddingState extends State<Lodding> {
 
   @override
   void initState() {
-    helper.init().then((value) {updateScreen();});
+    helper.init().then((value) {
+      updateScreen();
+    });
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.lightBlueAccent,
-      body: FutureBuilder<String>(
-          future: checkpermission(),
-          builder: (BuildContext context, AsyncSnapshot snapshot) {
-            if (snapshot.data == '허가')
-              return _ok(user_infotmations: user_infotmations,);
-            if (snapshot.connectionState == ConnectionState.waiting)
-              return _lodding();
-            else
-              return _error();
-          }));
+        backgroundColor: Colors.lightBlueAccent,
+        body: FutureBuilder<String>(
+            future: checkpermission(),
+            builder: (BuildContext context, AsyncSnapshot snapshot) {
+              if (snapshot.data == '허가')
+                return _ok(
+                  user_infotmations: user_infotmations,
+                );
+              if (snapshot.connectionState == ConnectionState.waiting)
+                return _lodding();
+              else
+                return _error();
+            }));
   }
 
   void updateScreen() {
@@ -44,12 +48,14 @@ class _LoddingState extends State<Lodding> {
 }
 
 Future<String> checkpermission() async {
-  var locationper=Permission.locationWhenInUse.request();
-  var photoper= Permission.photos.request();
-  if(locationper.isDenied==true) Permission.locationWhenInUse.request();
-  if(photoper.isDenied==true) Permission.locationWhenInUse.request();
-  if((await locationper.isGranted==false||await locationper.isLimited==false) &&
-      await photoper.isGranted==false ||await photoper.isLimited==false )
+  var locationper = Permission.locationWhenInUse.request();
+  var photoper = Permission.photos.request();
+  if (locationper.isDenied == true) Permission.locationWhenInUse.request();
+  if (photoper.isDenied == true) Permission.locationWhenInUse.request();
+  if ((await locationper.isGranted == false ||
+              await locationper.isLimited == false) &&
+          await photoper.isGranted == false ||
+      await photoper.isLimited == false)
     return '허가';
   else
     return '문제 발생';
@@ -58,36 +64,60 @@ Future<String> checkpermission() async {
 class _ok extends StatelessWidget {
   final List<user_information> user_infotmations;
 
-  const _ok({
-    required this.user_infotmations,
-    Key? key}) : super(key: key);
+  const _ok({required this.user_infotmations, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Image.asset(
-          'asset/imgs/unicorn.png',
-        ),
-        ElevatedButton(
-          child: Text(
-            "시작하기",
-            style: TextStyle(color: Colors.white),
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal:  15.0),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Image.asset(
+            'asset/imgs/unicorn.png',
           ),
-          style: ElevatedButton.styleFrom(),
-          onPressed: () {
-            if (user_infotmations.length<1) //정보저장여부
-              Navigator.push(context, MaterialPageRoute(builder: (context) => StartScreen()));
-            else
-              Navigator.push(context, MaterialPageRoute(builder: (context) => HomeScreen()));
-          },
-        ),
-      ],
+          Padding(
+            padding: const EdgeInsets.only(top: 8.0),
+            child: SizedBox(
+              height: 50.0,
+              child: ElevatedButton(
+                child: Text(
+                  "시작하기",
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontFamily: 'jua',
+                    fontSize: 30.0,
+                  ),
+                ),
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.orangeAccent, //배경색
+                  onPrimary: Colors.deepOrange, //눌렀을 때
+                  shadowColor: Colors.black,
+                  shape: RoundedRectangleBorder(
+                    //테두리 둥글게
+                    borderRadius: BorderRadius.circular(
+                      (10.0),
+                    ),
+                  ),
+                  elevation: 0.0, //그림자?? 확인해보기
+                ),
+                onPressed: () {
+                  if (user_infotmations.length < 1) //정보저장여부
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => StartScreen()));
+                  else
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => HomeScreen()));
+                },
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
-
 
 class _lodding extends StatelessWidget {
   const _lodding({Key? key}) : super(key: key);
@@ -131,4 +161,3 @@ class _error extends StatelessWidget {
     );
   }
 }
-
