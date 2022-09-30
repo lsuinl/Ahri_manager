@@ -6,15 +6,15 @@ import 'package:ahri_manager/data/hospital_information.dart';
 
 import '../plus/user_helper.dart'; //데이터 가져오기
 
-class Map_hospital extends StatefulWidget {
-  const Map_hospital({Key? key}) : super(key: key);
+class MapHospitalScreen extends StatefulWidget {
+  const MapHospitalScreen({Key? key}) : super(key: key);
 
   @override
-  State<Map_hospital> createState() => _Map_hospitalState();
+  State<MapHospitalScreen> createState() => _MapHospitalScreenState();
 }
 
 
-class _Map_hospitalState extends State<Map_hospital> {
+class _MapHospitalScreenState extends State<MapHospitalScreen> {
   Set<Marker> _markers=new Set();
   GoogleMapController? mapController;
   List<information> hospitalinf =[];

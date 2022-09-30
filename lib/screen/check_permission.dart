@@ -1,17 +1,17 @@
 import 'package:ahri_manager/screen/home.dart';
-import 'package:ahri_manager/screen/input_user_information.dart';
+import 'package:ahri_manager/screen/input_animal_information.dart';
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:ahri_manager/data/user_information.dart';
 import 'package:ahri_manager/plus/user_helper.dart';
 
-class Lodding extends StatefulWidget {
-  const Lodding({Key? key}) : super(key: key);
+class LoddingScreen extends StatefulWidget {
+  const LoddingScreen({Key? key}) : super(key: key);
   @override
-  State<Lodding> createState() => _LoddingState();
+  State<LoddingScreen> createState() => _LoddingScreenState();
 }
 
-class _LoddingState extends State<Lodding> {
+class _LoddingScreenState extends State<LoddingScreen> {
   List<user_information> user_infotmations = [];
   final UserHelper helper = UserHelper();
 
@@ -46,10 +46,13 @@ class _LoddingState extends State<Lodding> {
 Future<String> checkpermission() async {
   var locationper=Permission.locationWhenInUse.request();
   var photoper= Permission.photos.request();
+  var cameraper = Permission.camera.request();
   if(locationper.isDenied==true) Permission.locationWhenInUse.request();
-  if(photoper.isDenied==true) Permission.locationWhenInUse.request();
-  if((await locationper.isGranted==false||await locationper.isLimited==false) &&
-      await photoper.isGranted==false ||await photoper.isLimited==false )
+  if(photoper.isDenied==true) Permission.photos.request();
+  if(cameraper.isDenied==true) Permission.camera.request();
+  if((await locationper.isGranted==true||await locationper.isLimited==true) &&
+      (await photoper.isGranted==true ||await photoper.isLimited==true) &&
+      (await cameraper.isGranted==true ||await cameraper.isLimited==true))
     return '허가';
   else
     return '문제 발생';

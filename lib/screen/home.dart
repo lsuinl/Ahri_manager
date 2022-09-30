@@ -1,10 +1,10 @@
-import 'package:ahri_manager/screen/buy_object.dart';
+import 'package:ahri_manager/screen/shop_list.dart';
 import 'package:ahri_manager/screen/calendar_scr.dart';
-import 'package:ahri_manager/screen/map_hospital.dart';
-import 'package:ahri_manager/screen/my.dart';
+import 'package:ahri_manager/screen/hospital_map.dart';
+import 'package:ahri_manager/screen/my_animal_information.dart';
 import 'package:flutter/material.dart';
 import 'package:ahri_manager/plus/user_helper.dart';
-import 'package:ahri_manager/data/user_data.dart';
+import 'package:ahri_manager/data/user_information.dart';
 
 
 import 'calendar_scr.dart';
@@ -63,7 +63,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       style: ElevatedButton.styleFrom(primary: Colors.white),
                       onPressed: () {
                         Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => My()));
+                          MaterialPageRoute(builder: (context) => MyAnimalScreen()));
                       },
                     ),
                   ),
@@ -87,7 +87,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         IconButton(
                           onPressed: () {
                             Navigator.push(context,
-                                MaterialPageRoute(builder: (context) => Buy_object()));
+                                MaterialPageRoute(builder: (context) => CalendarScreen()));
                           },
                           icon: Image.asset('asset/imgs/schedule.png'),
                          
@@ -117,7 +117,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       IconButton( //병원 이미지
                           onPressed: () {
                             Navigator.push(context,
-                                MaterialPageRoute(builder: (context) => Map_hospital()));
+                                MaterialPageRoute(builder: (context) => MapHospitalScreen()));
                           },
                           icon: Image.asset('asset/imgs/hospital.png'),
                           iconSize: 70,
@@ -147,7 +147,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       IconButton( //물품 이미지
                         onPressed: () {
                           Navigator.push(context,
-                              MaterialPageRoute(builder: (context) => Buy_object()));
+                              MaterialPageRoute(builder: (context) => BuyObjectScreen()));
                           },
                         icon: Image.asset('asset/imgs/pet-food.png'),
                         iconSize: 70,

@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:ahri_manager/data/shop_information.dart';
-class Shop_url extends StatefulWidget {
+class ShopUrlScreen extends StatefulWidget {
   final String shopname;
-  const Shop_url({
+  const ShopUrlScreen({
     required this.shopname,
     Key? key}) : super(key: key);
 
   @override
-  State<Shop_url> createState() => _Shop_urlState();
+  State<ShopUrlScreen> createState() => _ShopUrlScreenState();
 }
 
-class _Shop_urlState extends State<Shop_url> {
+class _ShopUrlScreenState extends State<ShopUrlScreen> {
   Map weburl={};
   WebViewController? controller;
   String shopname="";
