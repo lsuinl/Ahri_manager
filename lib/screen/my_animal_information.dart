@@ -1,16 +1,16 @@
-import 'package:ahri_manager/screen/input_user_information.dart';
+import 'package:ahri_manager/screen/input_animal_information.dart';
 import 'package:flutter/material.dart';
 import 'package:ahri_manager/plus/user_helper.dart';
 import 'package:ahri_manager/data/user_information.dart';
 
-//내정보 조회, 배경테마설정
-class MyScreen extends StatefulWidget {
-  const MyScreen({Key? key}) : super(key: key);
+//내 동물 정보 조회, 배경테마설정
+class MyAnimalScreen extends StatefulWidget {
+  const MyAnimalScreen({Key? key}) : super(key: key);
   @override
-  State<MyScreen> createState() => _MyScreenState();
+  State<MyAnimalScreen> createState() => _MyAnimalScreenState();
 }
 
-class _MyScreenState extends State<MyScreen> {
+class _MyAnimalScreenState extends State<MyAnimalScreen> {
   List<user_information> user_infotmations=[]; //유저정보 리스트
   final UserHelper helper=UserHelper();
 
@@ -26,14 +26,14 @@ class _MyScreenState extends State<MyScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("내 정보"),
+        title: Text("${user_infotmations.first.name}이의 정보"), //동물 이름 띄우는 걸로 수정했어요
       ),
       backgroundColor:Colors.white,
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children:[
-          Text("내 정보를 표기합니다."),
+          Text("동물 정보를 표기합니다."),
           Text('이름: ${user_infotmations.first.name}'),
           Text('몸무게: ${user_infotmations.first.weight}'),
           Text('종: ${user_infotmations.first.species}'),

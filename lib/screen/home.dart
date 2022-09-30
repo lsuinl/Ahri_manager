@@ -1,7 +1,7 @@
 import 'package:ahri_manager/screen/shop_list.dart';
 import 'package:ahri_manager/screen/calendar_scr.dart';
 import 'package:ahri_manager/screen/hospital_map.dart';
-import 'package:ahri_manager/screen/my_information.dart';
+import 'package:ahri_manager/screen/my_animal_information.dart';
 import 'package:flutter/material.dart';
 import 'package:ahri_manager/plus/user_helper.dart';
 import 'package:ahri_manager/data/user_information.dart';
@@ -63,7 +63,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       style: ElevatedButton.styleFrom(primary: Colors.white),
                       onPressed: () {
                         Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => MyScreen()));
+                          MaterialPageRoute(builder: (context) => MyAnimalScreen()));
                       },
                     ),
                   ),
@@ -87,7 +87,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         IconButton(
                           onPressed: () {
                             Navigator.push(context,
-                                MaterialPageRoute(builder: (context) => BuyObjectScreen()));
+                                MaterialPageRoute(builder: (context) => CalendarScreen()));
                           },
                           icon: Image.asset('asset/imgs/schedule.png'),
                          

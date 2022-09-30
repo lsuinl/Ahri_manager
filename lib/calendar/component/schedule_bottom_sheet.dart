@@ -6,7 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:ahri_manager/data/database/drift_database.dart';
 import 'package:get_it/get_it.dart';
 
-//Add 버튼을 누르면 하단에서 흰 공간이 올라오게 하는 클래스
+// Add 버튼을 누르면 하단에서 흰 공간이 올라오게 하는 클래스
+// 여기서는 일정 등록 내용 쓸 때 사용됩니다!
 
 class ScheduleBottomSheet extends StatefulWidget {
   final DateTime selectedDate;
@@ -58,7 +59,6 @@ class _ScheduleBottomSheetState extends State<ScheduleBottomSheet> {
                 child: CircularProgressIndicator(),
               );
             }
-
             if (snapshot.hasData && startTime == null) {
               startTime = snapshot.data!.startTime;
               title = snapshot.data!.title;
@@ -68,7 +68,7 @@ class _ScheduleBottomSheetState extends State<ScheduleBottomSheet> {
 
             return SafeArea(
               child: Container(
-                height: MediaQuery.of(context).size.height / 1.5 +
+                height: MediaQuery.of(context).size.height / 1.4 +
                     bottonInset, //높이 = 전체화면의 1/1.8배 + 키보드 높이
                 color: Colors.white,
                 child: Padding(
