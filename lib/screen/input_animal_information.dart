@@ -4,7 +4,7 @@
 이름, 성별, 생일, 몸무게, 중성화 여부
  */
 import 'package:ahri_manager/plus/user_helper.dart';
-import 'package:ahri_manager/data/user_data.dart';
+import 'package:ahri_manager/data/user_information.dart';
 import 'package:ahri_manager/screen/home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -132,7 +132,6 @@ class _StartScreenState extends State<StartScreen> {
                       height: 100,
                       width: 100,
                     );
-
                   }
                 },
               ),
@@ -171,7 +170,9 @@ class _StartScreenState extends State<StartScreen> {
                   ),
                   Text('         '),
                   DropdownButton(
-                    style: TextStyle(fontFamily: 'jua'),
+                    style: TextStyle(
+                      color: Colors.black,
+                    ),
                     items: _dropDownSpeciesItems,
                     onChanged: (String? value) {
                       setState(() {
@@ -195,6 +196,9 @@ class _StartScreenState extends State<StartScreen> {
                   ),
                   Text('           '),
                   DropdownButton(
+                    style: TextStyle(
+                      color: Colors.black,
+                    ),
                     items: _dropDownGenderItems,
                     onChanged: (String? value) {
                       setState(() {
@@ -348,11 +352,11 @@ class _StartScreenState extends State<StartScreen> {
                             MaterialStateProperty.all(Colors.green)),
                     onPressed: () {
                       // 앱 종료 기능(정보수정창인 경우에는 이전화면으로 돌아감.
-                      if(weight.text!=""||name.text!=""){
-                          Navigator.pop(context);
-                      }
-                      else
-                      SystemChannels.platform.invokeMethod('SystemNavigator.pop');
+                      if (weight.text != "" || name.text != "") {
+                        Navigator.pop(context);
+                      } else
+                        SystemChannels.platform
+                            .invokeMethod('SystemNavigator.pop');
                     },
                   ),
                 ],

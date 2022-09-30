@@ -1,44 +1,40 @@
 import 'package:ahri_manager/screen/home.dart';
-import 'package:ahri_manager/screen/start.dart';
+import 'package:ahri_manager/screen/input_animal_information.dart';
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:ahri_manager/data/user_data.dart';
+import 'package:ahri_manager/data/user_information.dart';
 import 'package:ahri_manager/plus/user_helper.dart';
 
-class Lodding extends StatefulWidget {
-  const Lodding({Key? key}) : super(key: key);
+class LoddingScreen extends StatefulWidget {
+  const LoddingScreen({Key? key}) : super(key: key);
   @override
-  State<Lodding> createState() => _LoddingState();
+  State<LoddingScreen> createState() => _LoddingScreenState();
 }
 
-class _LoddingState extends State<Lodding> {
+class _LoddingScreenState extends State<LoddingScreen> {
   List<user_information> user_infotmations = [];
   final UserHelper helper = UserHelper();
 
   @override
   void initState() {
-    helper.init().then((value) {
-      updateScreen();
-    });
+    helper.init().then((value) {updateScreen();});
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.lightBlueAccent,
-        body: FutureBuilder<String>(
-            future: checkpermission(),
-            builder: (BuildContext context, AsyncSnapshot snapshot) {
-              if (snapshot.data == '허가')
-                return _ok(
-                  user_infotmations: user_infotmations,
-                );
-              if (snapshot.connectionState == ConnectionState.waiting)
-                return _lodding();
-              else
-                return _error();
-            }));
+      backgroundColor: Colors.lightBlueAccent,
+      body: FutureBuilder<String>(
+          future: checkpermission(),
+          builder: (BuildContext context, AsyncSnapshot snapshot) {
+            if (snapshot.data == '허가')
+              return _ok(user_infotmations: user_infotmations,);
+            if (snapshot.connectionState == ConnectionState.waiting)
+              return _lodding();
+            else
+              return _error();
+          }));
   }
 
   void updateScreen() {
@@ -48,14 +44,15 @@ class _LoddingState extends State<Lodding> {
 }
 
 Future<String> checkpermission() async {
-  var locationper = Permission.locationWhenInUse.request();
-  var photoper = Permission.photos.request();
-  if (locationper.isDenied == true) Permission.locationWhenInUse.request();
-  if (photoper.isDenied == true) Permission.locationWhenInUse.request();
-  if ((await locationper.isGranted == false ||
-              await locationper.isLimited == false) &&
-          await photoper.isGranted == false ||
-      await photoper.isLimited == false)
+  var locationper=Permission.locationWhenInUse.request();
+  var photoper= Permission.photos.request();
+  var cameraper = Permission.camera.request();
+  if(locationper.isDenied==true) Permission.locationWhenInUse.request();
+  if(photoper.isDenied==true) Permission.photos.request();
+  if(cameraper.isDenied==true) Permission.camera.request();
+  if((await locationper.isGranted==true||await locationper.isLimited==true) &&
+      (await photoper.isGranted==true ||await photoper.isLimited==true) &&
+      (await cameraper.isGranted==true ||await cameraper.isLimited==true))
     return '허가';
   else
     return '문제 발생';
@@ -64,7 +61,9 @@ Future<String> checkpermission() async {
 class _ok extends StatelessWidget {
   final List<user_information> user_infotmations;
 
-  const _ok({required this.user_infotmations, Key? key}) : super(key: key);
+  const _ok({
+    required this.user_infotmations,
+    Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -119,6 +118,7 @@ class _ok extends StatelessWidget {
   }
 }
 
+
 class _lodding extends StatelessWidget {
   const _lodding({Key? key}) : super(key: key);
 
@@ -161,3 +161,4 @@ class _error extends StatelessWidget {
     );
   }
 }
+

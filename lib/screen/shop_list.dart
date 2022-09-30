@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:ahri_manager/screen/shop_url.dart';
-import 'package:ahri_manager/data/user_data.dart';
+import 'package:ahri_manager/screen/shop_web.dart';
+import 'package:ahri_manager/data/user_information.dart';
 import 'package:ahri_manager/plus/user_helper.dart';
+import 'package:ahri_manager/data/shop_information.dart';
 
 //물건판매리스트(동물별로 다르게 표기)
 //목록 중 하나를 선택 시, 웹사이트로 이동
-class Buy_object extends StatefulWidget {
-  const Buy_object({Key? key}) : super(key: key);
+class BuyObjectScreen extends StatefulWidget {
+  const BuyObjectScreen({Key? key}) : super(key: key);
 
   @override
-  State<Buy_object> createState() => _Buy_objectState();
+  State<BuyObjectScreen> createState() => _BuyObjectScreenState();
 }
 
-class _Buy_objectState extends State<Buy_object> {
+class _BuyObjectScreenState extends State<BuyObjectScreen> {
   @override
   Widget build(BuildContext context) {
     return _birdurl();
@@ -27,11 +28,7 @@ class _birdurl extends StatefulWidget {
 }
 
 class _birdurlState extends State<_birdurl> {
-  List birdshopname = ["와우버드", "버드소리", "아가새농장", "버드모아"];
-  List hamshopname = ["햄토피아", "햄숲", "봄해농장", "햄찌네"];
-  List rabbitshopname = ["달나라토끼농장", "토당마을", "청아농장", "미니미펫"];
-  List pishshopname = ["라라아쿠아", "헬로아쿠아", "트로피쉬넷", "신세계수족관"];
-  List lizardshopname = ["줄스샵", "반모리", "밀림펫"];
+  List shop_name =[];
   List<user_information> user_infotmations = []; //유저정보 리스트
   final UserHelper helper = UserHelper();
 
@@ -40,17 +37,16 @@ class _birdurlState extends State<_birdurl> {
     helper.init().then((value) {
       updateScreen();
     });
+    if (user_infotmations.first.species == "앵무새") shop_name = birdshopname;
+    if (user_infotmations.first.species == "햄스터") shop_name = hamshopname;
+    if (user_infotmations.first.species == "토끼") shop_name = rabbitshopname;
+    if (user_infotmations.first.species == "물고기") shop_name = pishshopname;
+    if (user_infotmations.first.species == "도마뱀") shop_name = lizardshopname;
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    List animalshop = [];
-    if (user_infotmations.first.species == "앵무새") animalshop = birdshopname;
-    if (user_infotmations.first.species == "햄스터") animalshop = hamshopname;
-    if (user_infotmations.first.species == "토끼") animalshop = rabbitshopname;
-    if (user_infotmations.first.species == "물고기") animalshop = pishshopname;
-    if (user_infotmations.first.species == "도마뱀") animalshop = lizardshopname;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.lightGreen,
@@ -77,7 +73,7 @@ class _birdurlState extends State<_birdurl> {
             mainAxisAlignment: MainAxisAlignment.center, //왜 중간으로 안 가는겨
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              for (int i = 0; i < animalshop.length; i++)
+              for (int i = 0; i < shop_name.length; i++)
                 Padding(
                   padding: const EdgeInsets.only(top: 30.0),
                   child: ElevatedButton.icon(
@@ -85,7 +81,7 @@ class _birdurlState extends State<_birdurl> {
                     icon: Icon(Icons.shopping_bag_outlined,
                         size: 20, color: Colors.black),
                     label: Text(
-                      animalshop[i],
+                      shop_name[i],
                       style: TextStyle(
                         color: Colors.black,
                         fontFamily: 'jua',
@@ -110,7 +106,7 @@ class _birdurlState extends State<_birdurl> {
                           context,
                           MaterialPageRoute(
                               builder: (context) =>
-                                  Shop_url(shopname: animalshop[i])));
+                                  ShopUrlScreen(shopname: shop_name[i])));
                     },
                   ),
                 ),

@@ -1,4 +1,4 @@
-import 'package:ahri_manager/data/user_data.dart';
+import 'package:ahri_manager/data/user_information.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -6,15 +6,15 @@ import 'package:ahri_manager/data/hospital_information.dart';
 
 import '../plus/user_helper.dart'; //데이터 가져오기
 
-class Map_hospital extends StatefulWidget {
-  const Map_hospital({Key? key}) : super(key: key);
+class MapHospitalScreen extends StatefulWidget {
+  const MapHospitalScreen({Key? key}) : super(key: key);
 
   @override
-  State<Map_hospital> createState() => _Map_hospitalState();
+  State<MapHospitalScreen> createState() => _MapHospitalScreenState();
 }
 
 
-class _Map_hospitalState extends State<Map_hospital> {
+class _MapHospitalScreenState extends State<MapHospitalScreen> {
   Set<Marker> _markers=new Set();
   GoogleMapController? mapController;
   List<information> hospitalinf =[];
@@ -41,8 +41,8 @@ class _Map_hospitalState extends State<Map_hospital> {
         _markers.add(Marker(
           markerId: MarkerId(hospitalinf[i].name),
           position: LatLng(
-            hospitalinf[i].xy.longitude,
             hospitalinf[i].xy.latitude,
+            hospitalinf[i].xy.longitude,
           ),
           onTap: () {
             showModalBottomSheet<void>(
@@ -80,10 +80,11 @@ class _Map_hospitalState extends State<Map_hospital> {
             '지도찾기',
             style: TextStyle(
               color: Colors.white,
-              fontWeight: FontWeight.w700,
+              fontFamily: 'jua',
+              fontSize: 30.0,
             ),
           ),
-          backgroundColor: Colors.pink,
+          backgroundColor: Colors.lightGreen,
         ),
         body: FutureBuilder<String>(
           future: checkPermission(),
