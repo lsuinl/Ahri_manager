@@ -44,16 +44,15 @@ class _LoddingScreenState extends State<LoddingScreen> {
 }
 
 Future<String> checkpermission() async {
-
   var locationper=Permission.locationWhenInUse.request();
   var photoper= Permission.photos.request();
   var cameraper = Permission.camera.request();
   if(locationper.isDenied==true) Permission.locationWhenInUse.request();
-  if(photoper.isDenied==true) Permission.locationWhenInUse.request();
-  if(cameraper.isDenied==true) Permission.locationWhenInUse.request();
-  if((await locationper.isGranted==false||await locationper.isLimited==false) &&
-      (await photoper.isGranted==false ||await photoper.isLimited==false) &&
-      (await cameraper.isGranted==false ||await cameraper.isLimited==false))
+  if(photoper.isDenied==true) Permission.photos.request();
+  if(cameraper.isDenied==true) Permission.camera.request();
+  if((await locationper.isGranted==true||await locationper.isLimited==true) &&
+      (await photoper.isGranted==true ||await photoper.isLimited==true) &&
+      (await cameraper.isGranted==true ||await cameraper.isLimited==true))
     return '허가';
   else
     return '문제 발생';
