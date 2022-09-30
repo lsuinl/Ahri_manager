@@ -6,14 +6,14 @@ import 'package:ahri_manager/data/hospital_information.dart';
 import 'package:flutter/cupertino.dart';
 import '../plus/user_helper.dart'; //데이터 가져오기
 
-class Map_hospital_list extends StatefulWidget {
-  const Map_hospital_list({Key? key}) : super(key: key);
+class MapHospitalListScreen extends StatefulWidget {
+  const MapHospitalListScreen({Key? key}) : super(key: key);
 
   @override
-  State<Map_hospital_list> createState() => _Map_hospital_listState();
+  State<MapHospitalListScreen> createState() => _MapHospitalListScreenState();
 }
 
-class _Map_hospital_listState extends State<Map_hospital_list> {
+class _MapHospitalListScreenState extends State<MapHospitalListScreen> {
   GoogleMapController? mapController;
   List<information> hospitalinf = [];
   List<user_information> user_infotmations = [];

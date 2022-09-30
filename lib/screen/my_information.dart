@@ -4,13 +4,13 @@ import 'package:ahri_manager/plus/user_helper.dart';
 import 'package:ahri_manager/data/user_information.dart';
 
 //내정보 조회, 배경테마설정
-class My extends StatefulWidget {
-  const My({Key? key}) : super(key: key);
+class MyScreen extends StatefulWidget {
+  const MyScreen({Key? key}) : super(key: key);
   @override
-  State<My> createState() => _MyState();
+  State<MyScreen> createState() => _MyScreenState();
 }
 
-class _MyState extends State<My> {
+class _MyScreenState extends State<MyScreen> {
   List<user_information> user_infotmations=[]; //유저정보 리스트
   final UserHelper helper=UserHelper();
 

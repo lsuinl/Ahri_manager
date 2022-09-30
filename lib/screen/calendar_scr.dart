@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../component/calendar.dart';
+import '../calendar/component/calendar.dart';
 
 //캘린더 관리창(초기설정을 기반으로+직접 지정하는 일정관리)
 

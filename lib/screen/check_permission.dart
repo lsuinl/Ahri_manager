@@ -5,13 +5,13 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:ahri_manager/data/user_information.dart';
 import 'package:ahri_manager/plus/user_helper.dart';
 
-class Lodding extends StatefulWidget {
-  const Lodding({Key? key}) : super(key: key);
+class LoddingScreen extends StatefulWidget {
+  const LoddingScreen({Key? key}) : super(key: key);
   @override
-  State<Lodding> createState() => _LoddingState();
+  State<LoddingScreen> createState() => _LoddingScreenState();
 }
 
-class _LoddingState extends State<Lodding> {
+class _LoddingScreenState extends State<LoddingScreen> {
   List<user_information> user_infotmations = [];
   final UserHelper helper = UserHelper();
 

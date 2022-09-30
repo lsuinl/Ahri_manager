@@ -8,7 +8,7 @@ import 'package:ahri_manager/screen/home.dart';
 void main(){
   runApp(
     MaterialApp( //앱 스타일
-    home: Lodding() //
+    home: LoddingScreen() //
     ),
   );
 }
