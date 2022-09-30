@@ -40,8 +40,10 @@ class _MapHospitalListScreenState extends State<MapHospitalListScreen> {
   @override
 
   Widget build(BuildContext context) {
-    String animalspecies = user_infotmations.first.species;
-
+    String animalspecies="";
+    if(user_infotmations.isNotEmpty) {
+       animalspecies = user_infotmations.first.species;
+    }
     List<Widget> getlist() {
       List<Widget> textlist = [];
       for (int i = 0; i < hospitalinf.length; i++) {

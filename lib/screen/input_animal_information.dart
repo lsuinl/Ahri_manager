@@ -21,6 +21,7 @@ class StartScreen extends StatefulWidget {
 }
 
 class _StartScreenState extends State<StartScreen> {
+  List<user_information> user_infotmations=[]; //유저정보 리스트
   TextEditingController name = TextEditingController();
   TextEditingController weight = TextEditingController();
   DateTime selectedDate = DateTime.now();
@@ -47,7 +48,9 @@ class _StartScreenState extends State<StartScreen> {
 
   @override
   void initState() {
-    helper.init();
+   helper.init().then((value){
+      updateScreen();
+    });
 
     super.initState();
     for (var item in _GenderType) {
@@ -64,6 +67,22 @@ class _StartScreenState extends State<StartScreen> {
     _genderbuttonText = _dropDownGenderItems[0].value;
     _neubuttonText = _dropDownSurItems[0].value;
     _speciesText = _dropDownSpeciesItems[0].value;
+   Future.delayed(const Duration(milliseconds: 100),()
+   {
+     if (user_infotmations.isNotEmpty) {
+       name.text = user_infotmations.first.name;
+       weight.text = user_infotmations.first.weight;
+       _genderbuttonText = _dropDownGenderItems[_GenderType.indexOf(
+           user_infotmations.first.gender.toString())].value;
+       _neubuttonText = _dropDownSurItems[_SurgeryMenu.indexOf(
+           user_infotmations.first.neu.toString())].value;
+       _speciesText = _dropDownSpeciesItems[_SpeciesList.indexOf(
+           user_infotmations.first.species.toString())].value;
+       selectedDate = DateTime(user_infotmations.first.selectedyear,
+           user_infotmations.first.selectedmonth,
+           user_infotmations.first.selectedday);
+     }
+   });
   }
 
   @override
@@ -124,8 +143,6 @@ class _StartScreenState extends State<StartScreen> {
                     });
                   }
                   Widget userima() {
-                    //저장한 이미지를 띄우는 친구였어요... 새로운 페이지로 띄우는 건 가능했는데요? 이 페이지 안에 띄우는 건 못하겠어요.
-                    //서칭해서 찾아보니까 return Container(body:어쩌구)) 하던데 응 안돼
                     return Image.file(
                       userImage,
                       height: 100,
@@ -325,7 +342,7 @@ class _StartScreenState extends State<StartScreen> {
                         backgroundColor:
                             MaterialStateProperty.all(Colors.green)),
                     onPressed: () {
-                      if (weight.text == "" || name.text == "") {
+                      if (weight.text=="" || name.text == "") {
                         Text("하이");
                       } else {
                         saveUserInformation();
@@ -347,7 +364,7 @@ class _StartScreenState extends State<StartScreen> {
                             MaterialStateProperty.all(Colors.green)),
                     onPressed: () {
                       // 앱 종료 기능(정보수정창인 경우에는 이전화면으로 돌아감.
-                      if(weight.text!=""||name.text!=""){
+                      if(!user_infotmations.isEmpty){
                           Navigator.pop(context);
                       }
                       else
@@ -359,6 +376,11 @@ class _StartScreenState extends State<StartScreen> {
             ),
           ]),
     );
+  }
+
+  void updateScreen(){
+    user_infotmations=helper.getuserinformation();
+    setState(() {});
   }
 
   Future saveUserInformation() async {

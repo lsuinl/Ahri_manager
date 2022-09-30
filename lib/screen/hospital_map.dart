@@ -23,6 +23,7 @@ class _MapHospitalScreenState extends State<MapHospitalScreen> {
 
   @override
   void initState(){
+
     hospitalinf=hospitialinf;
     helper.init().then((value){
       updateScreen();
@@ -31,18 +32,21 @@ class _MapHospitalScreenState extends State<MapHospitalScreen> {
   }
   @override
   Widget build(BuildContext context) {
-    String animalspecies= user_infotmations.first.species;
-
+    String animalspecies="";
+    if(user_infotmations.isNotEmpty) {
+      animalspecies = user_infotmations.first.species;
+    }
     //페이지 뷰에소의 박스
 
     //마커.
     for(int i=0; i<hospitalinf.length;i++) {
       if(hospitalinf[i].animal.contains(animalspecies)) { //해당반려동물을 진료하는 병원만
+        //마커추가하기
         _markers.add(Marker(
           markerId: MarkerId(hospitalinf[i].name),
           position: LatLng(
-            hospitalinf[i].xy.longitude,
             hospitalinf[i].xy.latitude,
+            hospitalinf[i].xy.longitude,
           ),
           onTap: () {
             showModalBottomSheet<void>(
@@ -88,6 +92,7 @@ class _MapHospitalScreenState extends State<MapHospitalScreen> {
         body: FutureBuilder<String>(
           future: checkPermission(),
           builder: (BuildContext context, AsyncSnapshot snapshot) {
+
             //로딩중,,
             if (snapshot.connectionState == ConnectionState.waiting) {
               return Center(child: CircularProgressIndicator());
@@ -95,18 +100,17 @@ class _MapHospitalScreenState extends State<MapHospitalScreen> {
             //권한을 얻었을 시에 작동
             if (snapshot.data == '위치 권한이 허가되었습니다.') {
               return StreamBuilder<Position>(
-                  stream: Geolocator.getPositionStream(), //내 현재위치 가져오기
+                  stream:Geolocator.getPositionStream(), //내 현재위치 가져오기
                   builder: (context, snapshot) {
                     return Column(
                       children: [
                       Expanded(
                       flex: 3,
                       child: GoogleMap(
-                        initialCameraPosition:  CameraPosition(
-                                target: LatLng(
-                                  37.22310017857214,
-                                  127.1873556838689,
-                                ),zoom: 16),
+                        initialCameraPosition: CameraPosition (
+                            target: LatLng(0,0),
+                            zoom: 16
+                        ),
                         //초기 카메라 위치
                         myLocationEnabled: true,
                         //내위치표시
@@ -140,6 +144,7 @@ class _MapHospitalScreenState extends State<MapHospitalScreen> {
     user_infotmations=helper.getuserinformation();
     setState(() {});
   }
+
 }
 
 //------------------------------------------------------

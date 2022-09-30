@@ -37,11 +37,13 @@ class _birdurlState extends State<_birdurl> {
     helper.init().then((value) {
       updateScreen();
     });
-    if (user_infotmations.first.species == "앵무새") shop_name = birdshopname;
-    if (user_infotmations.first.species == "햄스터") shop_name = hamshopname;
-    if (user_infotmations.first.species == "토끼") shop_name = rabbitshopname;
-    if (user_infotmations.first.species == "물고기") shop_name = pishshopname;
-    if (user_infotmations.first.species == "도마뱀") shop_name = lizardshopname;
+    if(user_infotmations.isNotEmpty) {
+      if (user_infotmations.first.species == "앵무새") shop_name = birdshopname;
+      if (user_infotmations.first.species == "햄스터") shop_name = hamshopname;
+      if (user_infotmations.first.species == "토끼") shop_name = rabbitshopname;
+      if (user_infotmations.first.species == "물고기") shop_name = pishshopname;
+      if (user_infotmations.first.species == "도마뱀") shop_name = lizardshopname;
+    }
     super.initState();
   }
 
