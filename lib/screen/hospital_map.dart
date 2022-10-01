@@ -13,34 +13,34 @@ class MapHospitalScreen extends StatefulWidget {
   State<MapHospitalScreen> createState() => _MapHospitalScreenState();
 }
 
-
 class _MapHospitalScreenState extends State<MapHospitalScreen> {
-  Set<Marker> _markers=new Set();
+  Set<Marker> _markers = new Set();
   GoogleMapController? mapController;
-  List<information> hospitalinf =[];
-  List<user_information> user_infotmations=[];
-  final UserHelper helper=UserHelper();
+  List<information> hospitalinf = [];
+  List<user_information> user_infotmations = [];
+  final UserHelper helper = UserHelper();
 
   @override
-  void initState(){
-
-    hospitalinf=hospitialinf;
-    helper.init().then((value){
+  void initState() {
+    hospitalinf = hospitialinf;
+    helper.init().then((value) {
       updateScreen();
     });
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
-    String animalspecies="";
-    if(user_infotmations.isNotEmpty) {
+    String animalspecies = "";
+    if (user_infotmations.isNotEmpty) {
       animalspecies = user_infotmations.first.species;
     }
     //페이지 뷰에소의 박스
 
     //마커.
-    for(int i=0; i<hospitalinf.length;i++) {
-      if(hospitalinf[i].animal.contains(animalspecies)) { //해당반려동물을 진료하는 병원만
+    for (int i = 0; i < hospitalinf.length; i++) {
+      if (hospitalinf[i].animal.contains(animalspecies)) {
+        //해당반려동물을 진료하는 병원만
         //마커추가하기
         _markers.add(Marker(
           markerId: MarkerId(hospitalinf[i].name),
@@ -52,7 +52,8 @@ class _MapHospitalScreenState extends State<MapHospitalScreen> {
             showModalBottomSheet<void>(
               context: context,
               builder: (context) {
-                return Container( //위로 올라오는 부분
+                return Container(
+                  //위로 올라오는 부분
                   height: 200,
                   color: Colors.amber,
                   child: Center(
@@ -74,8 +75,8 @@ class _MapHospitalScreenState extends State<MapHospitalScreen> {
             title: hospitalinf[i].name,
           ),
         ));
-      }//if
-    }//for
+      } //if
+    } //for
 
     return Scaffold(
         appBar: AppBar(
@@ -83,16 +84,16 @@ class _MapHospitalScreenState extends State<MapHospitalScreen> {
           title: Text(
             '지도찾기',
             style: TextStyle(
-              color: Colors.white,
-              fontWeight: FontWeight.w700,
-            ),
+                color: Colors.white,
+                fontFamily: 'jua',
+                fontSize: 30.0),
           ),
-          backgroundColor: Colors.pink,
+          backgroundColor: Colors.lightGreen,
+          centerTitle: true,
         ),
         body: FutureBuilder<String>(
           future: checkPermission(),
           builder: (BuildContext context, AsyncSnapshot snapshot) {
-
             //로딩중,,
             if (snapshot.connectionState == ConnectionState.waiting) {
               return Center(child: CircularProgressIndicator());
@@ -100,38 +101,36 @@ class _MapHospitalScreenState extends State<MapHospitalScreen> {
             //권한을 얻었을 시에 작동
             if (snapshot.data == '위치 권한이 허가되었습니다.') {
               return StreamBuilder<Position>(
-                  stream:Geolocator.getPositionStream(), //내 현재위치 가져오기
+                  stream: Geolocator.getPositionStream(), //내 현재위치 가져오기
                   builder: (context, snapshot) {
                     return Column(
                       children: [
-                      Expanded(
-                      flex: 3,
-                      child: GoogleMap(
-                        initialCameraPosition: CameraPosition (
-                            target: LatLng(0,0),
-                            zoom: 16
+                        Expanded(
+                          flex: 3,
+                          child: GoogleMap(
+                            initialCameraPosition:
+                                CameraPosition(target: LatLng(0, 0), zoom: 16),
+                            //초기 카메라 위치
+                            myLocationEnabled: true,
+                            //내위치표시
+                            myLocationButtonEnabled: true,
+                            //내위치로가기버튼
+                            mapType: MapType.normal,
+                            //맵타입형식 위성지도 등등 설정 가능, //**************************
+                            //줌 동작 활성화
+                            zoomGesturesEnabled: true,
+                            //컨트롤러 조작
+                            onMapCreated: onMapCreated,
+                            markers: _markers,
+                          ),
                         ),
-                        //초기 카메라 위치
-                        myLocationEnabled: true,
-                        //내위치표시
-                        myLocationButtonEnabled: true,
-                        //내위치로가기버튼
-                        mapType: MapType.normal,
-                        //맵타입형식 위성지도 등등 설정 가능, //**************************
-                        //줌 동작 활성화
-                        zoomGesturesEnabled: true,
-                        //컨트롤러 조작
-                        onMapCreated: onMapCreated,
-                        markers: _markers,
-                      ),
-                    ),
                       ],
                     );
                   });
             }
             //권한 설정이 안 되어있는 경우
             return Center(
-              child:(snapshot.data),
+              child: (snapshot.data),
             );
           },
         ));
@@ -140,11 +139,11 @@ class _MapHospitalScreenState extends State<MapHospitalScreen> {
   onMapCreated(GoogleMapController controller) {
     mapController = controller;
   }
-  void updateScreen(){
-    user_infotmations=helper.getuserinformation();
+
+  void updateScreen() {
+    user_infotmations = helper.getuserinformation();
     setState(() {});
   }
-
 }
 
 //------------------------------------------------------
