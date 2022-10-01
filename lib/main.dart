@@ -1,5 +1,10 @@
 import 'package:ahri_manager/data/database/drift_database.dart';
 import 'package:ahri_manager/screen/check_permission.dart';
+import 'package:ahri_manager/screen/my_animal_information.dart';
+import 'package:ahri_manager/screen/input_animal_information.dart';
+import 'package:drift/drift.dart';
+import 'package:ahri_manager/data/database/drift_database.dart';
+import 'package:ahri_manager/screen/check_permission.dart';
 import 'package:ahri_manager/screen/hospital_list.dart';
 import 'package:ahri_manager/screen/hospital_map.dart';
 import 'package:ahri_manager/screen/my_animal_information.dart';
@@ -52,7 +57,7 @@ void main() async {
   runApp(
     MaterialApp(
         //앱 스타일
-        home: MapHospitalScreen() //
+        home: MapHospitalListScreen() //
         ),
   );
 }
