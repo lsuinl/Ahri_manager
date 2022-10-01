@@ -48,21 +48,55 @@ class _MapHospitalListScreenState extends State<MapHospitalListScreen> {
       List<Widget> textlist = [];
       for (int i = 0; i < hospitalinf.length; i++) {
         if (hospitalinf[i].animal.contains(animalspecies)) {
-          textlist.add(Column(
-              children: [
-                Text("${hospitalinf[i].name}", style: TextStyle(fontSize: 17),),
-                Text("${hospitalinf[i].phone}", style: TextStyle(fontSize: 17),),
-                Text("${hospitalinf[i].adress}", style: TextStyle(fontSize: 12),),
-                Text("${hospitalinf[i].animal.toString()}\n\n", style: TextStyle(fontSize: 17),),
-                //이름순이면 순서대로, 거리순이면 거리계산해서
-              ],
+          textlist.add(
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 15.0),
+              child: Column(
+                children: [
+                  SizedBox(height: 8.0),
+                  Text(
+                    "${hospitalinf[i].name}", //병원명
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontFamily: 'jua',
+                    ),
+                  ),
+                  Text(
+                    "${hospitalinf[i].phone}", //전화번호
+                    style: TextStyle(
+                      fontSize: 17,
+                      fontFamily: 'jua',
+                    ),
+                  ),
+                  Text(
+                    "${hospitalinf[i].adress}", //주소
+                    style: TextStyle(
+                      fontSize: 15,
+                      fontFamily: 'jua',
+                    ),
+                  ),
+                  Text(
+                    "${hospitalinf[i].animal.toString()}\n\n", //동물
+                    style: TextStyle(
+                      fontSize: 17,
+                      fontFamily: 'jua',
+                    ),
+                  ),
+                  Container(
+                    height: 1.0,
+                    width: 500.0,
+                    color: Colors.black12,
+                  ),
+                  //이름순이면 순서대로, 거리순이면 거리계산해서
+                ],
+              ),
             ),
           );
         }
         //거리순으로 선택된경우에는 거리순으로 정렬(버블정렬)
-        if(_sortText=="거리순"){
-          for(int a=0;a<textlist.length;a++) {
-            for(int b=a;b<textlist.length;b++) {
+        if (_sortText == "거리순") {
+          for (int a = 0; a < textlist.length; a++) {
+            for (int b = a; b < textlist.length; b++) {
               Widget temporary;
               // if(){}
             }
@@ -74,23 +108,42 @@ class _MapHospitalListScreenState extends State<MapHospitalListScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text("내 정보"),
+        backgroundColor: Colors.lightGreen,
+        title: Padding(
+          padding: const EdgeInsets.only(top: 8.0),
+          child: Text(
+            "병원 목록",
+            style: TextStyle(
+              fontSize: 30.0,
+              fontFamily: 'jua',
+            ),
+          ),
+        ),
         actions: [
-      DropdownButton(
-        items: _dropDownSpeciesItems,
-        onChanged: (String? value) {
-          setState(() {
-            _sortText = value;
-          });
-        },
-        value: _sortText,
+          Padding(
+            padding: const EdgeInsets.only(top: 6.0),
+            child: DropdownButton(
+              style: TextStyle(
+                fontFamily: 'jua',
+                fontSize: 17.0,
+                color: Colors.black,
+              ),
+              items: _dropDownSpeciesItems,
+              onChanged: (String? value) {
+                setState(() {
+                  _sortText = value;
+                });
+              },
+              value: _sortText,
+            ),
+          ),
+        ],
+        centerTitle: true,
       ),
-      ],
-    ),
       body: ListView(
-          scrollDirection: Axis.vertical,
-          shrinkWrap: true,
-          children: getlist(),
+        scrollDirection: Axis.vertical,
+        shrinkWrap: true,
+        children: getlist(),
       ),
     );
   }

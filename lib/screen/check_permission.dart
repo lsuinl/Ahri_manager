@@ -67,26 +67,53 @@ class _ok extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Image.asset(
-          'asset/imgs/unicorn.png',
-        ),
-        ElevatedButton(
-          child: Text(
-            "시작하기",
-            style: TextStyle(color: Colors.white),
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal:  15.0),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Image.asset(
+            'asset/imgs/unicorn.png',
           ),
-          style: ElevatedButton.styleFrom(),
-          onPressed: () {
-            if (user_infotmations.length<1) //정보저장여부
-              Navigator.push(context, MaterialPageRoute(builder: (context) => StartScreen()));
-            else
-              Navigator.push(context, MaterialPageRoute(builder: (context) => HomeScreen()));
-          },
-        ),
-      ],
+          Padding(
+            padding: const EdgeInsets.only(top: 8.0),
+            child: SizedBox(
+              height: 50.0,
+              child: ElevatedButton(
+                child: Text(
+                  "시작하기",
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontFamily: 'jua',
+                    fontSize: 30.0,
+                  ),
+                ),
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.orangeAccent, //배경색
+                  onPrimary: Colors.deepOrange, //눌렀을 때
+                  shadowColor: Colors.black,
+                  shape: RoundedRectangleBorder(
+                    //테두리 둥글게
+                    borderRadius: BorderRadius.circular(
+                      (10.0),
+                    ),
+                  ),
+                  elevation: 0.0, //그림자?? 확인해보기
+                ),
+                onPressed: () {
+                  if (user_infotmations.length < 1) //정보저장여부
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => StartScreen()));
+                  else
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => HomeScreen()));
+                },
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

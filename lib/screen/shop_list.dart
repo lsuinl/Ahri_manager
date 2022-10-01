@@ -49,6 +49,12 @@ class _birdurlState extends State<_birdurl> {
 
   @override
   Widget build(BuildContext context) {
+    List animalshop = [];
+    if (user_infotmations.first.species == "앵무새") animalshop = birdshopname;
+    if (user_infotmations.first.species == "햄스터") animalshop = hamshopname;
+    if (user_infotmations.first.species == "토끼") animalshop = rabbitshopname;
+    if (user_infotmations.first.species == "물고기") animalshop = pishshopname;
+    if (user_infotmations.first.species == "도마뱀") animalshop = lizardshopname;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.lightGreen,
@@ -63,6 +69,8 @@ class _birdurlState extends State<_birdurl> {
             ),
           ),
         ),
+        centerTitle: true, //가운데 정렬
+        elevation: 0.0,
       ),
       backgroundColor: Colors.white,
       body: SingleChildScrollView(

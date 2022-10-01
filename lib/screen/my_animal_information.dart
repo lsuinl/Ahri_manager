@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:ahri_manager/plus/user_helper.dart';
 import 'package:ahri_manager/data/user_information.dart';
 
+
 //내 동물 정보 조회, 배경테마설정
 class MyAnimalScreen extends StatefulWidget {
   const MyAnimalScreen({Key? key}) : super(key: key);
@@ -46,17 +47,18 @@ class _MyAnimalScreenState extends State<MyAnimalScreen> {
                 .selectedmonth}월 ${user_infotmations.first.selectedday}일"),
             ElevatedButton(
               child: const Text('정보 수정'),
-              style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all(Colors.green)),
-              onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => StartScreen()));
-              },
-            ),
-          ],
-        ),
+      style: ButtonStyle(
+      backgroundColor: MaterialStateProperty.all(Colors.green)),
+      onPressed: () {
+      Navigator.push(context,
+      MaterialPageRoute(builder: (context) => StartScreen()));
+      },
+      ),
+      ],
+      ),
       );
-    }
+      }
+
     else
      return Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -65,7 +67,7 @@ class _MyAnimalScreenState extends State<MyAnimalScreen> {
             'asset/imgs/unicorn.png',
           ),
           Text(
-            "문제가 생겼습다. 다시 시도해주세요.",
+            "문제가 생겼습니다. 다시 시도해주세요.",
             style: TextStyle(color: Colors.black),
           ),
         ],

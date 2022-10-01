@@ -84,10 +84,11 @@ class _MapHospitalScreenState extends State<MapHospitalScreen> {
             '지도찾기',
             style: TextStyle(
               color: Colors.white,
-              fontWeight: FontWeight.w700,
+              fontFamily: 'jua',
+              fontSize: 30.0,
             ),
           ),
-          backgroundColor: Colors.pink,
+          backgroundColor: Colors.lightGreen,
         ),
         body: FutureBuilder<String>(
           future: checkPermission(),

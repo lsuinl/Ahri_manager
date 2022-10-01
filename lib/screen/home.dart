@@ -18,15 +18,16 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  List<user_information> user_infotmations=[]; //유저정보 리스트
-  final UserHelper helper=UserHelper();
+  List<user_information> user_infotmations = []; //유저정보 리스트
+  final UserHelper helper = UserHelper();
   @override
-  void initState(){
-    helper.init().then((value){
-     updateScreen();
+  void initState() {
+    helper.init().then((value) {
+      updateScreen();
     });
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     if(user_infotmations.isNotEmpty) {
@@ -71,6 +72,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ],
             ),
+            centerTitle: true,//????????????????????????
           ),
 
           backgroundColor: Colors.transparent, //배경색 투명으로 설정
@@ -140,7 +142,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
 
 
-                //동물 이미지 넣기 (Column)
+              //동물 이미지 넣기 (Column)
 
 
                 Row(
@@ -175,7 +177,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
           ),
         ),
-      );
+              );
     }
     else
       return Column(
@@ -185,7 +187,7 @@ class _HomeScreenState extends State<HomeScreen> {
             'asset/imgs/unicorn.png',
           ),
           Text(
-            "문제가 생겼습다. 다시 시도해주세요.",
+            "문제가 생겼습니다. 다시 시도해주세요.",
             style: TextStyle(color: Colors.black),
           ),
         ],
