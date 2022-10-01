@@ -148,7 +148,6 @@ class _StartScreenState extends State<StartScreen> {
                       height: 100,
                       width: 100,
                     );
-
                   }
                 },
               ),
@@ -187,7 +186,9 @@ class _StartScreenState extends State<StartScreen> {
                   ),
                   Text('         '),
                   DropdownButton(
-                    style: TextStyle(fontFamily: 'jua'),
+                    style: TextStyle(
+                      color: Colors.black,
+                    ),
                     items: _dropDownSpeciesItems,
                     onChanged: (String? value) {
                       setState(() {
@@ -211,6 +212,9 @@ class _StartScreenState extends State<StartScreen> {
                   ),
                   Text('           '),
                   DropdownButton(
+                    style: TextStyle(
+                      color: Colors.black,
+                    ),
                     items: _dropDownGenderItems,
                     onChanged: (String? value) {
                       setState(() {

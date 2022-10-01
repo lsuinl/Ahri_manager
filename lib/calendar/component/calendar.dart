@@ -6,12 +6,12 @@ class Calendar extends StatelessWidget {
   final DateTime focusedDay;
   final OnDaySelected? onDaySelected;
 
-  const Calendar({
-    required this.selectedDay,
-    required this.focusedDay,
-    required this.onDaySelected,
-    Key? key}) : super(key: key);
-
+  const Calendar(
+      {required this.selectedDay,
+      required this.focusedDay,
+      required this.onDaySelected,
+      Key? key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -19,13 +19,15 @@ class Calendar extends StatelessWidget {
       borderRadius: BorderRadius.circular(6.0),
       color: Colors.grey[200],
     );
-    final defaultTextStyle = TextStyle(
+    final defaultTextStyle = TextStyle( //평일
       fontWeight: FontWeight.w700,
+      fontSize: 18.0,
     );
-    final weekendTextStyle = TextStyle(
-      color: Colors.red, fontWeight: FontWeight.w700,
+    final weekendTextStyle = TextStyle( //주말
+      color: Colors.red,
+      fontWeight: FontWeight.w700,
+      fontSize: 18.0,
     );
-
 
     return TableCalendar(
       locale: 'ko-KR',
@@ -35,20 +37,21 @@ class Calendar extends StatelessWidget {
       headerStyle: HeaderStyle(
         formatButtonVisible: false,
         titleCentered: true,
-        titleTextStyle: TextStyle(
+        titleTextStyle: TextStyle( //맨위에 ~년 ~월
           fontWeight: FontWeight.w700,
-          fontSize: 16.0,
+          fontSize: 20.0,
         ),
       ),
       calendarStyle: CalendarStyle(
         isTodayHighlighted: false, //오늘 날짜 하이라이트 X
         defaultTextStyle: defaultTextStyle, //주중
-        holidayTextStyle: TextStyle().copyWith(color: Colors.red, fontWeight: FontWeight.w700), //홀리!
+        holidayTextStyle: TextStyle()
+            .copyWith(color: Colors.red, fontWeight: FontWeight.w700), //홀리!
         weekendTextStyle: weekendTextStyle, //주말
       ),
 
       onDaySelected: onDaySelected,
-      selectedDayPredicate: (DateTime date){
+      selectedDayPredicate: (DateTime date) {
         if (selectedDay == null) {
           return false;
         }
@@ -58,7 +61,7 @@ class Calendar extends StatelessWidget {
             date.day == selectedDay.day;
       }, //우리가 선택한 날짜(selectedDay)와 비교해서 모두 같으면 true 반환 -> 우리가 선택한 날에 색깔생김
       calendarBuilders:
-      CalendarBuilders(markerBuilder: (context, date, dynamic event){
+          CalendarBuilders(markerBuilder: (context, date, dynamic event) {
         if (event.isNotEmpty) {
           return Container(
             width: 35,

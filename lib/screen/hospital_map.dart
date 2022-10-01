@@ -53,6 +53,7 @@ class _MapHospitalScreenState extends State<MapHospitalScreen> {
               context: context,
               builder: (context) {
                 return Container(
+                  //위로 올라오는 부분
                   height: 200,
                   color: Colors.amber,
                   child: Center(
@@ -90,10 +91,12 @@ class _MapHospitalScreenState extends State<MapHospitalScreen> {
           title: Text(
             '지도찾기',
             style: TextStyle(
-              color: Colors.white,
-              fontWeight: FontWeight.w700,
-            ),
+                color: Colors.white,
+                fontFamily: 'jua',
+                fontSize: 30.0),
           ),
+          backgroundColor: Colors.lightGreen,
+          centerTitle: true,
           actions: [
             TextButton(onPressed: () async {
               Marker nearlymarker;
@@ -106,9 +109,8 @@ class _MapHospitalScreenState extends State<MapHospitalScreen> {
                 );
              // }
             },
-                child: Text("인근병원"))
+                child: Text("인근병원")),
           ],
-          backgroundColor: Colors.pink,
         ),
         body: FutureBuilder<String>(
           future: checkPermission(),
@@ -127,8 +129,8 @@ class _MapHospitalScreenState extends State<MapHospitalScreen> {
                         Expanded(
                           flex: 3,
                           child: GoogleMap(
-                            initialCameraPosition: CameraPosition(
-                              target: mylocation,
+                            initialCameraPosition:
+                              CameraPosition(target: mylocation,
                               zoom: 10,
                             ),
                             //초기 카메라 위치
