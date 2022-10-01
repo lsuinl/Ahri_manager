@@ -54,6 +54,7 @@ Future<String> checkpermission() async {
   if (statuses.values.every((element) => element.isDenied)) {
     return '비허가';
   }
+
   else
     return '허가';
 }

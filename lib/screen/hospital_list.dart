@@ -23,6 +23,7 @@ class _MapHospitalListScreenState extends State<MapHospitalListScreen> {
   List<DropdownMenuItem<String>> _dropDownSpeciesItems =
       new List.empty(growable: true);
   String? _sortText;
+  LatLng mylocation = LatLng(0, 0);
 
   @override
   void initState() {
@@ -39,7 +40,6 @@ class _MapHospitalListScreenState extends State<MapHospitalListScreen> {
   }
 
   @override
-
   Widget build(BuildContext context) {
     String animalspecies="";
     if(user_infotmations.isNotEmpty) {
@@ -104,13 +104,15 @@ class _MapHospitalListScreenState extends State<MapHospitalListScreen> {
     setState(() {});
   }
 
-//현재좌표 가져오기
-  Future<Position> getCurrentLocation() async {
+  Future<LatLng> getCurrentLocation() async {
     Position position = await Geolocator.getCurrentPosition(
         desiredAccuracy: LocationAccuracy.high);
-
-    return position;
+    print(position);
+    LatLng mylocation=LatLng(position.latitude, position.longitude);
+    print(1);
+    return mylocation;
   }
+
 }
 
 //------------------------------------------------------
