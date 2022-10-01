@@ -13,6 +13,7 @@ class MapHospitalScreen extends StatefulWidget {
   State<MapHospitalScreen> createState() => _MapHospitalScreenState();
 }
 
+
 class _MapHospitalScreenState extends State<MapHospitalScreen> {
   Set<Marker> _markers = new Set();
   GoogleMapController? mapController;
@@ -94,6 +95,7 @@ class _MapHospitalScreenState extends State<MapHospitalScreen> {
         body: FutureBuilder<String>(
           future: checkPermission(),
           builder: (BuildContext context, AsyncSnapshot snapshot) {
+
             //로딩중,,
             if (snapshot.connectionState == ConnectionState.waiting) {
               return Center(child: CircularProgressIndicator());
@@ -144,6 +146,7 @@ class _MapHospitalScreenState extends State<MapHospitalScreen> {
     user_infotmations = helper.getuserinformation();
     setState(() {});
   }
+
 }
 
 //------------------------------------------------------
