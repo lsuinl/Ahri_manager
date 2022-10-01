@@ -52,7 +52,7 @@ class _MapHospitalScreenState extends State<MapHospitalScreen> {
             showModalBottomSheet<void>(
               context: context,
               builder: (context) {
-                return Container(
+                return Container( //위로 올라오는 부분
                   height: 200,
                   color: Colors.amber,
                   child: Center(
