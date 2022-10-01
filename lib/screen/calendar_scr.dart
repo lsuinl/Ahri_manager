@@ -34,8 +34,12 @@ class _CalendarScreenState extends State<CalendarScreen> {
               focusedDay: focusedDay,
               onDaySelected: onDaySelected,
             ),
-            SizedBox(height: 8.0,),
-            TodayBanner(selectedDay: selectedDay,),
+            SizedBox(
+              height: 8.0,
+            ),
+            TodayBanner(
+              selectedDay: selectedDay,
+            ),
             SizedBox(height: 8.0),
             _ScheduleList(
               selectedDate: selectedDay,
@@ -50,20 +54,22 @@ class _CalendarScreenState extends State<CalendarScreen> {
     // 일정 추가 Button
     return FloatingActionButton(
       onPressed: () {
-        showModalBottomSheet( //최대 사이즈가 화면의 반.
+        showModalBottomSheet(
+          //최대 사이즈가 화면의 반.
           context: context,
           isScrollControlled: true, //이렇게 설정하면 화면의 반보다 더 올라갈 수 있다.
-          builder: (_){
+          builder: (_) {
             return ScheduleBottomSheet(
               selectedDate: selectedDay,
-            );//Add 버튼을 누르면 하단에서 흰 공간이 올라오
+            ); //Add 버튼을 누르면 하단에서 흰 공간이 올라오
           },
         );
       },
       backgroundColor: Colors.red[100],
       child: Icon(
         Icons.add,
-      ),);
+      ),
+    );
   }
 
   onDaySelected(DateTime selectedDay, DateTime focusedDay) {
@@ -77,9 +83,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
 class _ScheduleList extends StatelessWidget {
   final DateTime selectedDate;
 
-  const _ScheduleList({
-    required this.selectedDate,
-    Key? key}) : super(key: key);
+  const _ScheduleList({required this.selectedDate, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -99,9 +103,11 @@ class _ScheduleList extends StatelessWidget {
                 );
               }
 
-              return ListView.separated( //스크롤 가능
+              return ListView.separated(
+                //스크롤 가능
                 itemCount: snapshot.data!.length,
-                separatorBuilder: (context, index) { //두 목록 사이에 끼워넣기
+                separatorBuilder: (context, index) {
+                  //두 목록 사이에 끼워넣기
                   return SizedBox(height: 8.0); //두 목록 사이에 여백 추가
                 },
                 itemBuilder: (context, index) {
@@ -111,8 +117,8 @@ class _ScheduleList extends StatelessWidget {
                     key: ObjectKey(scheduleWithColor.schedule.id),
                     direction: DismissDirection.endToStart,
                     onDismissed: (DismissDirection direction) {
-                      GetIt.I<LocalDatabase>().removeSchedule(
-                          scheduleWithColor.schedule.id);
+                      GetIt.I<LocalDatabase>()
+                          .removeSchedule(scheduleWithColor.schedule.id);
                     },
                     child: GestureDetector(
                       onTap: () {
@@ -128,7 +134,6 @@ class _ScheduleList extends StatelessWidget {
                         );
                       },
                       child: ScheduleCard(
-                        startTime: scheduleWithColor.schedule.startTime,
                         title: scheduleWithColor.schedule.title,
                         color: Color(
                           int.parse(
@@ -140,8 +145,7 @@ class _ScheduleList extends StatelessWidget {
                   );
                 },
               );
-            }
-        ),
+            }),
       ),
     );
   }

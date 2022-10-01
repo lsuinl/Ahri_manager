@@ -5,15 +5,13 @@ import 'package:flutter/services.dart';
 
 class CustomTextField extends StatelessWidget {
   final String initialValue;
-
-  final FormFieldSetter<String> onSaved;
   final String label;
-  final bool isTime; // true - 시간 / false - 내용
   final bool isMemo;
+  final FormFieldSetter<String> onSaved;
 
   const CustomTextField({
     required this.label,
-    required this.isTime,
+    //required this.isTime,
     required this.isMemo,
     required this.onSaved,
     required this.initialValue,
@@ -33,12 +31,6 @@ class CustomTextField extends StatelessWidget {
           ),
         ),
         renderTextField(),
-        //if (isTime) renderTextField(),
-        //if (isTitle) renderTextField(),
-        //if (isMemo)
-          //Expanded(
-            //child: renderTextField(),
-          //),
       ],
     );
   }
@@ -53,21 +45,13 @@ class CustomTextField extends StatelessWidget {
         if (val == null || val.isEmpty){ //텍스트가 입력되지 않았다!면
           return '값을 입력해주세요.'; //값을 입력해달라고 띄워보리기
         }
-        if (isTime){ //시간이라고요?
-          DateTime time = DateTime.parse(val); //value 값을 datetime으로.
-          if(time == null) { //시간을 정하지 않았다고요?
-            return '시간을 선택해주세요'; //선택해주세요
-          }
-        }
+
         return null;
       },
       cursorColor: Colors.grey, //커서 색 설정 (텍스트 입력하면 바로 옆에 깜빡이는 세로줄)
       maxLines: isMemo ? 4 : 1, //최대 쓸 수 있는 줄 수 (null값은 줄 제한X)
+      initialValue: initialValue,
       //expands: isMemo, //메모 늘리기
-      keyboardType: isTime ? TextInputType.number : TextInputType.multiline, //시간이다? => 숫자만 입력 가능(날짜로 바꿀 것) / 시간이 아니다? => 여러줄 글쓰기 가능능          inputFormatters: [
-      inputFormatters: isTime ? [
-              FilteringTextInputFormatter.digitsOnly, //시간이라면 숫자만 쓸 수 있어요.
-            ] : [], //시간이 아니라면 숫자만 쓸 수 있는 제한이 사라져요
       decoration: InputDecoration(
         border: InputBorder.none, //입력칸 밑줄 없애기
         filled: true, //밑줄대신 네모칸 보이기
