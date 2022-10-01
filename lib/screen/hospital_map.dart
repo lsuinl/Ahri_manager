@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:ahri_manager/data/hospital_information.dart';
-
+import 'package:url_launcher/url_launcher.dart';
 import '../plus/user_helper.dart'; //데이터 가져오기
 
 class MapHospitalScreen extends StatefulWidget {
@@ -61,7 +61,10 @@ class _MapHospitalScreenState extends State<MapHospitalScreen> {
                       mainAxisSize: MainAxisSize.min,
                       children: <Widget>[
                         Text("${hospitalinf[i].name}"),
-                        Text("${hospitalinf[i].phone}"),
+                        new TextButton(
+                            onPressed:  () => launchUrl(Uri.parse('tel:${hospitalinf[i].phone.replaceAll("-", "")}')),
+                            child: new Text("${hospitalinf[i].phone}", style: TextStyle(fontSize: 16,),)
+                        ),
                         Text("${hospitalinf[i].adress}"),
                       ],
                     ),
@@ -109,7 +112,7 @@ class _MapHospitalScreenState extends State<MapHospitalScreen> {
                       child: GoogleMap(
                         initialCameraPosition: CameraPosition (
                             target: LatLng(0,0),
-                            zoom: 16
+                            zoom: 10
                         ),
                         //초기 카메라 위치
                         myLocationEnabled: true,

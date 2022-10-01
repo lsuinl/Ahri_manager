@@ -5,6 +5,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:ahri_manager/data/hospital_information.dart';
 import 'package:flutter/cupertino.dart';
 import '../plus/user_helper.dart'; //데이터 가져오기
+import 'package:url_launcher/url_launcher.dart';
 
 class MapHospitalListScreen extends StatefulWidget {
   const MapHospitalListScreen({Key? key}) : super(key: key);
@@ -51,7 +52,10 @@ class _MapHospitalListScreenState extends State<MapHospitalListScreen> {
           textlist.add(Column(
               children: [
                 Text("${hospitalinf[i].name}", style: TextStyle(fontSize: 17),),
-                Text("${hospitalinf[i].phone}", style: TextStyle(fontSize: 17),),
+                new TextButton(
+                  onPressed:  () => launchUrl(Uri.parse('tel:${hospitalinf[i].phone.replaceAll("-", "")}')),
+                    child: new Text("${hospitalinf[i].phone}", style: TextStyle(fontSize: 16,),)
+                ),
                 Text("${hospitalinf[i].adress}", style: TextStyle(fontSize: 12),),
                 Text("${hospitalinf[i].animal.toString()}\n\n", style: TextStyle(fontSize: 17),),
                 //이름순이면 순서대로, 거리순이면 거리계산해서
