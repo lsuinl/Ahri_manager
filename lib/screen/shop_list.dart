@@ -51,7 +51,7 @@ class _birdurlState extends State<_birdurl> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.lightGreen,
+        backgroundColor: Colors.red[100],
         title: Padding(
           padding: const EdgeInsets.only(top: 8.0),
           child: Text(
@@ -60,6 +60,13 @@ class _birdurlState extends State<_birdurl> {
               color: Colors.white,
               fontFamily: 'jua',
               fontSize: 30.0,
+              shadows: [
+                Shadow(
+                  blurRadius: 10.0,
+                  color: Colors.black,
+                  offset: Offset(1.0, 1.0),
+                ),
+              ],
             ),
           ),
         ),

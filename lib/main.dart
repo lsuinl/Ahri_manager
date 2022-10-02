@@ -1,4 +1,5 @@
 import 'package:ahri_manager/data/database/drift_database.dart';
+import 'package:ahri_manager/screen/calendar_scr.dart';
 import 'package:ahri_manager/screen/check_permission.dart';
 import 'package:ahri_manager/screen/my_animal_information.dart';
 import 'package:ahri_manager/screen/input_animal_information.dart';
@@ -57,7 +58,7 @@ void main() async {
   runApp(
     MaterialApp(
         //앱 스타일
-        home: MapHospitalListScreen() //
+        home: CalendarScreen() //
         ),
   );
 }

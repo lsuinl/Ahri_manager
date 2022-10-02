@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:ahri_manager/plus/user_helper.dart';
 import 'package:ahri_manager/data/user_information.dart';
 
-
 import 'calendar_scr.dart';
 
 //메인화면(탭 선택 화면)
@@ -30,9 +29,10 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    if(user_infotmations.isNotEmpty) {
+    if (user_infotmations.isNotEmpty) {
       return Container(
-        decoration: BoxDecoration( //배경이미지
+        decoration: BoxDecoration(
+          //배경이미지
           image: DecorationImage(
             fit: BoxFit.cover,
             image: AssetImage('asset/imgs/background3.jpg'),
@@ -40,9 +40,8 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         child: Scaffold(
           appBar: AppBar(
-            backgroundColor: Colors.lightGreen,
-            title:
-            Row(
+            backgroundColor: Colors.red[100],
+            title: Row(
               children: [
                 Padding(
                   padding: const EdgeInsets.only(top: 8.0),
@@ -52,6 +51,13 @@ class _HomeScreenState extends State<HomeScreen> {
                       color: Colors.white,
                       fontFamily: 'jua',
                       fontSize: 30.0,
+                      shadows: [
+                        Shadow(
+                          blurRadius: 10.0,
+                          color: Colors.black,
+                          offset: Offset(1.0, 1.0),
+                        ),
+                      ],
                     ),
                   ),
                 ),
@@ -64,7 +70,8 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                     style: ElevatedButton.styleFrom(primary: Colors.white),
                     onPressed: () {
-                      Navigator.push(context,
+                      Navigator.push(
+                          context,
                           MaterialPageRoute(
                               builder: (context) => MyAnimalScreen()));
                     },
@@ -72,25 +79,26 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ],
             ),
-            centerTitle: true,//????????????????????????
+            centerTitle: true, //????????????????????????
           ),
 
           backgroundColor: Colors.transparent, //배경색 투명으로 설정
           body: SingleChildScrollView(
             scrollDirection: Axis.vertical,
-
             child: Column(
               //crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    Column( //달력
+                    Column(
+                      //달력
                       //mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         IconButton(
                           onPressed: () {
-                            Navigator.push(context,
+                            Navigator.push(
+                                context,
                                 MaterialPageRoute(
                                     builder: (context) => CalendarScreen()));
                           },
@@ -99,8 +107,6 @@ class _HomeScreenState extends State<HomeScreen> {
                           iconSize: 70,
                           //padding,
                         ),
-
-
                         Text(
                           "기록장",
                           style: TextStyle(
@@ -116,19 +122,21 @@ class _HomeScreenState extends State<HomeScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Column( //병원 찾기
+                    Column(
+                      //병원 찾기
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        IconButton( //병원 이미지
+                        IconButton(
+                          //병원 이미지
                           onPressed: () {
-                            Navigator.push(context,
+                            Navigator.push(
+                                context,
                                 MaterialPageRoute(
                                     builder: (context) => MapHospitalScreen()));
                           },
                           icon: Image.asset('asset/imgs/hospital.png'),
                           iconSize: 70,
                         ),
-
                         Text(
                           '병원 찾기',
                           style: TextStyle(
@@ -141,25 +149,24 @@ class _HomeScreenState extends State<HomeScreen> {
                   ],
                 ),
 
-
-              //동물 이미지 넣기 (Column)
-
+                //동물 이미지 넣기 (Column)
 
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Column(
                       children: [
-                        IconButton( //물품 이미지
+                        IconButton(
+                          //물품 이미지
                           onPressed: () {
-                            Navigator.push(context,
+                            Navigator.push(
+                                context,
                                 MaterialPageRoute(
                                     builder: (context) => BuyObjectScreen()));
                           },
                           icon: Image.asset('asset/imgs/pet-food.png'),
                           iconSize: 70,
                         ),
-
                         Text(
                           "물품구매",
                           style: TextStyle(
@@ -171,15 +178,12 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ],
                 ),
-
               ],
             ),
-
           ),
         ),
-              );
-    }
-    else
+      );
+    } else
       return Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -193,9 +197,9 @@ class _HomeScreenState extends State<HomeScreen> {
         ],
       );
   }
-  void updateScreen(){
-    user_infotmations=helper.getuserinformation();
+
+  void updateScreen() {
+    user_infotmations = helper.getuserinformation();
     setState(() {});
   }
 }
-

@@ -13,7 +13,6 @@ class MapHospitalScreen extends StatefulWidget {
   State<MapHospitalScreen> createState() => _MapHospitalScreenState();
 }
 
-
 class _MapHospitalScreenState extends State<MapHospitalScreen> {
   Set<Marker> _markers = new Set();
   GoogleMapController? mapController;
@@ -56,15 +55,34 @@ class _MapHospitalScreenState extends State<MapHospitalScreen> {
                 return Container(
                   //위로 올라오는 부분
                   height: 200,
-                  color: Colors.amber,
+                  color: Color(0xfffff8f1), //올라오는 칸 색깔(현재 상아색)
                   child: Center(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       mainAxisSize: MainAxisSize.min,
                       children: <Widget>[
-                        Text("${hospitalinf[i].name}"),
-                        Text("${hospitalinf[i].phone}"),
-                        Text("${hospitalinf[i].adress}"),
+                        Text(
+                          "${hospitalinf[i].name}",
+                          style: TextStyle(
+                            fontSize: 25.0,
+                            fontFamily: 'jua',
+                          ),
+                        ),
+                        Text(
+                          "${hospitalinf[i].phone}",
+                          style: TextStyle(
+                            fontSize: 20.0,
+                            fontFamily: 'jua',
+                          ),
+                        ),
+                        SizedBox(height: 5.0),
+                        Text(
+                          "${hospitalinf[i].adress}",
+                          style: TextStyle(
+                            fontSize: 15.0,
+                            fontFamily: 'jua',
+                          ),
+                        ),
                       ],
                     ),
                   ),
@@ -85,17 +103,24 @@ class _MapHospitalScreenState extends State<MapHospitalScreen> {
           title: Text(
             '지도찾기',
             style: TextStyle(
-                color: Colors.white,
-                fontFamily: 'jua',
-                fontSize: 30.0),
+              color: Colors.white,
+              fontFamily: 'jua',
+              fontSize: 30.0,
+              shadows: [
+                Shadow(
+                  blurRadius: 10.0,
+                  color: Colors.black,
+                  offset: Offset(1.0, 1.0),
+                ),
+              ],
+            ),
           ),
-          backgroundColor: Colors.lightGreen,
+          backgroundColor: Colors.red[100],
           centerTitle: true,
         ),
         body: FutureBuilder<String>(
           future: checkPermission(),
           builder: (BuildContext context, AsyncSnapshot snapshot) {
-
             //로딩중,,
             if (snapshot.connectionState == ConnectionState.waiting) {
               return Center(child: CircularProgressIndicator());
@@ -146,7 +171,6 @@ class _MapHospitalScreenState extends State<MapHospitalScreen> {
     user_infotmations = helper.getuserinformation();
     setState(() {});
   }
-
 }
 
 //------------------------------------------------------
