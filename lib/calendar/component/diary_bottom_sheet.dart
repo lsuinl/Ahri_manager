@@ -2,14 +2,13 @@ import 'package:ahri_manager/calendar/component/custom_text_field.dart';
 import 'package:drift/drift.dart' show Value;
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
-
-import '../../data/database/drift_diary_database.dart';
+import '../../data/database/drift_database.dart';
 
 //다이어리 정보 등록창
 
 class DiaryBottomSheet extends StatefulWidget {
   final DateTime selectedDate;
-  final int? diaryId;
+  final DateTime? diaryId;
 
   const DiaryBottomSheet({
     required this.selectedDate,
@@ -41,7 +40,7 @@ class _DiaryBottomSheetState extends State<DiaryBottomSheet> {
           child: FutureBuilder<DiaryData>(
             future: widget.diaryId == null
                 ? null
-                : GetIt.I<LocalDatabase>().getDiaryById(widget.diaryId!),
+                : GetIt.I<LocalDatabase>().getDiaryByDate(widget.selectedDate!),
             builder: (context, snapshot) {
               if (snapshot.hasError) {
                 return Center(
@@ -127,8 +126,8 @@ class _DiaryBottomSheetState extends State<DiaryBottomSheet> {
           ),
         );
       } else {
-        await GetIt.I<LocalDatabase>().updateDiaryById(
-          widget.diaryId!,
+        await GetIt.I<LocalDatabase>().updateDiaryByDate(
+          widget.selectedDate!,
           DiaryCompanion(
             date: Value(widget.selectedDate),
             title: Value(title!),

@@ -7,6 +7,7 @@ import 'package:drift/drift.dart';
 import 'package:drift/native.dart';
 import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
+import 'package:ahri_manager/calendar/model/diary.dart';
 
 // drift DataBase에 연결할 코드 작성
 
@@ -17,6 +18,7 @@ part 'drift_database.g.dart'; //자동으로 파일이 생성
   tables: [
     Schedules,
     CategoryColors,
+    Diary,
   ],
 )
 
@@ -66,6 +68,28 @@ class LocalDatabase extends _$LocalDatabase {
       )
           .toList(),
     );
+  }
+
+  Future<DiaryData> getDiaryByDate(DateTime date) =>
+      (select(diary)
+        ..where((tbl) => tbl.date.equals(date))).getSingle();
+
+  //일기 작성
+  Future<int> createDiary(DiaryCompanion data) => into(diary).insert(data);
+
+  //일기 수정
+  Future<int> updateDiaryByDate(DateTime date, DiaryCompanion data) =>
+      (update(diary)
+        ..where((tbl) => tbl.date.equals(date))).write(data);
+
+  //일기 삭제
+  Future<int> removeDiary(DateTime date) =>
+      (delete(diary)..where((tbl) => tbl.date.equals(date))).go();
+
+  //일기 띄우기
+  Stream<List<DiaryData>> watchDiary(DateTime date) {
+    return (select(diary)..where((tbl)=>tbl.date.equals(date))).watch();
+
   }
 
   @override

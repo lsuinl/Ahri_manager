@@ -2,11 +2,9 @@ import 'package:ahri_manager/calendar/component/calendar.dart';
 import 'package:ahri_manager/calendar/component/diary_banner.dart';
 import 'package:ahri_manager/calendar/component/diary_bottom_sheet.dart';
 import 'package:ahri_manager/calendar/component/diary_card.dart';
-import 'package:ahri_manager/calendar/model/diary.dart';
-import 'package:ahri_manager/calendar/model/diary_day.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
-import '../data/database/drift_diary_database.dart';
+import '../data/database/drift_database.dart';
 
 
 class DiaryScreen extends StatefulWidget {
@@ -23,6 +21,29 @@ class _DiaryScreenState extends State<DiaryScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.red[100],
+        title: Padding(
+          padding: const EdgeInsets.only(top: 8.0),
+          child: Text(
+            '캘린더',
+            style: TextStyle(
+              fontFamily: 'jua',
+              fontSize: 30.0,
+              color: Colors.white,
+              shadows: [
+                Shadow(
+                  blurRadius: 10.0,
+                  color: Colors.black,
+                  offset: Offset(1.0, 1.0),
+                ),
+              ],
+            ),
+          ),
+        ),
+        centerTitle: true,
+      ),
+
       floatingActionButton: renderFloatingActionButton(), //add Button
       body: SafeArea(
         child: Column(
@@ -52,7 +73,7 @@ class _DiaryScreenState extends State<DiaryScreen> {
       onPressed: () {
         showModalBottomSheet(
           //최대 사이즈가 화면의 반.
-          context: this.context,
+          context: context,
           isScrollControlled: true, //이렇게 설정하면 화면의 반보다 더 올라갈 수 있다.
           builder: (_) {
             return DiaryBottomSheet(
@@ -61,7 +82,7 @@ class _DiaryScreenState extends State<DiaryScreen> {
           },
         );
       },
-      backgroundColor: Colors.blue,
+      backgroundColor: Colors.red[100],
       child: Icon(
         Icons.add,
         color: Colors.white,
@@ -89,7 +110,7 @@ class _ShowDiary extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 8.0),
         child: StreamBuilder<List<DiaryData>>(
             stream: GetIt.I<LocalDatabase>().watchDiary(selectedDate),
-            builder: (context, snapshot) {
+            builder: (context, snapshot) { //snapshot은 return 값을 의미
               if (!snapshot.hasData) {
                 return Center(child: CircularProgressIndicator());
               }
@@ -103,20 +124,20 @@ class _ShowDiary extends StatelessWidget {
               return ListView.separated(
                 scrollDirection: Axis.vertical,
                 //스크롤 가능
-                itemCount: snapshot.data!.length,
+                itemCount: snapshot.data!.length, //일기 개수
                 separatorBuilder: (context, index) {
                   //두 목록 사이에 끼워넣기
                   return SizedBox(height: 8.0); //두 목록 사이에 여백 추가
                 },
                 itemBuilder: (context, index) {
-                  final DiaryData = snapshot.data![index];
+                  final diaryData = snapshot.data![index];
 
                   return Dismissible(
-                    key: ObjectKey(DiaryData.id),
+                    key: ObjectKey(diaryData.id),
                     direction: DismissDirection.endToStart,
                     onDismissed: (DismissDirection direction) {
                       GetIt.I<LocalDatabase>()
-                          .removeDiary(DiaryData.id);
+                          .removeDiary(selectedDate);
                     },
                     child: GestureDetector(
                       onTap: () {
@@ -126,13 +147,13 @@ class _ShowDiary extends StatelessWidget {
                           builder: (_) {
                             return DiaryBottomSheet(
                               selectedDate: selectedDate,
-                              diaryId: DiaryData.id,
+                              //diaryId: DiaryData.id,
                             );
                           },
                         );
                       },
                       child: DiaryCard(
-                        title: DiaryData.title,
+                        title: diaryData.title,
                       ),
                     ),
                   );
