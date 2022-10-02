@@ -114,7 +114,7 @@ class _DiaryBottomSheetState extends State<DiaryBottomSheet> {
     }
 
     //모든 텍스트 폼 필드를 검사한 뒤 모두 에러가 없으면 TRUE가 나옴
-    if (formKey.currentState!.validate()) {
+    if (formKey.currentState!.validate()) { //에러가 없을 때
       formKey.currentState!.save(); // 에러가 없어서 저장.
 
       if (widget.diaryId == null) {
