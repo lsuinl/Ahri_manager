@@ -25,6 +25,29 @@ class _CalendarScreenState extends State<CalendarScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.red[100],
+        title: Padding(
+          padding: const EdgeInsets.only(top: 8.0),
+          child: Text(
+            '캘린더',
+            style: TextStyle(
+              fontFamily: 'jua',
+              fontSize: 30.0,
+              color: Colors.white,
+              shadows: [
+                Shadow(
+                  blurRadius: 10.0,
+                  color: Colors.black,
+                  offset: Offset(1.0, 1.0),
+                ),
+              ],
+            ),
+          ),
+        ),
+        centerTitle: true,
+      ),
+
       floatingActionButton: renderFloatingActionButton(), //add Button
       body: SafeArea(
         child: Column(
@@ -40,7 +63,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
             TodayBanner(
               selectedDay: selectedDay,
             ),
-            SizedBox(height: 8.0),
+            SizedBox(height: 8.0), //여기 어디지
             _ScheduleList(
               selectedDate: selectedDay,
             ),

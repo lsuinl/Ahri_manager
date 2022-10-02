@@ -89,15 +89,22 @@ class _StartScreenState extends State<StartScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.lightGreen,
+        backgroundColor: Colors.red[100],
         title: Padding(
           padding: const EdgeInsets.only(top: 5.0),
           child: Text(
-            '동물 등록하기',
+            '동물 정보 입력',
             style: TextStyle(
               color: Colors.white,
               fontFamily: 'jua',
               fontSize: 28.0,
+              shadows: [
+                Shadow(
+                  blurRadius: 10.0,
+                  color: Colors.black,
+                  offset: Offset(1.0, 1.0),
+                ),
+              ],
             ),
           ),
         ),
@@ -130,7 +137,7 @@ class _StartScreenState extends State<StartScreen> {
                   ),
                 ),
                 style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all(Colors.green)),
+                    backgroundColor: MaterialStateProperty.all(Colors.pink[200])),
                 onPressed: () async {
                   var picker = ImagePicker();
                   dynamic image =
@@ -340,11 +347,12 @@ class _StartScreenState extends State<StartScreen> {
                       '저장',
                       style: TextStyle(
                         fontFamily: 'jua',
+                        fontSize: 18.0,
                       ),
                     ),
                     style: ButtonStyle(
                         backgroundColor:
-                            MaterialStateProperty.all(Colors.green)),
+                            MaterialStateProperty.all(Colors.pink[200])),
                     onPressed: () {
                       if (weight.text=="" || name.text == "") {
                         Text("하이");
@@ -361,11 +369,12 @@ class _StartScreenState extends State<StartScreen> {
                       '취소',
                       style: TextStyle(
                         fontFamily: 'jua',
+                        fontSize: 18.0,
                       ),
                     ),
                     style: ButtonStyle(
                         backgroundColor:
-                            MaterialStateProperty.all(Colors.green)),
+                            MaterialStateProperty.all(Colors.pink[200])),
                     onPressed: () {
                       // 앱 종료 기능(정보수정창인 경우에는 이전화면으로 돌아감.
                       if(!user_infotmations.isEmpty){

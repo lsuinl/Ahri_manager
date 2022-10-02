@@ -30,7 +30,7 @@ class Calendar extends StatelessWidget {
     );
 
     return TableCalendar(
-      locale: 'ko-KR',
+      //locale: 'ko-KR',
       focusedDay: focusedDay,
       firstDay: DateTime(2000),
       lastDay: DateTime(3000),
@@ -48,6 +48,11 @@ class Calendar extends StatelessWidget {
         holidayTextStyle: TextStyle()
             .copyWith(color: Colors.red, fontWeight: FontWeight.w700), //홀리!
         weekendTextStyle: weekendTextStyle, //주말
+        selectedDecoration: BoxDecoration(
+          color: Colors.red[100],
+          shape: BoxShape.circle,
+        )
+        //selectedColor: Theme.of(context).primaryColor, //왜안되지요?
       ),
 
       onDaySelected: onDaySelected,
