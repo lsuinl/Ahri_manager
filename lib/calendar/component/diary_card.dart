@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
 
-// 캘린더 밑에 일정 리스트 관리
-// 일정 제목 | 카테고리 색상
+// 일기를 캘린더 밑에 보여줍니다.
+// 일기 제목
 
-class ScheduleCard extends StatelessWidget {
-  final String title; //일정 제목
-  final Color color; //일정 카테고리 색깔
+class DiaryCard extends StatelessWidget {
+  final String title;
 
-  const ScheduleCard({
+  const DiaryCard({
     required this.title,
-    required this.color,
     Key? key}) : super(key: key);
 
   @override
@@ -24,14 +22,12 @@ class ScheduleCard extends StatelessWidget {
       ),
       child: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: IntrinsicHeight( //Row가 최대한으로 차지하고 있는 사이즈만큼 높이 지정.
+        child: IntrinsicHeight(
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               SizedBox(width: 16.0),
-              _Title(title: title), //일정 제목
-              SizedBox(width: 16.0),
-              _Category(color: color), //일정 카테고리 색깔
+              _Title(title: title), //일기 제목
             ],
           ),
         ),
@@ -50,24 +46,5 @@ class _Title extends StatelessWidget { //제목
   @override
   Widget build(BuildContext context) {
     return Expanded(child: Text(title));
-  }
-}
-
-class _Category extends StatelessWidget { //카테고리 색상
-  final Color color;
-  const _Category({
-    required this.color,
-    Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: color,
-        shape: BoxShape.circle,
-      ),
-      width: 16.0,
-      height: 16.0,
-    );
   }
 }

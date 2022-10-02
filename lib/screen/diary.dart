@@ -1,53 +1,28 @@
 import 'package:ahri_manager/calendar/component/calendar.dart';
-import 'package:ahri_manager/calendar/component/schedule_bottom_sheet.dart';
-import 'package:ahri_manager/calendar/component/schedule_card.dart';
-import 'package:ahri_manager/calendar/component/today_banner.dart';
-import 'package:ahri_manager/calendar/model/schedule_with_color.dart';
-import 'package:ahri_manager/data/database/drift_database.dart';
+import 'package:ahri_manager/calendar/component/diary_banner.dart';
+import 'package:ahri_manager/calendar/component/diary_bottom_sheet.dart';
+import 'package:ahri_manager/calendar/component/diary_card.dart';
+import 'package:ahri_manager/calendar/model/diary.dart';
+import 'package:ahri_manager/calendar/model/diary_day.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
+import '../data/database/drift_diary_database.dart';
 
-//캘린더 스크린 관리창(초기설정을 기반으로+직접 지정하는 일정관리)
 
-class CalendarScreen extends StatefulWidget {
-  const CalendarScreen({Key? key}) : super(key: key);
+class DiaryScreen extends StatefulWidget {
+  const DiaryScreen({Key? key}) : super(key: key);
 
   @override
-  State<CalendarScreen> createState() => _CalendarScreenState();
+  State<DiaryScreen> createState() => _DiaryScreenState();
 }
 
-class _CalendarScreenState extends State<CalendarScreen> {
+class _DiaryScreenState extends State<DiaryScreen> {
   DateTime selectedDay = DateTime.now();
   DateTime focusedDay = DateTime.now();
-
-  //final ScrollController _scrollController = ScrollController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.red[100],
-        title: Padding(
-          padding: const EdgeInsets.only(top: 8.0),
-          child: Text(
-            '캘린더',
-            style: TextStyle(
-              fontFamily: 'jua',
-              fontSize: 30.0,
-              color: Colors.white,
-              shadows: [
-                Shadow(
-                  blurRadius: 10.0,
-                  color: Colors.black,
-                  offset: Offset(1.0, 1.0),
-                ),
-              ],
-            ),
-          ),
-        ),
-        centerTitle: true,
-      ),
-
       floatingActionButton: renderFloatingActionButton(), //add Button
       body: SafeArea(
         child: Column(
@@ -60,13 +35,11 @@ class _CalendarScreenState extends State<CalendarScreen> {
             SizedBox(
               height: 8.0,
             ),
-            TodayBanner(
+            DiaryBanner(
               selectedDay: selectedDay,
             ),
-            SizedBox(height: 8.0), //여기 어디지
-            _ScheduleList(
-              selectedDate: selectedDay,
-            ),
+            SizedBox(height: 8.0),
+            _ShowDiary(selectedDate: selectedDay),
           ],
         ),
       ),
@@ -79,18 +52,19 @@ class _CalendarScreenState extends State<CalendarScreen> {
       onPressed: () {
         showModalBottomSheet(
           //최대 사이즈가 화면의 반.
-          context: context,
+          context: this.context,
           isScrollControlled: true, //이렇게 설정하면 화면의 반보다 더 올라갈 수 있다.
           builder: (_) {
-            return ScheduleBottomSheet(
+            return DiaryBottomSheet(
               selectedDate: selectedDay,
             ); //Add 버튼을 누르면 하단에서 흰 공간이 올라오
           },
         );
       },
-      backgroundColor: Colors.red[100],
+      backgroundColor: Colors.blue,
       child: Icon(
         Icons.add,
+        color: Colors.white,
       ),
     );
   }
@@ -103,18 +77,18 @@ class _CalendarScreenState extends State<CalendarScreen> {
   }
 }
 
-class _ScheduleList extends StatelessWidget {
+class _ShowDiary extends StatelessWidget {
   final DateTime selectedDate;
 
-  const _ScheduleList({required this.selectedDate, Key? key}) : super(key: key);
+  const _ShowDiary({required this.selectedDate, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Expanded(
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8.0),
-        child: StreamBuilder<List<ScheduleWithColor>>(
-            stream: GetIt.I<LocalDatabase>().watchSchedules(selectedDate),
+        child: StreamBuilder<List<DiaryData>>(
+            stream: GetIt.I<LocalDatabase>().watchDiary(selectedDate),
             builder: (context, snapshot) {
               if (!snapshot.hasData) {
                 return Center(child: CircularProgressIndicator());
@@ -122,17 +96,12 @@ class _ScheduleList extends StatelessWidget {
 
               if (snapshot.hasData && snapshot.data!.isEmpty) {
                 return Center(
-                  child: Text(
-                    '스케줄이 없어요.',
-                    style: TextStyle(
-                      //fontFamily: 'jua',
-                      fontSize: 20.0,
-                    ),
-                  ),
+                  child: Text('일기가 없어요.'),
                 );
               }
 
               return ListView.separated(
+                scrollDirection: Axis.vertical,
                 //스크롤 가능
                 itemCount: snapshot.data!.length,
                 separatorBuilder: (context, index) {
@@ -140,14 +109,14 @@ class _ScheduleList extends StatelessWidget {
                   return SizedBox(height: 8.0); //두 목록 사이에 여백 추가
                 },
                 itemBuilder: (context, index) {
-                  final scheduleWithColor = snapshot.data![index];
+                  final DiaryData = snapshot.data![index];
 
                   return Dismissible(
-                    key: ObjectKey(scheduleWithColor.schedule.id),
+                    key: ObjectKey(DiaryData.id),
                     direction: DismissDirection.endToStart,
                     onDismissed: (DismissDirection direction) {
                       GetIt.I<LocalDatabase>()
-                          .removeSchedule(scheduleWithColor.schedule.id);
+                          .removeDiary(DiaryData.id);
                     },
                     child: GestureDetector(
                       onTap: () {
@@ -155,20 +124,15 @@ class _ScheduleList extends StatelessWidget {
                           context: context,
                           isScrollControlled: true,
                           builder: (_) {
-                            return ScheduleBottomSheet(
+                            return DiaryBottomSheet(
                               selectedDate: selectedDate,
-                              scheduleId: scheduleWithColor.schedule.id,
+                              diaryId: DiaryData.id,
                             );
                           },
                         );
                       },
-                      child: ScheduleCard(
-                        title: scheduleWithColor.schedule.title,
-                        color: Color(
-                          int.parse(
-                              'FF${scheduleWithColor.categoryColor.hexCode}',
-                              radix: 16),
-                        ),
+                      child: DiaryCard(
+                        title: DiaryData.title,
                       ),
                     ),
                   );
