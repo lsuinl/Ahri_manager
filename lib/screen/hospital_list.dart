@@ -178,7 +178,7 @@ class _HospitalListScreenState extends State<HospitalListScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.lightGreen,
+        backgroundColor: Colors.red[100],
         title: Padding(
           padding: const EdgeInsets.only(top: 8.0),
           child: Text(
@@ -186,6 +186,13 @@ class _HospitalListScreenState extends State<HospitalListScreen> {
             style: TextStyle(
               fontSize: 30.0,
               fontFamily: 'jua',
+              shadows: [
+                Shadow(
+                  blurRadius: 10.0,
+                  color: Colors.black,
+                  offset: Offset(1.0, 1.0),
+                ),
+              ],
             ),
           ),
         ),

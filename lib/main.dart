@@ -47,7 +47,7 @@ void main() async {
   runApp(
     MaterialApp(
         //앱 스타일
-        home: CheckPermissionScreen() //
+        home: BuyObjectScreen() //
         ),
   );
 }

@@ -28,7 +28,7 @@ class _MyAnimalInformationScreenState extends State<MyAnimalInformationScreen> {
     if (user_infotmations.isNotEmpty) {
       return Scaffold(
         appBar: AppBar(
-          backgroundColor: Colors.lightGreen,
+          backgroundColor: Colors.red[100],
           title: Padding(
             padding: const EdgeInsets.only(top: 8.0),
             child: Text(
@@ -37,6 +37,13 @@ class _MyAnimalInformationScreenState extends State<MyAnimalInformationScreen> {
                 fontFamily: 'jua',
                 fontSize: 30.0,
                 color: Colors.white,
+                shadows: [
+                  Shadow(
+                    blurRadius: 10.0,
+                    color: Colors.black,
+                    offset: Offset(1.0, 1.0),
+                  ),
+                ],
               ),
             ),
           ), //동물 이름 띄우는 걸로 수정했어요
@@ -54,7 +61,7 @@ class _MyAnimalInformationScreenState extends State<MyAnimalInformationScreen> {
                 style: TextStyle(
                   fontSize: 30.0,
                   fontFamily: 'jua',
-                  color: Colors.green,
+                  color: Colors.pink[200],
                 ),
               ),
               Text(
@@ -111,7 +118,7 @@ class _MyAnimalInformationScreenState extends State<MyAnimalInformationScreen> {
                   ),
                 ),
                 style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all(Colors.green)),
+                    backgroundColor: MaterialStateProperty.all(Colors.pink[200])),
                 onPressed: () {
                   Navigator.push(context,
                       MaterialPageRoute(builder: (context) => InputAnimalInformationScreen()));
@@ -131,7 +138,7 @@ class _MyAnimalInformationScreenState extends State<MyAnimalInformationScreen> {
             'asset/imgs/unicorn.png',
           ),
           Text(
-            "문제가 생겼습다. 다시 시도해주세요.",
+            "문제가 생겼습니다. 다시 시도해주세요.",
             style: TextStyle(color: Colors.black),
           ),
         ],

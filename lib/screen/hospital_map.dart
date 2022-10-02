@@ -14,6 +14,7 @@ class HospitalMapScreen extends StatefulWidget {
   State<HospitalMapScreen> createState() => _HospitalMapScreenState();
 }
 
+
 class _HospitalMapScreenState extends State<HospitalMapScreen> {
   Set<Marker> _markers = new Set();
   GoogleMapController? mapController;
@@ -38,6 +39,7 @@ class _HospitalMapScreenState extends State<HospitalMapScreen> {
     if (user_infotmations.isNotEmpty) {
       animalspecies = user_infotmations.first.species;
     }
+    //페이지 뷰에소의 박스
 
     //마커.
     for (int i = 0; i < hospitalinf.length; i++) {
@@ -57,7 +59,7 @@ class _HospitalMapScreenState extends State<HospitalMapScreen> {
                 return Container(
                   //위로 올라오는 부분
                   height: 200,
-                  color: Colors.amber,
+                  color: Color(0xfffff8f1), //올라오는 칸 색깔(현재 상아색)
                   child: Center(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -94,9 +96,19 @@ class _HospitalMapScreenState extends State<HospitalMapScreen> {
           title: Text(
             '지도찾기',
             style: TextStyle(
-                color: Colors.white, fontFamily: 'jua', fontSize: 30.0),
+              color: Colors.white,
+              fontFamily: 'jua',
+              fontSize: 30.0,
+              shadows: [
+                Shadow(
+                  blurRadius: 10.0,
+                  color: Colors.black,
+                  offset: Offset(1.0, 1.0),
+                ),
+              ],
+            ),
           ),
-          backgroundColor: Colors.lightGreen,
+          backgroundColor: Colors.red[100],
           centerTitle: true,
           actions: [
             TextButton(

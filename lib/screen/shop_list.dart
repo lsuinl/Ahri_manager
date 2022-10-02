@@ -50,7 +50,7 @@ class _birdurlState extends State<_birdurl> {
       if (user_infotmations.first.species == "도마뱀") shop_name = lizardshopname;
       return Scaffold(
         appBar: AppBar(
-          backgroundColor: Colors.lightGreen,
+          backgroundColor: Colors.red[100],
           title: Padding(
             padding: const EdgeInsets.only(top: 8.0),
             child: Text(
@@ -59,6 +59,13 @@ class _birdurlState extends State<_birdurl> {
                 color: Colors.white,
                 fontFamily: 'jua',
                 fontSize: 30.0,
+                shadows: [
+                  Shadow(
+                    blurRadius: 10.0,
+                    color: Colors.black,
+                    offset: Offset(1.0, 1.0),
+                  ),
+                ],
               ),
             ),
           ),
@@ -89,8 +96,8 @@ class _birdurlState extends State<_birdurl> {
                         ),
                       ),
                       style: ElevatedButton.styleFrom(
-                        primary: Colors.lightGreen,
-                        onPrimary: Colors.lightGreen,
+                        primary: Colors.pink[100],
+                        onPrimary: Colors.pink,
                         //애니메이션 색깔
                         shadowColor: Colors.black,
                         elevation: 5.0,
@@ -124,7 +131,7 @@ class _birdurlState extends State<_birdurl> {
             'asset/imgs/unicorn.png',
           ),
           Text(
-            "문제가 생겼습다. 다시 시도해주세요.",
+            "문제가 생겼습니다. 다시 시도해주세요.",
             style: TextStyle(color: Colors.black),
           ),
         ],
