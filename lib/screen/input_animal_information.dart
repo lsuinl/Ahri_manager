@@ -13,14 +13,14 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 
 //초기 권한 및 정보설정
-class StartScreen extends StatefulWidget {
-  const StartScreen({Key? key}) : super(key: key);
+class InputAnimalInformationScreen extends StatefulWidget {
+  const InputAnimalInformationScreen({Key? key}) : super(key: key);
 
   @override
-  State<StartScreen> createState() => _StartScreenState();
+  State<InputAnimalInformationScreen> createState() => _InputAnimalInformationScreenState();
 }
 
-class _StartScreenState extends State<StartScreen> {
+class _InputAnimalInformationScreenState extends State<InputAnimalInformationScreen> {
   List<user_information> user_infotmations=[]; //유저정보 리스트
   TextEditingController name = TextEditingController();
   TextEditingController weight = TextEditingController();
@@ -347,7 +347,23 @@ class _StartScreenState extends State<StartScreen> {
                             MaterialStateProperty.all(Colors.green)),
                     onPressed: () {
                       if (weight.text=="" || name.text == "") {
-                        Text("하이");
+                        showDialog(
+                          context: context,
+                          barrierDismissible: true, // 바깥 영역 터치시 닫을지 여부
+                          builder: (BuildContext context) {
+                            return AlertDialog(
+                              content: const Text("내용을 빠짐없이 기입해주세요!"),
+                              actions: [
+                                TextButton(
+                                  child: const Text('확인'),
+                                  onPressed: () {
+                                    Navigator.of(context).pop();
+                                  },
+                                ),
+                              ],
+                            );
+                          }
+                            );
                       } else {
                         saveUserInformation();
                       }

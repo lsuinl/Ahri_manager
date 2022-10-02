@@ -9,14 +9,14 @@ import 'package:get_it/get_it.dart';
 
 //캘린더 스크린 관리창(초기설정을 기반으로+직접 지정하는 일정관리)
 
-class CalendarScreen extends StatefulWidget {
-  const CalendarScreen({Key? key}) : super(key: key);
+class CalenderScreen extends StatefulWidget {
+  const CalenderScreen({Key? key}) : super(key: key);
 
   @override
-  State<CalendarScreen> createState() => _CalendarScreenState();
+  State<CalenderScreen> createState() => _CalenderScreenState();
 }
 
-class _CalendarScreenState extends State<CalendarScreen> {
+class _CalenderScreenState extends State<CalenderScreen> {
   DateTime selectedDay = DateTime.now();
   DateTime focusedDay = DateTime.now();
 

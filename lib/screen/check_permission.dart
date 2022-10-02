@@ -5,13 +5,13 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:ahri_manager/data/user_information.dart';
 import 'package:ahri_manager/plus/user_helper.dart';
 
-class LoddingScreen extends StatefulWidget {
-  const LoddingScreen({Key? key}) : super(key: key);
+class CheckPermissionScreen extends StatefulWidget {
+  const CheckPermissionScreen({Key? key}) : super(key: key);
   @override
-  State<LoddingScreen> createState() => _LoddingScreenState();
+  State<CheckPermissionScreen> createState() => _CheckPermissionScreenState();
 }
 
-class _LoddingScreenState extends State<LoddingScreen> {
+class _CheckPermissionScreenState extends State<CheckPermissionScreen> {
   List<user_information> user_infotmations = [];
   final UserHelper helper = UserHelper();
 
@@ -105,7 +105,7 @@ class _ok extends StatelessWidget {
                 onPressed: () {
                   if (user_infotmations.length < 1) //정보저장여부
                     Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => StartScreen()));
+                        MaterialPageRoute(builder: (context) => InputAnimalInformationScreen()));
                   else
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) => HomeScreen()));
@@ -141,7 +141,7 @@ class _lodding extends StatelessWidget {
       ],
     );
   }
-}
+  }
 
 class _error extends StatelessWidget {
   final List<user_information> user_infotmations;
@@ -166,7 +166,7 @@ class _error extends StatelessWidget {
           style: ElevatedButton.styleFrom(),
           onPressed: () {
             if (user_infotmations.length<1) //정보저장여부
-              Navigator.push(context, MaterialPageRoute(builder: (context) => StartScreen()));
+              Navigator.push(context, MaterialPageRoute(builder: (context) => InputAnimalInformationScreen()));
             else
               Navigator.push(context, MaterialPageRoute(builder: (context) => HomeScreen()));
           },
