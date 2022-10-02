@@ -1,9 +1,10 @@
 import 'package:ahri_manager/data/user_information.dart';
+import 'package:ahri_manager/screen/hospital_list.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:ahri_manager/data/hospital_information.dart';
-
+import 'package:url_launcher/url_launcher.dart';
 import '../plus/user_helper.dart'; //데이터 가져오기
 
 class MapHospitalScreen extends StatefulWidget {
@@ -13,12 +14,14 @@ class MapHospitalScreen extends StatefulWidget {
   State<MapHospitalScreen> createState() => _MapHospitalScreenState();
 }
 
+
 class _MapHospitalScreenState extends State<MapHospitalScreen> {
   Set<Marker> _markers = new Set();
   GoogleMapController? mapController;
   List<information> hospitalinf = [];
   List<user_information> user_infotmations = [];
   final UserHelper helper = UserHelper();
+  LatLng mylocation = LatLng(0, 0);
 
   @override
   void initState() {
@@ -61,28 +64,17 @@ class _MapHospitalScreenState extends State<MapHospitalScreen> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       mainAxisSize: MainAxisSize.min,
                       children: <Widget>[
-                        Text(
-                          "${hospitalinf[i].name}",
-                          style: TextStyle(
-                            fontSize: 25.0,
-                            fontFamily: 'jua',
-                          ),
-                        ),
-                        Text(
-                          "${hospitalinf[i].phone}",
-                          style: TextStyle(
-                            fontSize: 20.0,
-                            fontFamily: 'jua',
-                          ),
-                        ),
-                        SizedBox(height: 5.0),
-                        Text(
-                          "${hospitalinf[i].adress}",
-                          style: TextStyle(
-                            fontSize: 15.0,
-                            fontFamily: 'jua',
-                          ),
-                        ),
+                        Text("${hospitalinf[i].name}"),
+                        new TextButton(
+                            onPressed: () => launchUrl(Uri.parse(
+                                'tel:${hospitalinf[i].phone.replaceAll("-", "")}')),
+                            child: new Text(
+                              "${hospitalinf[i].phone}",
+                              style: TextStyle(
+                                fontSize: 16,
+                              ),
+                            )),
+                        Text("${hospitalinf[i].adress}"),
                       ],
                     ),
                   ),
@@ -117,10 +109,37 @@ class _MapHospitalScreenState extends State<MapHospitalScreen> {
           ),
           backgroundColor: Colors.red[100],
           centerTitle: true,
+          actions: [
+            TextButton(
+                onPressed: () async {
+                  var initlocation = LatLng(0, 0);
+                  mylocation = await getCurrentLocation();
+                  for (int i = 0; i < hospitalinf.length; i++) {
+                    if (((mylocation.latitude - initlocation.latitude).abs() +
+                            (mylocation.longitude - initlocation.longitude)
+                                .abs()) >
+                        ((mylocation.latitude - hospitalinf[i].xy.latitude)
+                                .abs() +
+                            (mylocation.longitude - hospitalinf[i].xy.longitude)
+                                .abs())) {
+                      initlocation = hospitalinf[i].xy;
+                    }
+                  }
+                  mapController!.animateCamera(CameraUpdate.newCameraPosition(
+                    CameraPosition(
+                      target:
+                          LatLng(initlocation.latitude, initlocation.longitude),
+                      zoom: 11.0,
+                    ),
+                  ));
+                },
+                child: Text("인근병원")),
+          ],
         ),
         body: FutureBuilder<String>(
           future: checkPermission(),
           builder: (BuildContext context, AsyncSnapshot snapshot) {
+
             //로딩중,,
             if (snapshot.connectionState == ConnectionState.waiting) {
               return Center(child: CircularProgressIndicator());
@@ -135,8 +154,10 @@ class _MapHospitalScreenState extends State<MapHospitalScreen> {
                         Expanded(
                           flex: 3,
                           child: GoogleMap(
-                            initialCameraPosition:
-                                CameraPosition(target: LatLng(0, 0), zoom: 16),
+                            initialCameraPosition: CameraPosition(
+                              target: LatLng(37.564214, 127.001699),
+                              zoom: 11,
+                            ),
                             //초기 카메라 위치
                             myLocationEnabled: true,
                             //내위치표시
@@ -151,6 +172,15 @@ class _MapHospitalScreenState extends State<MapHospitalScreen> {
                             markers: _markers,
                           ),
                         ),
+                        TextButton(
+                            onPressed: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          MapHospitalListScreen()));
+                            },
+                            child: Text("리스트로 보기"))
                       ],
                     );
                   });
@@ -170,6 +200,14 @@ class _MapHospitalScreenState extends State<MapHospitalScreen> {
   void updateScreen() {
     user_infotmations = helper.getuserinformation();
     setState(() {});
+  }
+
+  Future<LatLng> getCurrentLocation() async {
+    Position position = await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.low);
+    print(position);
+    LatLng mylocation = LatLng(position.latitude, position.longitude);
+    return mylocation;
   }
 }
 

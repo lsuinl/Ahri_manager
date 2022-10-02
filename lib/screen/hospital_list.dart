@@ -1,10 +1,12 @@
+import 'dart:collection';
 import 'package:ahri_manager/data/user_information.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:ahri_manager/data/hospital_information.dart';
 import 'package:flutter/cupertino.dart';
-import '../plus/user_helper.dart'; //데이터 가져오기
+import '../plus/user_helper.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class MapHospitalListScreen extends StatefulWidget {
   const MapHospitalListScreen({Key? key}) : super(key: key);
@@ -20,8 +22,9 @@ class _MapHospitalListScreenState extends State<MapHospitalListScreen> {
   final UserHelper helper = UserHelper();
   List _SpeciesList = ['이름순', '거리순'];
   List<DropdownMenuItem<String>> _dropDownSpeciesItems =
-  new List.empty(growable: true);
+      new List.empty(growable: true);
   String? _sortText;
+  LatLng mylocation = LatLng(0, 0);
 
   @override
   void initState() {
@@ -33,22 +36,24 @@ class _MapHospitalListScreenState extends State<MapHospitalListScreen> {
       _dropDownSpeciesItems
           .add(DropdownMenuItem(value: item, child: Text(item)));
     }
+    getCurrentLocation();
     _sortText = _dropDownSpeciesItems[0].value;
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    String animalspecies="";
-    if(user_infotmations.isNotEmpty) {
+    String animalspecies = "";
+    if (user_infotmations.isNotEmpty) {
       animalspecies = user_infotmations.first.species;
     }
 
     List<Widget> getlist() {
-      List<Widget> textlist = [];
+      List<Widget> textnamelist = [];
+      List<Widget> textdistancelist = [];
       for (int i = 0; i < hospitalinf.length; i++) {
         if (hospitalinf[i].animal.contains(animalspecies)) {
-          textlist.add(
+          textnamelist.add(
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 15.0),
               child: Column(
@@ -61,13 +66,16 @@ class _MapHospitalListScreenState extends State<MapHospitalListScreen> {
                       fontFamily: 'jua',
                     ),
                   ),
-                  Text(
-                    "${hospitalinf[i].phone}", //전화번호
-                    style: TextStyle(
-                      fontSize: 17,
-                      fontFamily: 'jua',
-                    ),
-                  ),
+                  new TextButton(
+                      onPressed: () => launchUrl(Uri.parse(
+                          'tel:${hospitalinf[i].phone.replaceAll("-", "")}')),
+                      child: new Text(
+                        "${hospitalinf[i].phone}",
+                        style: TextStyle(
+                          fontSize: 15,
+                          fontFamily: 'jua',
+                        ),
+                      )),
                   Text(
                     "${hospitalinf[i].adress}", //주소
                     style: TextStyle(
@@ -87,23 +95,83 @@ class _MapHospitalListScreenState extends State<MapHospitalListScreen> {
                     width: 500.0,
                     color: Colors.black12,
                   ),
-                  //이름순이면 순서대로, 거리순이면 거리계산해서
+                  //거리측정해서 int형 배열에 순위 저장
                 ],
               ),
             ),
           );
         }
-        //거리순으로 선택된경우에는 거리순으로 정렬(버블정렬)
-        if (_sortText == "거리순") {
-          for (int a = 0; a < textlist.length; a++) {
-            for (int b = a; b < textlist.length; b++) {
-              Widget temporary;
-              // if(){}
-            }
-          }
+      }
+
+      Map<int, double> list = {};
+      for (int i = 0; i < hospitalinf.length; i++) {
+        if (hospitalinf[i].animal.contains(animalspecies)) {
+          //map에 해당 동물이 있는 위치 i 와 거리를 key와 value로 저장
+          list[i] = (mylocation.latitude - hospitalinf[i].xy.latitude).abs() +
+              (mylocation.longitude - hospitalinf[i].xy.longitude).abs();
         }
       }
-      return textlist;
+      //거리순으로 정렬된 map
+      var sortedKeys = list.keys.toList(growable: false)
+        ..sort((k1, k2) => list[k1]!.compareTo(list[k2]!));
+      LinkedHashMap sortedMap = new LinkedHashMap.fromIterable(sortedKeys,
+          key: (k) => k, value: (k) => list[k]);
+      sortedMap.forEach((key, value) {
+        textdistancelist.add(
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 15.0),
+            child: Column(
+              children: [
+                SizedBox(height: 8.0),
+                Text(
+                  "${hospitalinf[key].name}", //병원명
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontFamily: 'jua',
+                  ),
+                ),
+                new TextButton(
+                    onPressed: () => launchUrl(Uri.parse(
+                        'tel:${hospitalinf[key].phone.replaceAll("-", "")}')),
+                    child: new Text(
+                      "${hospitalinf[key].phone}",
+                      style: TextStyle(
+                        fontSize: 15,
+                        fontFamily: 'jua',
+                      ),
+                    )),
+                Text(
+                  "${hospitalinf[key].adress}", //주소
+                  style: TextStyle(
+                    fontSize: 15,
+                    fontFamily: 'jua',
+                  ),
+                ),
+                Text(
+                  "${hospitalinf[key].animal.toString()}\n\n", //동물
+                  style: TextStyle(
+                    fontSize: 17,
+                    fontFamily: 'jua',
+                  ),
+                ),
+                Container(
+                  height: 1.0,
+                  width: 500.0,
+                  color: Colors.black12,
+                ),
+              ],
+            ),
+          ),
+        );
+      });
+
+      if (_sortText == '이름순') {
+        return textnamelist;
+      } else if (_sortText == '거리순') {
+        print(sortedMap.values);
+        return textdistancelist;
+      }
+      return textdistancelist;
     }
 
     return Scaffold(
@@ -155,19 +223,17 @@ class _MapHospitalListScreenState extends State<MapHospitalListScreen> {
     );
   }
 
+  getCurrentLocation() async {
+    Position position = await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.low);
+    print(position);
+    setState(() {
+      mylocation = LatLng(position.latitude, position.longitude);
+    });
+  }
+
   void updateScreen() {
     user_infotmations = helper.getuserinformation();
     setState(() {});
   }
-
-//현재좌표 가져오기
-  Future<Position> getCurrentLocation() async {
-    Position position = await Geolocator.getCurrentPosition(
-        desiredAccuracy: LocationAccuracy.high);
-
-    return position;
-  }
 }
-
-//------------------------------------------------------
-// 권한과 관련된 모든 값은 미래의 값을 받아오는 async로 작업
