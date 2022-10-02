@@ -33,7 +33,7 @@ class _LoddingScreenState extends State<LoddingScreen> {
             if (snapshot.connectionState == ConnectionState.waiting)
               return _lodding();
             else
-              return _error();
+              return _error(user_infotmations: user_infotmations,);
           }));
   }
 
@@ -44,18 +44,19 @@ class _LoddingScreenState extends State<LoddingScreen> {
 }
 
 Future<String> checkpermission() async {
-  var locationper=Permission.locationWhenInUse.request();
-  var photoper= Permission.photos.request();
-  var cameraper = Permission.camera.request();
-  if(locationper.isDenied==true) Permission.locationWhenInUse.request();
-  if(photoper.isDenied==true) Permission.photos.request();
-  if(cameraper.isDenied==true) Permission.camera.request();
-  if((await locationper.isGranted==true||await locationper.isLimited==true) &&
-      (await photoper.isGranted==true ||await photoper.isLimited==true) &&
-      (await cameraper.isGranted==true ||await cameraper.isLimited==true))
-    return '허가';
+  Map<Permission, PermissionStatus> statuses = await [
+    Permission.locationWhenInUse,
+    Permission.photos,
+    Permission.phone,
+    Permission.camera,
+  ].request();
+
+  if (statuses.values.every((element) => element.isDenied)) {
+    return '비허가';
+  }
+
   else
-    return '문제 발생';
+    return '허가';
 }
 
 class _ok extends StatelessWidget {
@@ -143,7 +144,11 @@ class _lodding extends StatelessWidget {
 }
 
 class _error extends StatelessWidget {
-  const _error({Key? key}) : super(key: key);
+  final List<user_information> user_infotmations;
+
+  const _error({
+    required this.user_infotmations,
+  Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -153,8 +158,21 @@ class _error extends StatelessWidget {
         Image.asset(
           'asset/imgs/unicorn.png',
         ),
+        ElevatedButton(
+          child: Text(
+            "시작하기",
+            style: TextStyle(color: Colors.white),
+          ),
+          style: ElevatedButton.styleFrom(),
+          onPressed: () {
+            if (user_infotmations.length<1) //정보저장여부
+              Navigator.push(context, MaterialPageRoute(builder: (context) => StartScreen()));
+            else
+              Navigator.push(context, MaterialPageRoute(builder: (context) => HomeScreen()));
+          },
+        ),
         Text(
-          "권한 설정에 문제가 생겼습다. 권한을 설정해주세요.",
+          "권한 설정에 문제가 생겼습니다. 어플의 원활한 작동을 위해 설정에서 권한을 설정해주세요.",
           style: TextStyle(color: Colors.black),
         ),
       ],
