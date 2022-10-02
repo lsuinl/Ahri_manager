@@ -1,4 +1,5 @@
 import 'package:ahri_manager/data/database/drift_database.dart';
+import 'package:ahri_manager/screen/diary.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import '../model/schedule_with_color.dart';
@@ -28,28 +29,20 @@ class TodayBanner extends StatelessWidget {
     return Container(
       color: Colors.pink[100], //배너 배경 색깔
       child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+        padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 1.0),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              '${selectedDay.year}년 ${selectedDay.month}월 ${selectedDay.day}일',
+              '''${selectedDay.year}년 ${selectedDay.month}월 ${selectedDay.day}일
+       Schedule''',
               style: textStyle,
             ),
-            StreamBuilder<List<ScheduleWithColor>>(
-              stream: GetIt.I<LocalDatabase>().watchSchedules(selectedDay),
-              builder: (context, snapshot) {
-                int count = 0;
-
-                if(snapshot.hasData){
-                  count = snapshot.data!.length;
-                }
-                return Text(
-                    '$count개',
-                    style: textStyle,
-                );
-              }
-            ),
+            IconButton(
+                onPressed: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => DiaryScreen()),);
+                },
+                icon: Icon(Icons.ac_unit))
           ],
         ),
       ),

@@ -18,7 +18,7 @@ class ScheduleCard extends StatelessWidget {
       decoration: BoxDecoration(
         border: Border.all(
           width: 1.0,
-          color: Colors.pink, //스케줄 테두리 색
+          color: Colors.grey, //스케줄 테두리 색
         ),
         borderRadius: BorderRadius.circular(8.0), //테두리 각진 거 둥글게!
       ),
