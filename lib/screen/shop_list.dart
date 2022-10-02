@@ -6,14 +6,14 @@ import 'package:ahri_manager/data/shop_information.dart';
 
 //물건판매리스트(동물별로 다르게 표기)
 //목록 중 하나를 선택 시, 웹사이트로 이동
-class BuyObjectScreen extends StatefulWidget {
-  const BuyObjectScreen({Key? key}) : super(key: key);
+class ShopListScreen extends StatefulWidget {
+  const ShopListScreen({Key? key}) : super(key: key);
 
   @override
-  State<BuyObjectScreen> createState() => _BuyObjectScreenState();
+  State<ShopListScreen> createState() => _ShopListScreenState();
 }
 
-class _BuyObjectScreenState extends State<BuyObjectScreen> {
+class _ShopListScreenState extends State<ShopListScreen> {
   @override
   Widget build(BuildContext context) {
     return _birdurl();
@@ -113,7 +113,7 @@ class _birdurlState extends State<_birdurl> {
                             context,
                             MaterialPageRoute(
                                 builder: (context) =>
-                                    ShopUrlScreen(shopname: shop_name[i])));
+                                    ShopWebScreen(shopname: shop_name[i])));
                       },
                     ),
                   ),

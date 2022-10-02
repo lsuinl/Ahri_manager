@@ -1,21 +1,24 @@
 import 'dart:collection';
 import 'package:ahri_manager/data/user_information.dart';
 import 'package:flutter/material.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:ahri_manager/data/hospital_information.dart';
 import 'package:flutter/cupertino.dart';
 import '../plus/user_helper.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class MapHospitalListScreen extends StatefulWidget {
-  const MapHospitalListScreen({Key? key}) : super(key: key);
+class HospitalListScreen extends StatefulWidget {
+  final LatLng mylocation;
+
+  const HospitalListScreen({
+    required this.mylocation,
+    Key? key}) : super(key: key);
 
   @override
-  State<MapHospitalListScreen> createState() => _MapHospitalListScreenState();
+  State<HospitalListScreen> createState() => _HospitalListScreenState();
 }
 
-class _MapHospitalListScreenState extends State<MapHospitalListScreen> {
+class _HospitalListScreenState extends State<HospitalListScreen> {
   GoogleMapController? mapController;
   List<information> hospitalinf = [];
   List<user_information> user_infotmations = [];
@@ -36,7 +39,7 @@ class _MapHospitalListScreenState extends State<MapHospitalListScreen> {
       _dropDownSpeciesItems
           .add(DropdownMenuItem(value: item, child: Text(item)));
     }
-    getCurrentLocation();
+    mylocation=widget.mylocation;
     _sortText = _dropDownSpeciesItems[0].value;
     super.initState();
   }
@@ -168,7 +171,6 @@ class _MapHospitalListScreenState extends State<MapHospitalListScreen> {
       if (_sortText == '이름순') {
         return textnamelist;
       } else if (_sortText == '거리순') {
-        print(sortedMap.values);
         return textdistancelist;
       }
       return textdistancelist;
@@ -221,15 +223,6 @@ class _MapHospitalListScreenState extends State<MapHospitalListScreen> {
         children: getlist(),
       ),
     );
-  }
-
-  getCurrentLocation() async {
-    Position position = await Geolocator.getCurrentPosition(
-        desiredAccuracy: LocationAccuracy.low);
-    print(position);
-    setState(() {
-      mylocation = LatLng(position.latitude, position.longitude);
-    });
   }
 
   void updateScreen() {

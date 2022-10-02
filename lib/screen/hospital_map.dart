@@ -7,15 +7,15 @@ import 'package:ahri_manager/data/hospital_information.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../plus/user_helper.dart'; //데이터 가져오기
 
-class MapHospitalScreen extends StatefulWidget {
-  const MapHospitalScreen({Key? key}) : super(key: key);
+class HospitalMapScreen extends StatefulWidget {
+  const HospitalMapScreen({Key? key}) : super(key: key);
 
   @override
-  State<MapHospitalScreen> createState() => _MapHospitalScreenState();
+  State<HospitalMapScreen> createState() => _HospitalMapScreenState();
 }
 
 
-class _MapHospitalScreenState extends State<MapHospitalScreen> {
+class _HospitalMapScreenState extends State<HospitalMapScreen> {
   Set<Marker> _markers = new Set();
   GoogleMapController? mapController;
   List<information> hospitalinf = [];
@@ -29,6 +29,7 @@ class _MapHospitalScreenState extends State<MapHospitalScreen> {
     helper.init().then((value) {
       updateScreen();
     });
+    getCurrentLocation();
     super.initState();
   }
 
@@ -111,18 +112,20 @@ class _MapHospitalScreenState extends State<MapHospitalScreen> {
           centerTitle: true,
           actions: [
             TextButton(
-                onPressed: () async {
+                onPressed: () {
                   var initlocation = LatLng(0, 0);
-                  mylocation = await getCurrentLocation();
                   for (int i = 0; i < hospitalinf.length; i++) {
-                    if (((mylocation.latitude - initlocation.latitude).abs() +
-                            (mylocation.longitude - initlocation.longitude)
-                                .abs()) >
-                        ((mylocation.latitude - hospitalinf[i].xy.latitude)
-                                .abs() +
-                            (mylocation.longitude - hospitalinf[i].xy.longitude)
-                                .abs())) {
-                      initlocation = hospitalinf[i].xy;
+                    if (hospitalinf[i].animal.contains(animalspecies)) {
+                      if (((mylocation.latitude - initlocation.latitude).abs() +
+                          (mylocation.longitude - initlocation.longitude)
+                              .abs()) >
+                          ((mylocation.latitude - hospitalinf[i].xy.latitude)
+                              .abs() +
+                              (mylocation.longitude -
+                                  hospitalinf[i].xy.longitude)
+                                  .abs())) {
+                        initlocation = hospitalinf[i].xy;
+                      }
                     }
                   }
                   mapController!.animateCamera(CameraUpdate.newCameraPosition(
@@ -139,7 +142,6 @@ class _MapHospitalScreenState extends State<MapHospitalScreen> {
         body: FutureBuilder<String>(
           future: checkPermission(),
           builder: (BuildContext context, AsyncSnapshot snapshot) {
-
             //로딩중,,
             if (snapshot.connectionState == ConnectionState.waiting) {
               return Center(child: CircularProgressIndicator());
@@ -178,7 +180,7 @@ class _MapHospitalScreenState extends State<MapHospitalScreen> {
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) =>
-                                          MapHospitalListScreen()));
+                                          HospitalListScreen(mylocation: mylocation,)));
                             },
                             child: Text("리스트로 보기"))
                       ],
@@ -196,19 +198,20 @@ class _MapHospitalScreenState extends State<MapHospitalScreen> {
   onMapCreated(GoogleMapController controller) {
     mapController = controller;
   }
+  getCurrentLocation() async {
+    Position position = await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.low);
+    print(position);
+    setState(() {
+      mylocation = LatLng(position.latitude, position.longitude);
+    });
+  }
 
   void updateScreen() {
     user_infotmations = helper.getuserinformation();
     setState(() {});
   }
 
-  Future<LatLng> getCurrentLocation() async {
-    Position position = await Geolocator.getCurrentPosition(
-        desiredAccuracy: LocationAccuracy.low);
-    print(position);
-    LatLng mylocation = LatLng(position.latitude, position.longitude);
-    return mylocation;
-  }
 }
 
 //------------------------------------------------------
