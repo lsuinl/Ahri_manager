@@ -14,7 +14,6 @@ class MapHospitalScreen extends StatefulWidget {
   State<MapHospitalScreen> createState() => _MapHospitalScreenState();
 }
 
-
 class _MapHospitalScreenState extends State<MapHospitalScreen> {
   Set<Marker> _markers = new Set();
   GoogleMapController? mapController;
@@ -58,23 +57,42 @@ class _MapHospitalScreenState extends State<MapHospitalScreen> {
                 return Container(
                   //위로 올라오는 부분
                   height: 200,
-                  color: Color(0xfffff8f1), //올라오는 칸 색깔(현재 상아색)
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      fit: BoxFit.cover,
+                      image: AssetImage('assets/imgs/pattern2.PNG'),
+                    ),
+                  ),
                   child: Center(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       mainAxisSize: MainAxisSize.min,
                       children: <Widget>[
-                        Text("${hospitalinf[i].name}"),
+                        Text(
+                          "${hospitalinf[i].name}",
+                          style: TextStyle(
+                            fontFamily: 'jua',
+                            fontSize: 20.0,
+                          ),
+                        ),
                         new TextButton(
-                            onPressed: () => launchUrl(Uri.parse(
-                                'tel:${hospitalinf[i].phone.replaceAll("-", "")}')),
-                            child: new Text(
-                              "${hospitalinf[i].phone}",
-                              style: TextStyle(
-                                fontSize: 16,
-                              ),
-                            )),
-                        Text("${hospitalinf[i].adress}"),
+                          onPressed: () => launchUrl(Uri.parse(
+                              'tel:${hospitalinf[i].phone.replaceAll("-", "")}')),
+                          child: new Text(
+                            "${hospitalinf[i].phone}",
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontFamily: 'jua',
+                            ),
+                          ),
+                        ),
+                        Text(
+                          "${hospitalinf[i].adress}",
+                          style: TextStyle(
+                            fontFamily: 'jua',
+                            fontSize: 20.0,
+                          ),
+                        ),
                       ],
                     ),
                   ),
@@ -111,35 +129,42 @@ class _MapHospitalScreenState extends State<MapHospitalScreen> {
           centerTitle: true,
           actions: [
             TextButton(
-                onPressed: () async {
-                  var initlocation = LatLng(0, 0);
-                  mylocation = await getCurrentLocation();
-                  for (int i = 0; i < hospitalinf.length; i++) {
-                    if (((mylocation.latitude - initlocation.latitude).abs() +
-                            (mylocation.longitude - initlocation.longitude)
-                                .abs()) >
-                        ((mylocation.latitude - hospitalinf[i].xy.latitude)
-                                .abs() +
-                            (mylocation.longitude - hospitalinf[i].xy.longitude)
-                                .abs())) {
-                      initlocation = hospitalinf[i].xy;
-                    }
+              onPressed: () async {
+                var initlocation = LatLng(0, 0);
+                mylocation = await getCurrentLocation();
+                for (int i = 0; i < hospitalinf.length; i++) {
+                  if (((mylocation.latitude - initlocation.latitude).abs() +
+                          (mylocation.longitude - initlocation.longitude)
+                              .abs()) >
+                      ((mylocation.latitude - hospitalinf[i].xy.latitude)
+                              .abs() +
+                          (mylocation.longitude - hospitalinf[i].xy.longitude)
+                              .abs())) {
+                    initlocation = hospitalinf[i].xy;
                   }
-                  mapController!.animateCamera(CameraUpdate.newCameraPosition(
-                    CameraPosition(
-                      target:
-                          LatLng(initlocation.latitude, initlocation.longitude),
-                      zoom: 11.0,
-                    ),
-                  ));
-                },
-                child: Text("인근병원")),
+                }
+                mapController!.animateCamera(CameraUpdate.newCameraPosition(
+                  CameraPosition(
+                    target:
+                        LatLng(initlocation.latitude, initlocation.longitude),
+                    zoom: 11.0,
+                  ),
+                ));
+              },
+              child: Text(
+                "인근병원",
+                style: TextStyle(
+                  fontSize: 15.0,
+                  fontFamily: 'jua',
+                  color: Colors.black,
+                ),
+              ),
+            ),
           ],
         ),
         body: FutureBuilder<String>(
           future: checkPermission(),
           builder: (BuildContext context, AsyncSnapshot snapshot) {
-
             //로딩중,,
             if (snapshot.connectionState == ConnectionState.waiting) {
               return Center(child: CircularProgressIndicator());

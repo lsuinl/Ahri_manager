@@ -138,6 +138,7 @@ class _MapHospitalListScreenState extends State<MapHospitalListScreen> {
                       style: TextStyle(
                         fontSize: 15,
                         fontFamily: 'jua',
+                        color: Colors.black,
                       ),
                     )),
                 Text(

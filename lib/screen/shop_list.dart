@@ -71,22 +71,19 @@ class _birdurlState extends State<_birdurl> {
           ),
         ),
         backgroundColor: Colors.white,
-        body: SingleChildScrollView(
-          scrollDirection: Axis.vertical,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8.0),
-            //버튼 양옆 조금씩 띄우기
+        body: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20.0), //버튼 양옆 조금씩 띄우기
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center, //왜 중간으로 안 가는겨
-              crossAxisAlignment: CrossAxisAlignment.stretch,
+              mainAxisAlignment: MainAxisAlignment.center, //중앙배치
+              crossAxisAlignment: CrossAxisAlignment.stretch, //가로로 꽉차게
               children: [
                 for (int i = 0; i < shop_name.length; i++)
                   Padding(
-                    padding: const EdgeInsets.only(top: 30.0),
+                    padding: const EdgeInsets.only(top: 40.0),
                     child: ElevatedButton.icon(
                       //버튼!!!
                       icon: Icon(Icons.shopping_bag_outlined,
-                          size: 20, color: Colors.black),
+                          size: 30, color: Colors.black),
                       label: Text(
                         shop_name[i],
                         style: TextStyle(
@@ -120,7 +117,6 @@ class _birdurlState extends State<_birdurl> {
               ],
             ),
           ),
-        ),
       );
     }
     else
