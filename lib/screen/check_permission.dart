@@ -14,49 +14,46 @@ class CheckPermissionScreen extends StatefulWidget {
 class _CheckPermissionScreenState extends State<CheckPermissionScreen> {
   List<user_information> user_infotmations = [];
   final UserHelper helper = UserHelper();
+  String check = "";
 
   @override
   void initState() {
-    helper.init().then((value) {updateScreen();});
+    helper.init().then((value) {
+      updateScreen();
+    });
+    checkpermission();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.lightBlueAccent,
-      body: FutureBuilder<String>(
-          future: checkpermission(),
-          builder: (BuildContext context, AsyncSnapshot snapshot) {
-            if (snapshot.data == '허가')
-              return _ok(user_infotmations: user_infotmations,);
-            if (snapshot.connectionState == ConnectionState.waiting)
-              return _lodding();
-            else
-              return _error(user_infotmations: user_infotmations,);
-          }));
+    if (check == '허가')
+      return _ok(user_infotmations: user_infotmations,);
+    else if (check == '비허가')
+      return _error(user_infotmations: user_infotmations,);
+    else
+      return _lodding();
   }
 
   void updateScreen() {
     user_infotmations = helper.getuserinformation();
     setState(() {});
   }
-}
 
-Future<String> checkpermission() async {
-  Map<Permission, PermissionStatus> statuses = await [
-    Permission.locationWhenInUse,
-    Permission.photos,
-    Permission.phone,
-    Permission.camera,
-  ].request();
 
-  if (statuses.values.every((element) => element.isDenied)) {
-    return '비허가';
+  checkpermission() async {
+    Map<Permission, PermissionStatus> statuses = await [
+      Permission.locationWhenInUse,
+      Permission.photos,
+    ].request();
+    print("와이라노");
+    setState(() {
+      if (statuses.values.every((element) => element.isDenied))
+        check = '비허가';
+      else
+        check='허가';
+    });
   }
-
-  else
-    return '허가';
 }
 
 class _ok extends StatelessWidget {
@@ -68,7 +65,9 @@ class _ok extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
+    return Scaffold(
+        backgroundColor: Colors.lightBlueAccent,
+        body: Padding(
       padding: const EdgeInsets.symmetric(horizontal:  15.0),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -115,6 +114,7 @@ class _ok extends StatelessWidget {
           ),
         ],
       ),
+    )
     );
   }
 }
@@ -125,7 +125,9 @@ class _lodding extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return Scaffold(
+        backgroundColor: Colors.lightBlueAccent,
+        body:Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Image.asset(
@@ -139,6 +141,7 @@ class _lodding extends StatelessWidget {
           style: TextStyle(color: Colors.black),
         ),
       ],
+    )
     );
   }
   }
@@ -152,7 +155,9 @@ class _error extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return Scaffold(
+        backgroundColor: Colors.lightBlueAccent,
+        body: Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Image.asset(
@@ -176,6 +181,7 @@ class _error extends StatelessWidget {
           style: TextStyle(color: Colors.black),
         ),
       ],
+    )
     );
   }
 }

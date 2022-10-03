@@ -49,7 +49,7 @@ void main() async {
   runApp(
     MaterialApp(
         //앱 스타일
-        home: CalendarScreen() //
+        home: CheckPermissionScreen() //
         ),
   );
 }
