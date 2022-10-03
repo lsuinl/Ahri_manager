@@ -11,7 +11,6 @@ class CustomTextField extends StatelessWidget {
 
   const CustomTextField({
     required this.label,
-    //required this.isTime,
     required this.isMemo,
     required this.onSaved,
     required this.initialValue,
