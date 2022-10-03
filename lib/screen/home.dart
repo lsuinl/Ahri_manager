@@ -1,12 +1,13 @@
 import 'package:ahri_manager/screen/shop_list.dart';
-import 'package:ahri_manager/screen/calendar_scr.dart';
+import 'package:ahri_manager/screen/calendar.dart';
 import 'package:ahri_manager/screen/hospital_map.dart';
 import 'package:ahri_manager/screen/my_animal_information.dart';
 import 'package:flutter/material.dart';
 import 'package:ahri_manager/plus/user_helper.dart';
 import 'package:ahri_manager/data/user_information.dart';
 
-import 'calendar_scr.dart';
+
+import 'calendar.dart';
 
 //메인화면(탭 선택 화면)
 class HomeScreen extends StatefulWidget {
@@ -74,7 +75,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => MyAnimalScreen()));
+                              builder: (context) => MyAnimalInformationScreen()));
                     },
                   ),
               ],
@@ -84,6 +85,7 @@ class _HomeScreenState extends State<HomeScreen> {
           backgroundColor: Colors.transparent, //배경색 투명으로 설정
           body: SingleChildScrollView(
             scrollDirection: Axis.vertical,
+
             child: Column(
               //crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -106,6 +108,8 @@ class _HomeScreenState extends State<HomeScreen> {
                           iconSize: 70,
                           //padding,
                         ),
+
+
                         Text(
                           "기록장",
                           style: TextStyle(
@@ -131,11 +135,12 @@ class _HomeScreenState extends State<HomeScreen> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => MapHospitalScreen()));
+                                    builder: (context) => HospitalMapScreen()));
                           },
                           icon: Image.asset('asset/imgs/hospital.png'),
                           iconSize: 70,
                         ),
+
                         Text(
                           '병원 찾기',
                           style: TextStyle(
@@ -147,8 +152,14 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ],
                 ),
+              //동물 이미지 넣기 (Column)
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+               Image.asset('asset/imgs/${user_infotmations.first.species}.png',scale: 3,),
+            ]
+        ),
 
-                //동물 이미지 넣기 (Column)
 
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -161,11 +172,12 @@ class _HomeScreenState extends State<HomeScreen> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => BuyObjectScreen()));
+                                    builder: (context) => ShopListScreen()));
                           },
                           icon: Image.asset('asset/imgs/pet-food.png'),
                           iconSize: 70,
                         ),
+
                         Text(
                           "물품구매",
                           style: TextStyle(
@@ -177,8 +189,10 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ],
                 ),
+
               ],
             ),
+
           ),
         ),
       );
@@ -202,3 +216,4 @@ class _HomeScreenState extends State<HomeScreen> {
     setState(() {});
   }
 }
+

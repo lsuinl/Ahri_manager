@@ -5,13 +5,13 @@ import 'package:ahri_manager/data/user_information.dart';
 
 
 //내 동물 정보 조회, 배경테마설정
-class MyAnimalScreen extends StatefulWidget {
-  const MyAnimalScreen({Key? key}) : super(key: key);
+class MyAnimalInformationScreen extends StatefulWidget {
+  const MyAnimalInformationScreen({Key? key}) : super(key: key);
   @override
-  State<MyAnimalScreen> createState() => _MyAnimalScreenState();
+  State<MyAnimalInformationScreen> createState() => _MyAnimalInformationScreenState();
 }
 
-class _MyAnimalScreenState extends State<MyAnimalScreen> {
+class _MyAnimalInformationScreenState extends State<MyAnimalInformationScreen> {
   List<user_information> user_infotmations = []; //유저정보 리스트
   final UserHelper helper = UserHelper();
 
@@ -110,7 +110,7 @@ class _MyAnimalScreenState extends State<MyAnimalScreen> {
                 child: Padding(
                   padding: const EdgeInsets.only(top: 3.0),
                   child: const Text(
-                    '저장 완료!',
+                    '수정을 원한다면 이곳을 클릭해주세요!',
                     style: TextStyle(
                       fontFamily: 'jua',
                       fontSize: 23.0,
@@ -121,7 +121,7 @@ class _MyAnimalScreenState extends State<MyAnimalScreen> {
                     backgroundColor: MaterialStateProperty.all(Colors.pink[200])),
                 onPressed: () {
                   Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => StartScreen()));
+                      MaterialPageRoute(builder: (context) => InputAnimalInformationScreen()));
                 },
               ),
             ],
