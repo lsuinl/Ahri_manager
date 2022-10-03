@@ -3,9 +3,8 @@ import 'package:ahri_manager/screen/calendar.dart';
 import 'package:ahri_manager/screen/check_permission.dart';
 import 'package:ahri_manager/screen/home.dart';
 import 'package:ahri_manager/screen/hospital_list.dart';
+import 'package:ahri_manager/screen/hospital_map.dart';
 import 'package:ahri_manager/screen/input_animal_information.dart';
-import 'package:ahri_manager/screen/my_animal_information.dart';
-import 'package:ahri_manager/screen/shop_list.dart';
 import 'package:drift/drift.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
@@ -51,7 +50,7 @@ void main() async {
   runApp(
     MaterialApp(
         //앱 스타일
-        home: HospitalListScreen() //
+        home: CheckPermissionScreen() //
         ),
   );
 }
