@@ -43,6 +43,7 @@ class _HomeScreenState extends State<HomeScreen> {
           appBar: AppBar(
             backgroundColor: Colors.red[100],
             title: Row(
+              mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 Padding(
                   padding: const EdgeInsets.only(top: 8.0),
@@ -60,11 +61,11 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ],
                     ),
+                    textAlign: TextAlign.center,
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 50.0),
-                  child: ElevatedButton(
+                SizedBox(width: 50.0,),
+                ElevatedButton(
                     child: Text(
                       "내정보",
                       style: TextStyle(color: Colors.black),
@@ -77,10 +78,8 @@ class _HomeScreenState extends State<HomeScreen> {
                               builder: (context) => MyAnimalInformationScreen()));
                     },
                   ),
-                ),
               ],
             ),
-            centerTitle: true, //????????????????????????
           ),
 
           backgroundColor: Colors.transparent, //배경색 투명으로 설정

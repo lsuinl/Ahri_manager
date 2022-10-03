@@ -14,7 +14,6 @@ class HospitalMapScreen extends StatefulWidget {
   State<HospitalMapScreen> createState() => _HospitalMapScreenState();
 }
 
-
 class _HospitalMapScreenState extends State<HospitalMapScreen> {
   Set<Marker> _markers = new Set();
   GoogleMapController? mapController;
@@ -59,26 +58,46 @@ class _HospitalMapScreenState extends State<HospitalMapScreen> {
                 return Container(
                   //위로 올라오는 부분
                   height: 200,
-                  color: Color(0xfffff8f1), //올라오는 칸 색깔(현재 상아색)
-                  child: Center(
-                    child: Column(
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage('asset/imgs/pattern1.png'),
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                  child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       mainAxisSize: MainAxisSize.min,
                       children: <Widget>[
-                        Text("${hospitalinf[i].name}"),
+                        Text(
+                          "${hospitalinf[i].name}",
+                          style: TextStyle(
+                            fontFamily: 'jua',
+                            fontSize: 20.0,
+                          ),
+                        ),
                         new TextButton(
-                            onPressed: () => launchUrl(Uri.parse(
-                                'tel:${hospitalinf[i].phone.replaceAll("-", "")}')),
-                            child: new Text(
-                              "${hospitalinf[i].phone}",
-                              style: TextStyle(
-                                fontSize: 16,
-                              ),
-                            )),
-                        Text("${hospitalinf[i].adress}"),
+                          onPressed: () => launchUrl(Uri.parse(
+                              'tel:${hospitalinf[i].phone.replaceAll("-", "")}')),
+                          child: new Text(
+                            "${hospitalinf[i].phone}",
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontFamily: 'jua',
+                              color: Colors.red,
+                            ),
+                          ),
+                        ),
+                        Text(
+                          "${hospitalinf[i].adress}",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontFamily: 'jua',
+                            fontSize: 20.0,
+                          ),
+                        ),
                       ],
                     ),
-                  ),
+                  //),
                 );
               }, // builder
             );
@@ -112,31 +131,38 @@ class _HospitalMapScreenState extends State<HospitalMapScreen> {
           centerTitle: true,
           actions: [
             TextButton(
-                onPressed: () {
-                  var initlocation = LatLng(0, 0);
-                  for (int i = 0; i < hospitalinf.length; i++) {
-                    if (hospitalinf[i].animal.contains(animalspecies)) {
-                      if (((mylocation.latitude - initlocation.latitude).abs() +
-                          (mylocation.longitude - initlocation.longitude)
-                              .abs()) >
-                          ((mylocation.latitude - hospitalinf[i].xy.latitude)
-                              .abs() +
-                              (mylocation.longitude -
-                                  hospitalinf[i].xy.longitude)
-                                  .abs())) {
-                        initlocation = hospitalinf[i].xy;
-                      }
+              onPressed: () {
+                var initlocation = LatLng(0, 0);
+                for (int i = 0; i < hospitalinf.length; i++) {
+                  if (hospitalinf[i].animal.contains(animalspecies)) {
+                    if (((mylocation.latitude - initlocation.latitude).abs() +
+                            (mylocation.longitude - initlocation.longitude)
+                                .abs()) >
+                        ((mylocation.latitude - hospitalinf[i].xy.latitude)
+                                .abs() +
+                            (mylocation.longitude - hospitalinf[i].xy.longitude)
+                                .abs())) {
+                      initlocation = hospitalinf[i].xy;
                     }
                   }
-                  mapController!.animateCamera(CameraUpdate.newCameraPosition(
-                    CameraPosition(
-                      target:
-                          LatLng(initlocation.latitude, initlocation.longitude),
-                      zoom: 11.0,
-                    ),
-                  ));
-                },
-                child: Text("인근병원")),
+                }
+                mapController!.animateCamera(CameraUpdate.newCameraPosition(
+                  CameraPosition(
+                    target:
+                        LatLng(initlocation.latitude, initlocation.longitude),
+                    zoom: 11.0,
+                  ),
+                ));
+              },
+              child: Text(
+                "인근병원",
+                style: TextStyle(
+                  fontSize: 15.0,
+                  fontFamily: 'jua',
+                  color: Colors.black,
+                ),
+              ),
+            ),
           ],
         ),
         body: FutureBuilder<String>(
@@ -175,14 +201,23 @@ class _HospitalMapScreenState extends State<HospitalMapScreen> {
                           ),
                         ),
                         TextButton(
-                            onPressed: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          HospitalListScreen(mylocation: mylocation,)));
-                            },
-                            child: Text("리스트로 보기"))
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => HospitalListScreen(
+                                          mylocation: mylocation,
+                                        )));
+                          },
+                          child: Text(
+                            "리스트로 보기",
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 20.0,
+                              fontFamily: 'jua',
+                            ),
+                          ),
+                        )
                       ],
                     );
                   });
@@ -198,6 +233,7 @@ class _HospitalMapScreenState extends State<HospitalMapScreen> {
   onMapCreated(GoogleMapController controller) {
     mapController = controller;
   }
+
   getCurrentLocation() async {
     Position position = await Geolocator.getCurrentPosition(
         desiredAccuracy: LocationAccuracy.low);
@@ -211,7 +247,6 @@ class _HospitalMapScreenState extends State<HospitalMapScreen> {
     user_infotmations = helper.getuserinformation();
     setState(() {});
   }
-
 }
 
 //------------------------------------------------------

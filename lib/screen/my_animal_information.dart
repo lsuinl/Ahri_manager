@@ -110,7 +110,7 @@ class _MyAnimalInformationScreenState extends State<MyAnimalInformationScreen> {
                 child: Padding(
                   padding: const EdgeInsets.only(top: 3.0),
                   child: const Text(
-                    '저장 완료!',
+                    '수정을 원한다면 이곳을 클릭해주세요!',
                     style: TextStyle(
                       fontFamily: 'jua',
                       fontSize: 23.0,
