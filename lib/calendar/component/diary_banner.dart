@@ -30,7 +30,7 @@ class DiaryBanner extends StatelessWidget {
           children: [
             Text(
               '''${selectedDay.year}년 ${selectedDay.month}월 ${selectedDay.day}일
-              Our Diary''',
+     Our Diary''',
               style: textStyle,
             ),
             IconButton(

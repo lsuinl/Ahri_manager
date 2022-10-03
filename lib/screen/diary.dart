@@ -44,6 +44,7 @@ class _DiaryScreenState extends State<DiaryScreen> {
         centerTitle: true,
       ),
 
+      ///////////////////////////////////////////////////////////////////
       floatingActionButton: renderFloatingActionButton(), //add Button
       body: SafeArea(
         child: Column(
@@ -84,7 +85,7 @@ class _DiaryScreenState extends State<DiaryScreen> {
       },
       backgroundColor: Colors.red[100],
       child: Icon(
-        Icons.add,
+        Icons.mode,
         color: Colors.white,
       ),
     );
@@ -137,9 +138,9 @@ class _ShowDiary extends StatelessWidget {
                     direction: DismissDirection.endToStart,
                     onDismissed: (DismissDirection direction) {
                       GetIt.I<LocalDatabase>()
-                          .removeDiary(selectedDate);
+                          .removeDiary(diaryData.id);
                     },
-                    child: GestureDetector(
+                    child: GestureDetector( //이미 적은 걸 클릭하면 수정
                       onTap: () {
                         showModalBottomSheet(
                           context: context,
@@ -147,7 +148,7 @@ class _ShowDiary extends StatelessWidget {
                           builder: (_) {
                             return DiaryBottomSheet(
                               selectedDate: selectedDate,
-                              //diaryId: DiaryData.id,
+                              diaryId: diaryData.id,
                             );
                           },
                         );

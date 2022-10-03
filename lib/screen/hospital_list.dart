@@ -141,6 +141,7 @@ class _HospitalListScreenState extends State<HospitalListScreen> {
                       style: TextStyle(
                         fontSize: 15,
                         fontFamily: 'jua',
+                        color: Colors.black,
                       ),
                     )),
                 Text(

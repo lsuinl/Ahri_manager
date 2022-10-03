@@ -191,7 +191,7 @@ class _InputAnimalInformationScreenState extends State<InputAnimalInformationScr
                     '  동물종',
                     style: TextStyle(fontFamily: 'jua', fontSize: 20),
                   ),
-                  Text('         '),
+                  Text('        '),
                   DropdownButton(
                     style: TextStyle(
                       color: Colors.black,

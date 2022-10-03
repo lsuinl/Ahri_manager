@@ -40,7 +40,6 @@ class _CheckPermissionScreenState extends State<CheckPermissionScreen> {
     setState(() {});
   }
 
-
   checkpermission() async {
     Map<Permission, PermissionStatus> statuses = await [
       Permission.locationWhenInUse,
@@ -59,14 +58,12 @@ class _CheckPermissionScreenState extends State<CheckPermissionScreen> {
 class _ok extends StatelessWidget {
   final List<user_information> user_infotmations;
 
-  const _ok({
-    required this.user_infotmations,
-    Key? key}) : super(key: key);
+  const _ok({required this.user_infotmations, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.lightBlueAccent,
+        backgroundColor: Colors.pink[100],
         body: Padding(
       padding: const EdgeInsets.symmetric(horizontal:  15.0),
       child: Column(
@@ -77,21 +74,22 @@ class _ok extends StatelessWidget {
             'asset/imgs/unicorn.png',
           ),
           Padding(
-            padding: const EdgeInsets.only(top: 8.0),
+            padding: const EdgeInsets.only(top: 12.0),
             child: SizedBox(
               height: 50.0,
               child: ElevatedButton(
                 child: Text(
                   "시작하기",
                   style: TextStyle(
-                    color: Colors.black,
+                    color: Colors.white,
                     fontFamily: 'jua',
                     fontSize: 30.0,
                   ),
+
                 ),
                 style: ElevatedButton.styleFrom(
-                  primary: Colors.orangeAccent, //배경색
-                  onPrimary: Colors.deepOrange, //눌렀을 때
+                  primary: Colors.pink[300], //배경색
+                  onPrimary: Colors.pink, //눌렀을 때
                   shadowColor: Colors.black,
                   shape: RoundedRectangleBorder(
                     //테두리 둥글게
@@ -99,12 +97,15 @@ class _ok extends StatelessWidget {
                       (10.0),
                     ),
                   ),
-                  elevation: 0.0, //그림자?? 확인해보기
+                  elevation: 3.0,
                 ),
                 onPressed: () {
                   if (user_infotmations.length < 1) //정보저장여부
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => InputAnimalInformationScreen()));
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                InputAnimalInformationScreen()));
                   else
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) => HomeScreen()));
@@ -126,7 +127,7 @@ class _lodding extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.lightBlueAccent,
+        backgroundColor: Colors.pink[100],
         body:Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -144,19 +145,17 @@ class _lodding extends StatelessWidget {
     )
     );
   }
-  }
+}
 
 class _error extends StatelessWidget {
   final List<user_information> user_infotmations;
 
-  const _error({
-    required this.user_infotmations,
-  Key? key}) : super(key: key);
+  const _error({required this.user_infotmations, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.lightBlueAccent,
+        backgroundColor: Colors.pink[100],
         body: Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -170,15 +169,23 @@ class _error extends StatelessWidget {
           ),
           style: ElevatedButton.styleFrom(),
           onPressed: () {
-            if (user_infotmations.length<1) //정보저장여부
-              Navigator.push(context, MaterialPageRoute(builder: (context) => InputAnimalInformationScreen()));
+            if (user_infotmations.length < 1) //정보저장여부
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => InputAnimalInformationScreen()));
             else
-              Navigator.push(context, MaterialPageRoute(builder: (context) => HomeScreen()));
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => HomeScreen()));
           },
         ),
         Text(
           "권한 설정에 문제가 생겼습니다. 어플의 원활한 작동을 위해 설정에서 권한을 설정해주세요.",
-          style: TextStyle(color: Colors.black),
+          style: TextStyle(
+            color: Colors.black,
+            fontFamily: 'jua',
+            fontSize: 20.0,
+          ),
         ),
       ],
     )
