@@ -8,7 +8,7 @@ import '../../data/database/drift_database.dart';
 
 class DiaryBottomSheet extends StatefulWidget {
   final DateTime selectedDate;
-  final DateTime? diaryId;
+  final int? diaryId;
 
   const DiaryBottomSheet({
     required this.selectedDate,
@@ -40,7 +40,7 @@ class _DiaryBottomSheetState extends State<DiaryBottomSheet> {
           child: FutureBuilder<DiaryData>(
             future: widget.diaryId == null
                 ? null
-                : GetIt.I<LocalDatabase>().getDiaryByDate(widget.selectedDate!),
+                : GetIt.I<LocalDatabase>().getDiaryById(widget.diaryId!),
             builder: (context, snapshot) {
               if (snapshot.hasError) {
                 return Center(
@@ -126,8 +126,8 @@ class _DiaryBottomSheetState extends State<DiaryBottomSheet> {
           ),
         );
       } else {
-        await GetIt.I<LocalDatabase>().updateDiaryByDate(
-          widget.selectedDate!,
+        await GetIt.I<LocalDatabase>().updateDiaryById(
+          widget.diaryId!,
           DiaryCompanion(
             date: Value(widget.selectedDate),
             title: Value(title!),

@@ -79,22 +79,22 @@ class LocalDatabase extends _$LocalDatabase {
     );
   }
 
-  Future<DiaryData> getDiaryByDate(DateTime date) =>
+  Future<DiaryData> getDiaryById(int id) =>
       (select(diary)
-        ..where((tbl) => tbl.date.equals(date))).getSingle();
+        ..where((tbl) => tbl.id.equals(id))).getSingle();
 
   //일기 작성
   Future<int> createDiary(DiaryCompanion data) => into(diary).insert(data);
 
   //일기 수정
-  Future<int> updateDiaryByDate(DateTime date, DiaryCompanion data) =>
+  Future<int> updateDiaryById(int id, DiaryCompanion data) =>
       (update(diary)
-        ..where((tbl) => tbl.date.equals(date))).write(data);
+        ..where((tbl) => tbl.id.equals(id))).write(data);
 
   //일기 삭제
-  Future<int> removeDiary(DateTime date) =>
+  Future<int> removeDiary(int id) =>
       (delete(diary)
-        ..where((tbl) => tbl.date.equals(date))).go();
+        ..where((tbl) => tbl.id.equals(id))).go();
 
   //일기 띄우기
   Stream<List<DiaryData>> watchDiary(DateTime date) {
