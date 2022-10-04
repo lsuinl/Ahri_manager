@@ -4,7 +4,7 @@ import 'package:ahri_manager/plus/user_helper.dart';
 import 'package:ahri_manager/data/user_information.dart';
 
 
-//내 동물 정보 조회, 배경테마설정
+//저장딘 이미지 상단에 띄우기, 글씨체, 두께 간격 등 전체적으로 조금씩 수정
 class MyAnimalInformationScreen extends StatefulWidget {
   const MyAnimalInformationScreen({Key? key}) : super(key: key);
   @override
@@ -59,7 +59,7 @@ class _MyAnimalInformationScreenState extends State<MyAnimalInformationScreen> {
               Text(
                 "동물 정보를 표기합니다.",
                 style: TextStyle(
-                  fontSize: 30.0,
+                  fontSize: 20.0,
                   fontFamily: 'jua',
                   color: Colors.pink[200],
                 ),
@@ -68,49 +68,49 @@ class _MyAnimalInformationScreenState extends State<MyAnimalInformationScreen> {
                 '이름: ${user_infotmations.first.name}',
                 style: TextStyle(
                   fontFamily: 'jua',
-                  fontSize: 25.0,
+                  fontSize: 24.0,
                 ),
               ),
               Text(
                 '몸무게: ${user_infotmations.first.weight}kg',
                 style: TextStyle(
                   fontFamily: 'jua',
-                  fontSize: 25.0,
+                  fontSize: 24.0,
                 ),
               ),
               Text(
                 '종: ${user_infotmations.first.species}',
                 style: TextStyle(
                   fontFamily: 'jua',
-                  fontSize: 25.0,
+                  fontSize: 24,
                 ),
               ),
               Text(
                 '성별: ${user_infotmations.first.gender}',
                 style: TextStyle(
                   fontFamily: 'jua',
-                  fontSize: 25.0,
+                  fontSize: 24,
                 ),
               ),
               Text(
                 '중성화: ${user_infotmations.first.neu}',
                 style: TextStyle(
                   fontFamily: 'jua',
-                  fontSize: 25.0,
+                  fontSize: 24,
                 ),
               ),
               Text(
                 "생일: ${user_infotmations.first.selectedyear}년 ${user_infotmations.first.selectedmonth}월 ${user_infotmations.first.selectedday}일",
                 style: TextStyle(
                   fontFamily: 'jua',
-                  fontSize: 25.0,
+                  fontSize: 24,
                 ),
               ),
               ElevatedButton(
                 child: Padding(
                   padding: const EdgeInsets.only(top: 3.0),
                   child: const Text(
-                    '수정을 원한다면 이곳을 클릭해주세요!',
+                    '수정하기',
                     style: TextStyle(
                       fontFamily: 'jua',
                       fontSize: 23.0,

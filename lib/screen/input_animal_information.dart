@@ -1,8 +1,3 @@
-/*
-<동물 기본 정보 등록하기>
-동물 사진 등록
-이름, 성별, 생일, 몸무게, 중성화 여부
- */
 import 'package:ahri_manager/plus/user_helper.dart';
 import 'package:ahri_manager/data/user_information.dart';
 import 'package:ahri_manager/screen/home.dart';
@@ -11,8 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 import 'package:flutter/cupertino.dart';
-
-//초기 권한 및 정보설정
+//이미지 불러와서 띄우기
 class InputAnimalInformationScreen extends StatefulWidget {
   const InputAnimalInformationScreen({Key? key}) : super(key: key);
 
@@ -21,7 +15,7 @@ class InputAnimalInformationScreen extends StatefulWidget {
 }
 
 class _InputAnimalInformationScreenState extends State<InputAnimalInformationScreen> {
-  List<user_information> user_infotmations=[]; //유저정보 리스트
+  List<user_information> user_infotmations=[];
   TextEditingController name = TextEditingController();
   TextEditingController weight = TextEditingController();
   DateTime selectedDate = DateTime.now();
@@ -32,57 +26,42 @@ class _InputAnimalInformationScreenState extends State<InputAnimalInformationScr
   final UserHelper helper = UserHelper();
 
   var userImage;
-  addUI(u) {
-    userImage = u;
-  } //이미지 띄우기
+  addUI(u) {userImage = u;} //이미지 띄우기
 
   List _GenderType = ['수컷', '암컷'];
   List _SurgeryMenu = ['O', 'X'];
   List _SpeciesList = ['앵무새', '햄스터', '토끼', '물고기', '도마뱀'];
-  List<DropdownMenuItem<String>> _dropDownGenderItems =
-      new List.empty(growable: true);
-  List<DropdownMenuItem<String>> _dropDownSurItems =
-      new List.empty(growable: true);
-  List<DropdownMenuItem<String>> _dropDownSpeciesItems =
-      new List.empty(growable: true);
+  List<DropdownMenuItem<String>> _dropDownGenderItems = new List.empty(growable: true);
+  List<DropdownMenuItem<String>> _dropDownSurItems = new List.empty(growable: true);
+  List<DropdownMenuItem<String>> _dropDownSpeciesItems = new List.empty(growable: true);
 
   @override
   void initState() {
-   helper.init().then((value){
-      updateScreen();
-    });
-
+   helper.init().then((value){updateScreen();});
     super.initState();
-    for (var item in _GenderType) {
-      _dropDownGenderItems
-          .add(DropdownMenuItem(value: item, child: Text(item)));
-    }
-    for (var item in _SurgeryMenu) {
+    for (var item in _GenderType)
+      _dropDownGenderItems.add(DropdownMenuItem(value: item, child: Text(item)));
+    for (var item in _SurgeryMenu)
       _dropDownSurItems.add(DropdownMenuItem(value: item, child: Text(item)));
-    }
-    for (var item in _SpeciesList) {
-      _dropDownSpeciesItems
-          .add(DropdownMenuItem(value: item, child: Text(item)));
-    }
+    for (var item in _SpeciesList)
+      _dropDownSpeciesItems.add(DropdownMenuItem(value: item, child: Text(item)));
+
     _genderbuttonText = _dropDownGenderItems[0].value;
     _neubuttonText = _dropDownSurItems[0].value;
     _speciesText = _dropDownSpeciesItems[0].value;
-   Future.delayed(const Duration(milliseconds: 100),()
+
+    Future.delayed(const Duration(milliseconds: 100),()
    {
      if (user_infotmations.isNotEmpty) {
        name.text = user_infotmations.first.name;
        weight.text = user_infotmations.first.weight;
-       _genderbuttonText = _dropDownGenderItems[_GenderType.indexOf(
-           user_infotmations.first.gender.toString())].value;
-       _neubuttonText = _dropDownSurItems[_SurgeryMenu.indexOf(
-           user_infotmations.first.neu.toString())].value;
-       _speciesText = _dropDownSpeciesItems[_SpeciesList.indexOf(
-           user_infotmations.first.species.toString())].value;
-       selectedDate = DateTime(user_infotmations.first.selectedyear,
-           user_infotmations.first.selectedmonth,
-           user_infotmations.first.selectedday);
+       _genderbuttonText = _dropDownGenderItems[_GenderType.indexOf(user_infotmations.first.gender.toString())].value;
+       _neubuttonText = _dropDownSurItems[_SurgeryMenu.indexOf(user_infotmations.first.neu.toString())].value;
+       _speciesText = _dropDownSpeciesItems[_SpeciesList.indexOf(user_infotmations.first.species.toString())].value;
+       selectedDate = DateTime(user_infotmations.first.selectedyear, user_infotmations.first.selectedmonth, user_infotmations.first.selectedday);
      }
    });
+
   }
 
   @override
@@ -90,6 +69,7 @@ class _InputAnimalInformationScreenState extends State<InputAnimalInformationScr
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.red[100],
+        centerTitle: true,
         title: Padding(
           padding: const EdgeInsets.only(top: 5.0),
           child: Text(
@@ -107,18 +87,19 @@ class _InputAnimalInformationScreenState extends State<InputAnimalInformationScr
               ],
             ),
           ),
-        ),
-        centerTitle: true, //중간에 오도록
+        ), //중간에 오도록
       ),
       body: ListView(
           scrollDirection: Axis.vertical,
           padding: const EdgeInsets.all(10.0),
           children: <Widget>[
-            Text(
-              '더 자세한 정보를 위해 해당 동물 정보를 입력해주세요.',
-              style: TextStyle(
-                fontFamily: 'jua',
-                fontSize: 18.0,
+            Center(
+              child: Text(
+                '자세한 정보제공을 위해 반려동물의 정보를 입력해주세요.',
+                style: TextStyle(
+                  fontFamily: 'jua',
+                  fontSize: 13.0,
+                ),
               ),
             ),
             SizedBox(height: 10.0),
@@ -149,12 +130,15 @@ class _InputAnimalInformationScreenState extends State<InputAnimalInformationScr
                       addUI(ui);
                     });
                   }
-                  Widget userima() {
-                    return Image.file(
-                      userImage,
-                      height: 100,
-                      width: 100,
-                    );
+                  else { //이거내가넣었어요
+                    //이거뭐에요?
+                    Widget userima() {
+                      return Image.file(
+                        userImage,
+                        height: 100,
+                        width: 100,
+                      );
+                    }
                   }
                 },
               ),
@@ -175,15 +159,13 @@ class _InputAnimalInformationScreenState extends State<InputAnimalInformationScr
                       child: new TextField(
                     controller: name,
                     style: Theme.of(context).textTheme.bodyText1,
-                  )),
+                  ),
+                  ),
                 ],
               ),
             ),
-
             SizedBox(height: 10.0),
-
             Padding(
-              //동물종
               padding: EdgeInsets.fromLTRB(26, 5, 30, 10),
               child: Row(
                 children: [
@@ -193,9 +175,7 @@ class _InputAnimalInformationScreenState extends State<InputAnimalInformationScr
                   ),
                   Text('        '),
                   DropdownButton(
-                    style: TextStyle(
-                      color: Colors.black,
-                    ),
+                    style: TextStyle(color: Colors.black,),
                     items: _dropDownSpeciesItems,
                     onChanged: (String? value) {
                       setState(() {
@@ -207,10 +187,8 @@ class _InputAnimalInformationScreenState extends State<InputAnimalInformationScr
                 ],
               ),
             ),
-
             Padding(
-              //성별
-              padding: EdgeInsets.fromLTRB(30, 15, 30, 10),
+              padding: EdgeInsets.fromLTRB(30, 0, 30, 0),
               child: Row(
                 children: [
                   Text(
@@ -233,7 +211,6 @@ class _InputAnimalInformationScreenState extends State<InputAnimalInformationScr
                 ],
               ),
             ),
-
             Padding(
               padding: EdgeInsets.fromLTRB(30, 20, 30, 5),
               child: Row(
@@ -245,7 +222,6 @@ class _InputAnimalInformationScreenState extends State<InputAnimalInformationScr
                   ),
                   Text('      '),
                   IconButton(
-                    //생일
                     iconSize: 30.0,
                     onPressed: () {
                       showCupertinoDialog(
@@ -286,7 +262,6 @@ class _InputAnimalInformationScreenState extends State<InputAnimalInformationScr
                 ],
               ),
             ),
-
             Padding(
               //무게
               padding: EdgeInsets.fromLTRB(30, 17, 210, 0),
@@ -313,10 +288,8 @@ class _InputAnimalInformationScreenState extends State<InputAnimalInformationScr
                 ],
               ),
             ),
-
             Padding(
-              //중성화여부
-              padding: EdgeInsets.fromLTRB(30, 25, 30, 5),
+              padding: EdgeInsets.fromLTRB(30, 25, 30, 30),
               child: Row(
                 children: [
                   Text(
@@ -336,10 +309,8 @@ class _InputAnimalInformationScreenState extends State<InputAnimalInformationScr
                 ],
               ),
             ),
-
-            //버튼
             Padding(
-              padding: EdgeInsets.fromLTRB(120, 15, 100, 0),
+              padding: EdgeInsets.fromLTRB(92, 45, 100, 0),
               child: Row(
                 children: [
                   ElevatedButton(
@@ -372,13 +343,14 @@ class _InputAnimalInformationScreenState extends State<InputAnimalInformationScr
                             );
                           }
                             );
-                      } else {
+                      }
+                      else {
                         saveUserInformation();
                       }
                     },
                   ),
                   SizedBox(
-                    width: 30.0,
+                    width: 50.0,
                   ),
                   ElevatedButton(
                     child: const Text(
@@ -403,7 +375,8 @@ class _InputAnimalInformationScreenState extends State<InputAnimalInformationScr
                 ],
               ),
             ),
-          ]),
+          ],
+      ),
     );
   }
 
