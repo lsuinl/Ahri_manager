@@ -10,9 +10,8 @@ import 'package:url_launcher/url_launcher.dart';
 class HospitalListScreen extends StatefulWidget {
   final LatLng mylocation;
 
-  const HospitalListScreen({
-    required this.mylocation,
-    Key? key}) : super(key: key);
+  const HospitalListScreen({required this.mylocation, Key? key})
+      : super(key: key);
 
   @override
   State<HospitalListScreen> createState() => _HospitalListScreenState();
@@ -39,7 +38,7 @@ class _HospitalListScreenState extends State<HospitalListScreen> {
       _dropDownSpeciesItems
           .add(DropdownMenuItem(value: item, child: Text(item)));
     }
-    mylocation=widget.mylocation;
+    mylocation = widget.mylocation;
     _sortText = _dropDownSpeciesItems[0].value;
     super.initState();
   }
@@ -134,16 +133,17 @@ class _HospitalListScreenState extends State<HospitalListScreen> {
                   ),
                 ),
                 new TextButton(
-                    onPressed: () => launchUrl(Uri.parse(
-                        'tel:${hospitalinf[key].phone.replaceAll("-", "")}')),
-                    child: new Text(
-                      "${hospitalinf[key].phone}",
-                      style: TextStyle(
-                        fontSize: 15,
-                        fontFamily: 'jua',
-                        color: Colors.black,
-                      ),
-                    )),
+                  onPressed: () => launchUrl(Uri.parse(
+                      'tel:${hospitalinf[key].phone.replaceAll("-", "")}')),
+                  child: new Text(
+                    "${hospitalinf[key].phone}",
+                    style: TextStyle(
+                      fontSize: 15,
+                      fontFamily: 'jua',
+                      color: Colors.red,  // 왜안먹?혀? --> 이름순 말고 거리순으로 하면 먹힘 이름순은 안먹힘 어이 x
+                    ),
+                  ),
+                ),
                 Text(
                   "${hospitalinf[key].adress}", //주소
                   style: TextStyle(
