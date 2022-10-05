@@ -68,26 +68,58 @@ class _DiaryScreenState extends State<DiaryScreen> {
     );
   }
 
-  FloatingActionButton renderFloatingActionButton() {
+  StreamBuilder<List<DiaryData>> renderFloatingActionButton() {
     // 일정 추가 Button
-    return FloatingActionButton(
-      onPressed: () {
-        showModalBottomSheet(
-          //최대 사이즈가 화면의 반.
-          context: context,
-          isScrollControlled: true, //이렇게 설정하면 화면의 반보다 더 올라갈 수 있다.
-          builder: (_) {
-            return DiaryBottomSheet(
-              selectedDate: selectedDay,
-            ); //Add 버튼을 누르면 하단에서 흰 공간이 올라오
-          },
-        );
-      },
-      backgroundColor: Colors.red[100],
-      child: Icon(
-        Icons.mode,
-        color: Colors.white,
-      ),
+    return StreamBuilder<List<DiaryData>>(
+        stream: GetIt.I<LocalDatabase>().watchDiary(selectedDay),
+        builder: (context, snapshot) {
+          if (!snapshot.hasData) { //데이터가 안 뜨면
+            return Center(child: CircularProgressIndicator());
+          }
+
+          if (snapshot.hasData && snapshot.data!.isEmpty) { //데이터가 없으면
+            return FloatingActionButton(
+              onPressed: () {
+                showModalBottomSheet(
+                  //최대 사이즈가 화면의 반.
+                  context: context,
+                  isScrollControlled: true, //이렇게 설정하면 화면의 반보다 더 올라갈 수 있다.
+                  builder: (_) {
+                    return DiaryBottomSheet(
+                      selectedDate: selectedDay,
+                    ); //Add 버튼을 누르면 하단에서 흰 공간이 올라옴
+                  },
+                );
+              },
+              backgroundColor: Colors.red[100],
+              child: Icon(
+                Icons.add,
+              ),
+            );
+          }
+
+          else {
+            final diary = snapshot.data![0];
+            return FloatingActionButton(
+              onPressed: () {
+                showModalBottomSheet(
+                  context: context,
+                  isScrollControlled: true,
+                  builder: (_) {
+                    return DiaryBottomSheet(
+                      selectedDate: selectedDay,
+                      diaryId: diary.id,
+                    );
+                  },
+                );
+              },
+              backgroundColor: Colors.red[100],
+              child: Icon(
+                Icons.edit,
+              ),
+            );
+          };
+        }
     );
   }
 
