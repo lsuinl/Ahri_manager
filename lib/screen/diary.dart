@@ -150,7 +150,12 @@ class _ShowDiary extends StatelessWidget {
 
               if (snapshot.hasData && snapshot.data!.isEmpty) {
                 return Center(
-                  child: Text('일기가 없어요.'),
+                  child: Text('작성된 일기가 없어요!',
+                    style: TextStyle(
+                      //fontFamily: 'jua',
+                      fontSize: 20.0,
+                    ),
+                  ),
                 );
               }
 

@@ -35,7 +35,7 @@ class TodayBanner extends StatelessWidget {
           children: [
             Text(
               '''${selectedDay.year}년 ${selectedDay.month}월 ${selectedDay.day}일
-       Schedule''',
+     Schedule''',
               style: textStyle,
             ),
             IconButton(
