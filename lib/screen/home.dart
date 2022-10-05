@@ -7,9 +7,6 @@ import 'package:ahri_manager/plus/user_helper.dart';
 import 'package:ahri_manager/data/user_information.dart';
 
 
-import 'calendar.dart';
-
-//메인화면(탭 선택 화면)
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
@@ -22,9 +19,7 @@ class _HomeScreenState extends State<HomeScreen> {
   final UserHelper helper = UserHelper();
   @override
   void initState() {
-    helper.init().then((value) {
-      updateScreen();
-    });
+    helper.init().then((value) {updateScreen();});
     super.initState();
   }
 
@@ -33,7 +28,6 @@ class _HomeScreenState extends State<HomeScreen> {
     if (user_infotmations.isNotEmpty) {
       return Container(
         decoration: BoxDecoration(
-          //배경이미지
           image: DecorationImage(
             fit: BoxFit.cover,
             image: AssetImage('asset/imgs/background3.jpg'),
@@ -81,8 +75,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ],
             ),
           ),
-
-          backgroundColor: Colors.transparent, //배경색 투명으로 설정
+          backgroundColor: Colors.transparent,
           body: SingleChildScrollView(
             scrollDirection: Axis.vertical,
 
@@ -104,12 +97,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                     builder: (context) => CalendarScreen()));
                           },
                           icon: Image.asset('asset/imgs/schedule.png'),
-
                           iconSize: 70,
                           //padding,
                         ),
-
-
                         Text(
                           "기록장",
                           style: TextStyle(
@@ -121,16 +111,13 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ],
                 ),
-
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Column(
-                      //병원 찾기
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         IconButton(
-                          //병원 이미지
                           onPressed: () {
                             Navigator.push(
                                 context,
@@ -140,7 +127,6 @@ class _HomeScreenState extends State<HomeScreen> {
                           icon: Image.asset('asset/imgs/hospital.png'),
                           iconSize: 70,
                         ),
-
                         Text(
                           '병원 찾기',
                           style: TextStyle(
@@ -152,22 +138,18 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ],
                 ),
-              //동물 이미지 넣기 (Column)
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                Image.asset('asset/imgs/${user_infotmations.first.species}.png',scale: 3,),
             ]
         ),
-
-
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Column(
                       children: [
                         IconButton(
-                          //물품 이미지
                           onPressed: () {
                             Navigator.push(
                                 context,
@@ -177,7 +159,6 @@ class _HomeScreenState extends State<HomeScreen> {
                           icon: Image.asset('asset/imgs/pet-food.png'),
                           iconSize: 70,
                         ),
-
                         Text(
                           "물품구매",
                           style: TextStyle(
@@ -189,10 +170,8 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ],
                 ),
-
               ],
             ),
-
           ),
         ),
       );
@@ -210,7 +189,6 @@ class _HomeScreenState extends State<HomeScreen> {
         ],
       );
   }
-
   void updateScreen() {
     user_infotmations = helper.getuserinformation();
     setState(() {});

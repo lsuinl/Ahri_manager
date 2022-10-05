@@ -1,12 +1,17 @@
 
 
-List birdshopname = ["와우버드", "버드소리", "아가새농장", "버드모아"];
+List birdshopname = ["와우버드", "버드소리", "아가새농장", "버드모아","버드마마","버드펠리스"];
 List hamshopname = ["햄토피아", "햄숲", "봄해농장", "햄찌네"];
-List rabbitshopname = ["달나라토끼농장", "토당마을", "청아농장", "미니미펫"];
+List rabbitshopname = ["버니바디","달나라토끼농장", "토당마을", "청아농장", "미니미펫","튼튼농장"];
 List pishshopname = ["라라아쿠아", "헬로아쿠아", "트로피쉬넷", "신세계수족관"];
-List lizardshopname = ["줄스샵", "반모리", "밀림펫"];
+List lizardshopname = ["줄스샵", "반모리", "밀림펫","곤충하모니"];
 
 Map Weburl={
+  "곤충하모니":"http://www.insectharmony.net/",
+  "튼튼농장":"https://www.tntnfarm.com/",
+  "버니바디":"http://www.bunnybuddy.com/",
+  "버드펠리스":"http://birdpalace.co.kr/",
+  "버드마마":"http://birdmama.co.kr/",
   "와우버드":"https://www.wawoobird.com/",
   "버드소리":"http://birdsori.com/",
   "아가새농장":"http://www.agase.co.kr/",

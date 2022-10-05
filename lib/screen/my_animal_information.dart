@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:ahri_manager/plus/user_helper.dart';
 import 'package:ahri_manager/data/user_information.dart';
 
-
-//내 동물 정보 조회, 배경테마설정
 class MyAnimalInformationScreen extends StatefulWidget {
   const MyAnimalInformationScreen({Key? key}) : super(key: key);
   @override
@@ -50,81 +48,83 @@ class _MyAnimalInformationScreenState extends State<MyAnimalInformationScreen> {
           centerTitle: true,
         ),
         backgroundColor: Colors.white,
-        body: Padding(
-          padding: const EdgeInsets.only(left: 10.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly, //사이 균등하게 배분
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Text(
-                "동물 정보를 표기합니다.",
-                style: TextStyle(
-                  fontSize: 30.0,
-                  fontFamily: 'jua',
-                  color: Colors.pink[200],
-                ),
-              ),
-              Text(
-                '이름: ${user_infotmations.first.name}',
-                style: TextStyle(
-                  fontFamily: 'jua',
-                  fontSize: 25.0,
-                ),
-              ),
-              Text(
-                '몸무게: ${user_infotmations.first.weight}kg',
-                style: TextStyle(
-                  fontFamily: 'jua',
-                  fontSize: 25.0,
-                ),
-              ),
-              Text(
-                '종: ${user_infotmations.first.species}',
-                style: TextStyle(
-                  fontFamily: 'jua',
-                  fontSize: 25.0,
-                ),
-              ),
-              Text(
-                '성별: ${user_infotmations.first.gender}',
-                style: TextStyle(
-                  fontFamily: 'jua',
-                  fontSize: 25.0,
-                ),
-              ),
-              Text(
-                '중성화: ${user_infotmations.first.neu}',
-                style: TextStyle(
-                  fontFamily: 'jua',
-                  fontSize: 25.0,
-                ),
-              ),
-              Text(
-                "생일: ${user_infotmations.first.selectedyear}년 ${user_infotmations.first.selectedmonth}월 ${user_infotmations.first.selectedday}일",
-                style: TextStyle(
-                  fontFamily: 'jua',
-                  fontSize: 25.0,
-                ),
-              ),
-              ElevatedButton(
-                child: Padding(
-                  padding: const EdgeInsets.only(top: 3.0),
-                  child: const Text(
-                    '수정을 원한다면 이곳을 클릭해주세요!',
-                    style: TextStyle(
-                      fontFamily: 'jua',
-                      fontSize: 23.0,
-                    ),
+        body: Container(
+          child: Padding(
+            padding: const EdgeInsets.only(left: 10.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly, //사이 균등하게 배분
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Text(
+                  "     저장된 동물 정보를 표기합니다.",
+                  style: TextStyle(
+                    fontSize: 20.0,
+                    fontFamily: 'jua',
+                    color: Colors.pink[100],
                   ),
                 ),
-                style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all(Colors.pink[200])),
-                onPressed: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => InputAnimalInformationScreen()));
-                },
-              ),
-            ],
+                Text(
+                  '     이름: ${user_infotmations.first.name}',
+                  style: TextStyle(
+                    fontFamily: 'jua',
+                    fontSize: 24.0,
+                  ),
+                ),
+                Text(
+                  '     몸무게: ${user_infotmations.first.weight}kg',
+                  style: TextStyle(
+                    fontFamily: 'jua',
+                    fontSize: 24.0,
+                  ),
+                ),
+                Text(
+                  '     종: ${user_infotmations.first.species}',
+                  style: TextStyle(
+                    fontFamily: 'jua',
+                    fontSize: 24,
+                  ),
+                ),
+                Text(
+                  '     성별: ${user_infotmations.first.gender}',
+                  style: TextStyle(
+                    fontFamily: 'jua',
+                    fontSize: 24,
+                  ),
+                ),
+                Text(
+                  '     중성화: ${user_infotmations.first.neu}',
+                  style: TextStyle(
+                    fontFamily: 'jua',
+                    fontSize: 24,
+                  ),
+                ),
+                Text(
+                  "     생일: ${user_infotmations.first.selectedyear}년 ${user_infotmations.first.selectedmonth}월 ${user_infotmations.first.selectedday}일",
+                  style: TextStyle(
+                    fontFamily: 'jua',
+                    fontSize: 24,
+                  ),
+                ),
+                ElevatedButton(
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 3.0),
+                    child: const Text(
+                      '수정하기',
+                      style: TextStyle(
+                        fontFamily: 'jua',
+                        fontSize: 23.0,
+                      ),
+                    ),
+                  ),
+                  style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all(Colors.pink[200])),
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => InputAnimalInformationScreen()));
+                  },
+                ),
+              ],
+            ),
           ),
         ),
       );
