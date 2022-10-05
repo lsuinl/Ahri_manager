@@ -31,13 +31,9 @@ class _HospitalListScreenState extends State<HospitalListScreen> {
   @override
   void initState() {
     hospitalinf = hospitialinf;
-    helper.init().then((value) {
-      updateScreen();
-    });
-    for (var item in _SpeciesList) {
-      _dropDownSpeciesItems
-          .add(DropdownMenuItem(value: item, child: Text(item)));
-    }
+    helper.init().then((value) {updateScreen();});
+    for (var item in _SpeciesList)
+      _dropDownSpeciesItems.add(DropdownMenuItem(value: item, child: Text(item)));
     mylocation = widget.mylocation;
     _sortText = _dropDownSpeciesItems[0].value;
     super.initState();
@@ -46,9 +42,8 @@ class _HospitalListScreenState extends State<HospitalListScreen> {
   @override
   Widget build(BuildContext context) {
     String animalspecies = "";
-    if (user_infotmations.isNotEmpty) {
+    if (user_infotmations.isNotEmpty)
       animalspecies = user_infotmations.first.species;
-    }
 
     List<Widget> getlist() {
       List<Widget> textnamelist = [];
@@ -59,48 +54,48 @@ class _HospitalListScreenState extends State<HospitalListScreen> {
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 15.0),
               child: Column(
-                children: [
-                  SizedBox(height: 8.0),
-                  Text(
-                    "${hospitalinf[i].name}", //병원명
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontFamily: 'jua',
+                  children: [
+                    SizedBox(height: 8.0),
+                    Text(
+                      "${hospitalinf[i].name}",
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontFamily: 'jua',
+                      ),
                     ),
-                  ),
-                  new TextButton(
-                      onPressed: () => launchUrl(Uri.parse(
-                          'tel:${hospitalinf[i].phone.replaceAll("-", "")}')),
-                      child: new Text(
-                        "${hospitalinf[i].phone}",
-                        style: TextStyle(
-                          fontSize: 15,
-                          fontFamily: 'jua',
-                        ),
-                      )),
-                  Text(
-                    "${hospitalinf[i].adress}", //주소
-                    style: TextStyle(
-                      fontSize: 15,
-                      fontFamily: 'jua',
+                    new TextButton(
+                        onPressed: () => launchUrl(Uri.parse(
+                            'tel:${hospitalinf[i].phone.replaceAll("-", "")}')),
+                        child: new Text(
+                          "${hospitalinf[i].phone}",
+                          style: TextStyle(
+                            fontSize: 15,
+                            fontFamily: 'jua',
+                            color: Colors.red,
+                          ),
+                        )),
+                    Text(
+                      "${hospitalinf[i].adress}",
+                      style: TextStyle(
+                        fontSize: 12,
+                        fontFamily: 'jua',
+                      ),
                     ),
-                  ),
-                  Text(
-                    "${hospitalinf[i].animal.toString()}\n\n", //동물
-                    style: TextStyle(
-                      fontSize: 17,
-                      fontFamily: 'jua',
+                    Text(
+                      "${hospitalinf[i].animal.toString()}\n\n",
+                      style: TextStyle(
+                        fontSize: 17,
+                        fontFamily: 'jua',
+                      ),
                     ),
-                  ),
-                  Container(
-                    height: 1.0,
-                    width: 500.0,
-                    color: Colors.black12,
-                  ),
-                  //거리측정해서 int형 배열에 순위 저장
-                ],
+                    Container(
+                      height: 1.0,
+                      width: 500.0,
+                      color: Colors.black12,
+                    ),
+                  ],
+                ),
               ),
-            ),
           );
         }
       }
@@ -108,12 +103,10 @@ class _HospitalListScreenState extends State<HospitalListScreen> {
       Map<int, double> list = {};
       for (int i = 0; i < hospitalinf.length; i++) {
         if (hospitalinf[i].animal.contains(animalspecies)) {
-          //map에 해당 동물이 있는 위치 i 와 거리를 key와 value로 저장
           list[i] = (mylocation.latitude - hospitalinf[i].xy.latitude).abs() +
               (mylocation.longitude - hospitalinf[i].xy.longitude).abs();
         }
       }
-      //거리순으로 정렬된 map
       var sortedKeys = list.keys.toList(growable: false)
         ..sort((k1, k2) => list[k1]!.compareTo(list[k2]!));
       LinkedHashMap sortedMap = new LinkedHashMap.fromIterable(sortedKeys,
@@ -126,7 +119,7 @@ class _HospitalListScreenState extends State<HospitalListScreen> {
               children: [
                 SizedBox(height: 8.0),
                 Text(
-                  "${hospitalinf[key].name}", //병원명
+                  "${hospitalinf[key].name}",
                   style: TextStyle(
                     fontSize: 20,
                     fontFamily: 'jua',
@@ -140,14 +133,14 @@ class _HospitalListScreenState extends State<HospitalListScreen> {
                     style: TextStyle(
                       fontSize: 15,
                       fontFamily: 'jua',
-                      color: Colors.red,  // 왜안먹?혀? --> 이름순 말고 거리순으로 하면 먹힘 이름순은 안먹힘 어이 x
+                      color: Colors.red,  // 왜안먹?혀? --> 이름순 말고이 x
                     ),
                   ),
                 ),
                 Text(
-                  "${hospitalinf[key].adress}", //주소
+                  "${hospitalinf[key].adress}",
                   style: TextStyle(
-                    fontSize: 15,
+                    fontSize: 12,
                     fontFamily: 'jua',
                   ),
                 ),
@@ -159,7 +152,7 @@ class _HospitalListScreenState extends State<HospitalListScreen> {
                   ),
                 ),
                 Container(
-                  height: 1.0,
+                  height: 1.5,
                   width: 500.0,
                   color: Colors.black12,
                 ),
@@ -169,12 +162,12 @@ class _HospitalListScreenState extends State<HospitalListScreen> {
         );
       });
 
-      if (_sortText == '이름순') {
+      if (_sortText == '이름순')
         return textnamelist;
-      } else if (_sortText == '거리순') {
+      else if (_sortText == '거리순')
         return textdistancelist;
-      }
-      return textdistancelist;
+      else
+        return textdistancelist;
     }
 
     return Scaffold(

@@ -1,12 +1,14 @@
 import 'package:ahri_manager/data/user_information.dart';
 import 'package:ahri_manager/screen/hospital_list.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:ahri_manager/data/hospital_information.dart';
 import 'package:url_launcher/url_launcher.dart';
-import '../plus/user_helper.dart'; //데이터 가져오기
-
+import '../plus/user_helper.dart';
+import 'dart:ui' as ui;
+//마커디자인 변경
 class HospitalMapScreen extends StatefulWidget {
   const HospitalMapScreen({Key? key}) : super(key: key);
 
@@ -21,15 +23,29 @@ class _HospitalMapScreenState extends State<HospitalMapScreen> {
   List<user_information> user_infotmations = [];
   final UserHelper helper = UserHelper();
   LatLng mylocation = LatLng(0, 0);
+  Uint8List markerIcon=Uint8List(0);//초기화
 
   @override
   void initState() {
     hospitalinf = hospitialinf;
-    helper.init().then((value) {
-      updateScreen();
-    });
+    helper.init().then((value) {updateScreen();});
     getCurrentLocation();
     super.initState();
+    setcustommappin();
+  }
+
+  void setcustommappin() async{
+    markerIcon = await getbytesfromasset('asset/imgs/hospitalmarker.png', 100);
+  }
+
+  Future<Uint8List> getbytesfromasset(String path, int width) async{
+    ByteData data= await rootBundle.load(path);
+    ui.Codec codec = await ui.instantiateImageCodec(data.buffer.asUint8List(),
+        targetWidth: width);
+    ui.FrameInfo fi = await codec.getNextFrame();
+    return (await fi.image.toByteData(format: ui.ImageByteFormat.png))
+        !.buffer
+        .asUint8List();
   }
 
   @override
@@ -38,15 +54,12 @@ class _HospitalMapScreenState extends State<HospitalMapScreen> {
     if (user_infotmations.isNotEmpty) {
       animalspecies = user_infotmations.first.species;
     }
-    //페이지 뷰에소의 박스
 
-    //마커.
     for (int i = 0; i < hospitalinf.length; i++) {
       if (hospitalinf[i].animal.contains(animalspecies)) {
-        //해당반려동물을 진료하는 병원만
-        //마커추가하기
         _markers.add(Marker(
           markerId: MarkerId(hospitalinf[i].name),
+          icon: BitmapDescriptor.fromBytes(markerIcon),
           position: LatLng(
             hospitalinf[i].xy.latitude,
             hospitalinf[i].xy.longitude,
@@ -56,7 +69,6 @@ class _HospitalMapScreenState extends State<HospitalMapScreen> {
               context: context,
               builder: (context) {
                 return Container(
-                  //위로 올라오는 부분
                   height: 200,
                   decoration: BoxDecoration(
                     image: DecorationImage(
@@ -73,6 +85,7 @@ class _HospitalMapScreenState extends State<HospitalMapScreen> {
                           style: TextStyle(
                             fontFamily: 'jua',
                             fontSize: 20.0,
+                            color: Colors.brown,
                           ),
                         ),
                         new TextButton(
@@ -93,6 +106,7 @@ class _HospitalMapScreenState extends State<HospitalMapScreen> {
                           style: TextStyle(
                             fontFamily: 'jua',
                             fontSize: 20.0,
+                            color: Colors.brown,
                           ),
                         ),
                       ],
@@ -111,7 +125,6 @@ class _HospitalMapScreenState extends State<HospitalMapScreen> {
 
     return Scaffold(
         appBar: AppBar(
-          //타이틀
           title: Text(
             '지도찾기',
             style: TextStyle(
@@ -155,7 +168,7 @@ class _HospitalMapScreenState extends State<HospitalMapScreen> {
                 ));
               },
               child: Text(
-                "인근병원",
+                "인근병원찾기",
                 style: TextStyle(
                   fontSize: 15.0,
                   fontFamily: 'jua',
@@ -168,11 +181,9 @@ class _HospitalMapScreenState extends State<HospitalMapScreen> {
         body: FutureBuilder<String>(
           future: checkPermission(),
           builder: (BuildContext context, AsyncSnapshot snapshot) {
-            //로딩중,,
             if (snapshot.connectionState == ConnectionState.waiting) {
               return Center(child: CircularProgressIndicator());
             }
-            //권한을 얻었을 시에 작동
             if (snapshot.data == '위치 권한이 허가되었습니다.') {
               return StreamBuilder<Position>(
                   stream: Geolocator.getPositionStream(), //내 현재위치 가져오기
@@ -185,18 +196,12 @@ class _HospitalMapScreenState extends State<HospitalMapScreen> {
                             initialCameraPosition: CameraPosition(
                               target: LatLng(37.564214, 127.001699),
                               zoom: 11,
-                            ),
-                            //초기 카메라 위치
-                            myLocationEnabled: true,
-                            //내위치표시
-                            myLocationButtonEnabled: true,
-                            //내위치로가기버튼
-                            mapType: MapType.normal,
-                            //맵타입형식 위성지도 등등 설정 가능, //**************************
-                            //줌 동작 활성화
-                            zoomGesturesEnabled: true,
-                            //컨트롤러 조작
-                            onMapCreated: onMapCreated,
+                            ),       //초기 카메라 위치
+                            myLocationEnabled: true,     //내위치표시
+                            myLocationButtonEnabled: true,     //내위치로가기버튼
+                            mapType: MapType.normal,  //맵타입형식
+                            zoomGesturesEnabled: true, //줌 동작 활성화
+                            onMapCreated: onMapCreated,    //컨트롤러 조작
                             markers: _markers,
                           ),
                         ),
@@ -207,22 +212,19 @@ class _HospitalMapScreenState extends State<HospitalMapScreen> {
                                 MaterialPageRoute(
                                     builder: (context) => HospitalListScreen(
                                           mylocation: mylocation,
-                                        )));
-                          },
+                                        )));},
                           child: Text(
                             "리스트로 보기",
                             style: TextStyle(
                               color: Colors.black,
                               fontSize: 20.0,
-                              fontFamily: 'jua',
-                            ),
+                              fontFamily: 'jua',),
                           ),
                         )
                       ],
                     );
                   });
             }
-            //권한 설정이 안 되어있는 경우
             return Center(
               child: (snapshot.data),
             );
@@ -249,27 +251,19 @@ class _HospitalMapScreenState extends State<HospitalMapScreen> {
   }
 }
 
-//------------------------------------------------------
-// 권한과 관련된 모든 값은 미래의 값을 받아오는 async로 작업
 Future<String> checkPermission() async {
-  //권한 확인
   final isLocationEnabled = await Geolocator.isLocationServiceEnabled();
 
   if (!isLocationEnabled) {
     return '위치 서비스를 활성화 해주세요.';
   }
-  //현재 앱이 가지고 있는 위치서비스에 대한 권한 값을 location이라는 형식으로 반환
   LocationPermission checkPermission = await Geolocator.checkPermission();
   if (checkPermission == LocationPermission.denied) {
-    //권한을 사용할 수 없지만 요청할 수는 있는 경우
     checkPermission = await Geolocator.requestPermission();
-
-    if (checkPermission == LocationPermission.denied) {
+    if (checkPermission == LocationPermission.denied)
       return '위치 권한을 설정합니다';
-    }
   }
-  if (checkPermission == LocationPermission.deniedForever) {
+  if (checkPermission == LocationPermission.deniedForever)
     return '앱의 위치 권한을 설정에서 허가해주세요';
-  }
   return '위치 권한이 허가되었습니다.';
 }

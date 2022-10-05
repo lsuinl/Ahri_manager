@@ -5,7 +5,6 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:ahri_manager/data/user_information.dart';
 import 'package:ahri_manager/plus/user_helper.dart';
 
-// 어플이름, 하단 메인 문구 텍스트, 위젯별 크기 및 위치 변경만 처리하면 됩니다.
 class CheckPermissionScreen extends StatefulWidget {
   const CheckPermissionScreen({Key? key}) : super(key: key);
 
@@ -19,12 +18,13 @@ class _CheckPermissionScreenState extends State<CheckPermissionScreen> {
   String check = "";
 
   @override
+  //초기 데이터 불러오기/권한요청하기
   void initState() {
     helper.init().then((value) {updateScreen();});
     checkpermission();
     super.initState();
   }
-
+ //권한요청여부에 따른 위젯 표기
   @override
   Widget build(BuildContext context) {
     if (check == '허가')
@@ -35,11 +35,13 @@ class _CheckPermissionScreenState extends State<CheckPermissionScreen> {
       return _lodding();
   }
 
-
+ //유저데이터 업데이트
   void updateScreen() {
     user_infotmations = helper.getuserinformation();
     setState(() {});
   }
+
+  //권한요청
   checkpermission() async {
     Map<Permission, PermissionStatus> statuses = await [
       Permission.locationWhenInUse,
@@ -56,9 +58,8 @@ class _CheckPermissionScreenState extends State<CheckPermissionScreen> {
 
 class _ok extends StatelessWidget {
   final List<user_information> user_infotmations;
-
   const _ok({required this.user_infotmations, Key? key}) : super(key: key);
-
+ //권한설정 허용 완료되었을 때 위젯
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -73,7 +74,7 @@ class _ok extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    "수인효선지유",
+                    "로웰펫",
                     style: TextStyle(
                       color: Colors.white,
                       fontFamily: 'jua',
@@ -85,7 +86,7 @@ class _ok extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(top: 20.0, bottom: 20),
                 child: Image.asset(
-                  'asset/imgs/unicorn.png', width: 300, height: 300,
+                  'asset/imgs/unicorn.png', width: 200, height: 200,
                 ),
               ),
               Column(
@@ -156,7 +157,7 @@ class _ok extends StatelessWidget {
 
 class _lodding extends StatelessWidget {
   const _lodding({Key? key}) : super(key: key);
-
+ //권한 설정 및 데이터 확인 과정에서의 로딩
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -168,7 +169,7 @@ class _lodding extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  "수인효선지유",
+                  "로웰펫",
                   style: TextStyle(
                     color: Colors.white,
                     fontFamily: 'jua',
@@ -180,7 +181,7 @@ class _lodding extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(top: 20.0, bottom: 20),
               child: Image.asset(
-                'asset/imgs/unicorn.png', width: 300, height: 300,
+                'asset/imgs/unicorn.png', width: 200, height: 200,
               ),
             ),
             Column(
@@ -215,7 +216,7 @@ class _error extends StatelessWidget {
   final List<user_information> user_infotmations;
 
   const _error({required this.user_infotmations, Key? key}) : super(key: key);
-
+ //권한 일부 거부될 경우에 띄우는 위젯
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -227,7 +228,7 @@ class _error extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  "수인효선지유",
+                  "로웰펫",
                   style: TextStyle(
                     color: Colors.white,
                     fontFamily: 'jua',
@@ -239,7 +240,7 @@ class _error extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(top: 20.0, bottom: 20),
               child: Image.asset(
-                'asset/imgs/unicorn.png', width: 100, height: 100,
+                'asset/imgs/unicorn.png', width: 200, height: 200,
               ),
             ),
             Column(

@@ -25,7 +25,7 @@ class _ShopWebScreenState extends State<ShopWebScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+      appBar: AppBar( //앱바
         backgroundColor: Colors.red[100],
         title: Text(
           shopname,
@@ -45,7 +45,6 @@ class _ShopWebScreenState extends State<ShopWebScreen> {
         centerTitle: true,
         actions: [
           IconButton(
-            //홈으로
             onPressed: () {
               if (controller == null) {
                 return;
@@ -58,10 +57,8 @@ class _ShopWebScreenState extends State<ShopWebScreen> {
           ),
         ],
       ),
-      body: WebView(
-        onWebViewCreated: (WebViewController controller) {
-          this.controller = controller;
-        },
+      body: WebView( //웹페이지 표기 위젯
+        onWebViewCreated: (WebViewController controller){this.controller = controller;},
         initialUrl: weburl[shopname],
         javascriptMode: JavascriptMode.unrestricted,
       ),
