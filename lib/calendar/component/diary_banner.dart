@@ -37,7 +37,8 @@ class DiaryBanner extends StatelessWidget {
                 onPressed: () {
                   Navigator.pop(context, MaterialPageRoute(builder: (context) => CalendarScreen()),);
                 },
-                icon: Icon(Icons.abc))
+                icon: Icon(Icons.pets,
+                  color: Colors.white,))
           ],
         ),
       ),
