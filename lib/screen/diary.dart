@@ -44,7 +44,7 @@ class _DiaryScreenState extends State<DiaryScreen> {
         centerTitle: true,
       ),
 
-      ///////////////////////////////////////////////////////////////////
+
       floatingActionButton: renderFloatingActionButton(), //add Button
       body: SafeArea(
         child: Column(
@@ -150,7 +150,12 @@ class _ShowDiary extends StatelessWidget {
 
               if (snapshot.hasData && snapshot.data!.isEmpty) {
                 return Center(
-                  child: Text('일기가 없어요.'),
+                  child: Text('작성된 일기가 없어요!',
+                    style: TextStyle(
+                      //fontFamily: 'jua',
+                      fontSize: 20.0,
+                    ),
+                  ),
                 );
               }
 
@@ -186,7 +191,9 @@ class _ShowDiary extends StatelessWidget {
                         );
                       },
                       child: DiaryCard(
+                        date: selectedDate,
                         title: diaryData.title,
+                        content: diaryData.content,
                       ),
                     ),
                   );
@@ -197,3 +204,4 @@ class _ShowDiary extends StatelessWidget {
     );
   }
 }
+

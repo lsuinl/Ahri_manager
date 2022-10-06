@@ -123,7 +123,7 @@ class _ScheduleList extends StatelessWidget {
               if (snapshot.hasData && snapshot.data!.isEmpty) {
                 return Center(
                   child: Text(
-                    '스케줄이 없어요.',
+                    '등록된 스케줄이 없어요.',
                     style: TextStyle(
                       //fontFamily: 'jua',
                       fontSize: 20.0,

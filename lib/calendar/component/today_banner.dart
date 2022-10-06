@@ -35,14 +35,23 @@ class TodayBanner extends StatelessWidget {
           children: [
             Text(
               '''${selectedDay.year}년 ${selectedDay.month}월 ${selectedDay.day}일
-       Schedule''',
+     Schedule''',
               style: textStyle,
             ),
-            IconButton(
-                onPressed: () {
+            ElevatedButton(
+              onPressed: () {
                   Navigator.push(context, MaterialPageRoute(builder: (context) => DiaryScreen()),);
                 },
-                icon: Icon(Icons.ac_unit))
+              style: ElevatedButton.styleFrom(primary: Colors.pink[200]),
+              child: Text("일기"),
+            )
+
+            // IconButton(
+            //     onPressed: () {
+            //       Navigator.push(context, MaterialPageRoute(builder: (context) => DiaryScreen()),);
+            //     },
+            //     icon: Icon(Icons.pets,
+            //     color: Colors.white,))
           ],
         ),
       ),
