@@ -59,12 +59,15 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
                 SizedBox(width: 50.0,),
-                ElevatedButton(
+                TextButton(
                     child: Text(
-                      "내정보",
-                      style: TextStyle(color: Colors.black),
-                    ),
-                    style: ElevatedButton.styleFrom(primary: Colors.white),
+                  "동물정보",
+                  style: TextStyle(
+                    fontSize: 18.0,
+                    fontFamily: 'jua',
+                    color: Colors.black,
+                  ),
+                ),
                     onPressed: () {
                       Navigator.push(
                           context,
@@ -89,6 +92,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       //달력
                       //mainAxisAlignment: MainAxisAlignment.start,
                       children: [
+                        SizedBox(width:130.0, height:70,),
                         IconButton(
                           onPressed: () {
                             Navigator.push(
@@ -97,7 +101,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     builder: (context) => CalendarScreen()));
                           },
                           icon: Image.asset('asset/imgs/schedule.png'),
-                          iconSize: 70,
+                          iconSize: 90,
                           //padding,
                         ),
                         Text(
@@ -111,36 +115,10 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ],
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        IconButton(
-                          onPressed: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => HospitalMapScreen()));
-                          },
-                          icon: Image.asset('asset/imgs/hospital.png'),
-                          iconSize: 70,
-                        ),
-                        Text(
-                          '병원 찾기',
-                          style: TextStyle(
-                            fontFamily: 'jua',
-                            fontSize: 20.0,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                SizedBox(height:30,),
                Image.asset('asset/imgs/${user_infotmations.first.species}.png',scale: 3,),
             ]
         ),
@@ -157,10 +135,37 @@ class _HomeScreenState extends State<HomeScreen> {
                                     builder: (context) => ShopListScreen()));
                           },
                           icon: Image.asset('asset/imgs/pet-food.png'),
-                          iconSize: 70,
+                          iconSize: 80,
                         ),
                         Text(
                           "물품구매",
+                          style: TextStyle(
+                            fontFamily: 'jua',
+                            fontSize: 20.0,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        IconButton(
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => HospitalMapScreen()));
+                          },
+                          icon: Image.asset('asset/imgs/hospital.png'),
+                          iconSize: 100,
+                        ),
+                        Text(
+                          '병원 찾기',
                           style: TextStyle(
                             fontFamily: 'jua',
                             fontSize: 20.0,

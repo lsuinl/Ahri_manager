@@ -49,6 +49,7 @@ void main() async {
 
   runApp(
     MaterialApp(
+        debugShowCheckedModeBanner: false,
         //앱 스타일
         home: CheckPermissionScreen() //
         ),

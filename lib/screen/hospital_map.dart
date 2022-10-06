@@ -126,7 +126,7 @@ class _HospitalMapScreenState extends State<HospitalMapScreen> {
     return Scaffold(
         appBar: AppBar(
           title: Text(
-            '지도찾기',
+            '병원찾기',
             style: TextStyle(
               color: Colors.white,
               fontFamily: 'jua',
