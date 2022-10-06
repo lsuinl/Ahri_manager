@@ -42,6 +42,7 @@ class TodayBanner extends StatelessWidget {
               onPressed: () {
                   Navigator.push(context, MaterialPageRoute(builder: (context) => DiaryScreen()),);
                 },
+              
               style: ElevatedButton.styleFrom(primary: Colors.pink[200]),
               child: Text("일기"),
             )

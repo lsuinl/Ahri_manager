@@ -33,12 +33,14 @@ class DiaryBanner extends StatelessWidget {
      Our Diary''',
               style: textStyle,
             ),
-            IconButton(
-                onPressed: () {
-                  Navigator.pop(context, MaterialPageRoute(builder: (context) => CalendarScreen()),);
-                },
-                icon: Icon(Icons.pets,
-                  color: Colors.white,))
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => CalendarScreen()),);
+              },
+
+              style: ElevatedButton.styleFrom(primary: Colors.pink[200]),
+              child: Text("일정"),
+            )
           ],
         ),
       ),

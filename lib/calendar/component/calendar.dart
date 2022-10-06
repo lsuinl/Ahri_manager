@@ -18,9 +18,7 @@ class Calendar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    bool isData = false;
-    Map<DateTime, List<ScheduleWithColor>> _scheduleEvents;
-
+    //Map<DateTime, List<ScheduleWithColor>> _scheduleEvents;
     final defaultBoxDeco = BoxDecoration(
       borderRadius: BorderRadius.circular(6.0),
       color: Colors.grey[200],

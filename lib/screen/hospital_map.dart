@@ -34,7 +34,7 @@ class _HospitalMapScreenState extends State<HospitalMapScreen> {
     setcustommappin();
   }
 
-  void setcustommappin() async{
+  void setcustommappin() async {
     markerIcon = await getbytesfromasset('asset/imgs/hospitalmarker.png', 100);
   }
 
@@ -145,7 +145,7 @@ class _HospitalMapScreenState extends State<HospitalMapScreen> {
           actions: [
             TextButton(
               onPressed: () {
-                var initlocation = LatLng(0, 0);
+                LatLng initlocation = LatLng(0, 0);
                 for (int i = 0; i < hospitalinf.length; i++) {
                   if (hospitalinf[i].animal.contains(animalspecies)) {
                     if (((mylocation.latitude - initlocation.latitude).abs() +
@@ -161,8 +161,7 @@ class _HospitalMapScreenState extends State<HospitalMapScreen> {
                 }
                 mapController!.animateCamera(CameraUpdate.newCameraPosition(
                   CameraPosition(
-                    target:
-                        LatLng(initlocation.latitude, initlocation.longitude),
+                    target: LatLng(initlocation.latitude, initlocation.longitude),
                     zoom: 11.0,
                   ),
                 ));
@@ -178,14 +177,7 @@ class _HospitalMapScreenState extends State<HospitalMapScreen> {
             ),
           ],
         ),
-        body: FutureBuilder<String>(
-          future: checkPermission(),
-          builder: (BuildContext context, AsyncSnapshot snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return Center(child: CircularProgressIndicator());
-            }
-            if (snapshot.data == '위치 권한이 허가되었습니다.') {
-              return StreamBuilder<Position>(
+        body:StreamBuilder<Position>(
                   stream: Geolocator.getPositionStream(), //내 현재위치 가져오기
                   builder: (context, snapshot) {
                     return Column(
@@ -223,13 +215,8 @@ class _HospitalMapScreenState extends State<HospitalMapScreen> {
                         )
                       ],
                     );
-                  });
-            }
-            return Center(
-              child: (snapshot.data),
+                  })
             );
-          },
-        ));
   }
 
   onMapCreated(GoogleMapController controller) {
@@ -249,21 +236,4 @@ class _HospitalMapScreenState extends State<HospitalMapScreen> {
     user_infotmations = helper.getuserinformation();
     setState(() {});
   }
-}
-
-Future<String> checkPermission() async {
-  final isLocationEnabled = await Geolocator.isLocationServiceEnabled();
-
-  if (!isLocationEnabled) {
-    return '위치 서비스를 활성화 해주세요.';
-  }
-  LocationPermission checkPermission = await Geolocator.checkPermission();
-  if (checkPermission == LocationPermission.denied) {
-    checkPermission = await Geolocator.requestPermission();
-    if (checkPermission == LocationPermission.denied)
-      return '위치 권한을 설정합니다';
-  }
-  if (checkPermission == LocationPermission.deniedForever)
-    return '앱의 위치 권한을 설정에서 허가해주세요';
-  return '위치 권한이 허가되었습니다.';
 }
