@@ -52,7 +52,7 @@ class _birdurlState extends State<_birdurl> {
           title: Padding(
             padding: const EdgeInsets.only(top: 8.0),
             child: Text(
-              "자본을 뿌려보아요",
+              "용품사이트 목록",
               style: TextStyle(
                 color: Colors.white,
                 fontFamily: 'jua',

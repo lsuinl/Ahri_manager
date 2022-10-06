@@ -74,7 +74,7 @@ class _ok extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    "로웰펫",
+                    "아리랑",
                     style: TextStyle(
                       color: Colors.white,
                       fontFamily: 'jua',
