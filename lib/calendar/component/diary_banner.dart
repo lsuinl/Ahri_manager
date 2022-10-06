@@ -24,7 +24,7 @@ class DiaryBanner extends StatelessWidget {
     return Container(
       color: Colors.pink[100], //배너 배경 색깔
       child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+        padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 1.0),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -35,7 +35,7 @@ class DiaryBanner extends StatelessWidget {
             ),
             IconButton(
                 onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => CalendarScreen()),);
+                  Navigator.pop(context, MaterialPageRoute(builder: (context) => CalendarScreen()),);
                 },
                 icon: Icon(Icons.abc))
           ],

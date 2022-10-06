@@ -5,9 +5,13 @@ import 'package:flutter/material.dart';
 
 class DiaryCard extends StatelessWidget {
   final String title;
+  final String content;
+  final DateTime date;
 
   const DiaryCard({
     required this.title,
+    required this.content,
+    required this.date,
     Key? key}) : super(key: key);
 
   @override
@@ -23,11 +27,15 @@ class DiaryCard extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: IntrinsicHeight(
-          child: Row(
+          child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               SizedBox(width: 16.0),
+              _Date(date: date),
+              SizedBox(width: 16.0),
               _Title(title: title), //일기 제목
+              SizedBox(width: 16.0,),
+              _Content(content: content,),
             ],
           ),
         ),
@@ -35,6 +43,26 @@ class DiaryCard extends StatelessWidget {
     );
   }
 }
+
+class _Date extends StatelessWidget { //제목
+  final DateTime date;
+
+  const _Date({ //데이터 불러오기
+    required this.date,
+    Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Text("${date.year}.${date.month}.${date.day}",
+      style: TextStyle(
+        fontFamily: 'jua',
+        fontSize: 15.0,
+        color: Colors.pink[300],
+      ),
+    );
+  }
+}
+
 
 class _Title extends StatelessWidget { //제목
   final String title;
@@ -45,6 +73,31 @@ class _Title extends StatelessWidget { //제목
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(child: Text(title));
+    return Text(title,
+        style: TextStyle(
+        fontFamily: 'jua',
+        fontSize: 30.0,
+        color: Colors.pink,
+        ),
+    );
+  }
+}
+
+class _Content extends StatelessWidget { //제목
+  final String content;
+
+  const _Content({ //데이터 불러오기
+    required this.content,
+    Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(child: Text(content,
+      style: TextStyle(
+        fontFamily: 'jua',
+        fontSize: 15.0,
+        color: Colors.black,
+      ),
+    ));
   }
 }

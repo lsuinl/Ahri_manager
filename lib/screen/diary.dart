@@ -44,7 +44,7 @@ class _DiaryScreenState extends State<DiaryScreen> {
         centerTitle: true,
       ),
 
-      ///////////////////////////////////////////////////////////////////
+
       floatingActionButton: renderFloatingActionButton(), //add Button
       body: SafeArea(
         child: Column(
@@ -191,7 +191,9 @@ class _ShowDiary extends StatelessWidget {
                         );
                       },
                       child: DiaryCard(
+                        date: selectedDate,
                         title: diaryData.title,
+                        content: diaryData.content,
                       ),
                     ),
                   );
@@ -202,3 +204,4 @@ class _ShowDiary extends StatelessWidget {
     );
   }
 }
+
