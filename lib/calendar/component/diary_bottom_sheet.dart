@@ -1,10 +1,10 @@
+//하단에서 창이 올라와 다이어리 데이터를 저장할 수 있는 코드
+
 import 'package:ahri_manager/calendar/component/custom_text_field.dart';
 import 'package:drift/drift.dart' show Value;
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import '../../data/database/drift_database.dart';
-
-//다이어리 정보 등록창
 
 class DiaryBottomSheet extends StatefulWidget {
   final DateTime selectedDate;
@@ -22,7 +22,6 @@ class DiaryBottomSheet extends StatefulWidget {
 class _DiaryBottomSheetState extends State<DiaryBottomSheet> {
   final GlobalKey<FormState> formKey = GlobalKey();
 
-  //DateTime? selectedDate;
   String? title;
   String? content;
 
@@ -31,7 +30,6 @@ class _DiaryBottomSheetState extends State<DiaryBottomSheet> {
     final bottonInset = MediaQuery.of(context).viewInsets.bottom;
 
     return SingleChildScrollView(
-      //스크롤 기능
       child: GestureDetector(
           onTap: () {
             FocusScope.of(context)
@@ -63,11 +61,10 @@ class _DiaryBottomSheetState extends State<DiaryBottomSheet> {
 
               return SafeArea(
                 child: Container(
-                  height: MediaQuery.of(context).size.height / 2 + bottonInset, //높이 = 전체화면의 1/1.8배 + 키보드 높이
+                  height: MediaQuery.of(context).size.height / 2 + bottonInset,
                   color: Colors.white,
                   child: Padding(
                     padding: EdgeInsets.only(bottom: bottonInset),
-                    //패딩도 포함시켜줘야 할 수 있다.
                     child: Padding(
                       padding: EdgeInsets.only(left: 8, right: 8, top: 16),
                       child: Form(
@@ -107,15 +104,13 @@ class _DiaryBottomSheetState extends State<DiaryBottomSheet> {
   }
 
   Future<void> onSavePressed() async {
-    //저장버튼 누르면
-    //formKey는 생성을 했는데 Form 위젯과 결합을 안 했을 때
     if (formKey.currentState == null) {
       return;
     }
 
-    //모든 텍스트 폼 필드를 검사한 뒤 모두 에러가 없으면 TRUE가 나옴
+    //모든 텍스트 폼 필드를 검사한 뒤 모두 에러가 없으면 TRUE
     if (formKey.currentState!.validate()) { //에러가 없을 때
-      formKey.currentState!.save(); // 에러가 없어서 저장.
+      formKey.currentState!.save(); //저장.
 
       if (widget.diaryId == null) {
         await GetIt.I<LocalDatabase>().createDiary(

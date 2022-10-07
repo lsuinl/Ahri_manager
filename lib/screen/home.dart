@@ -1,11 +1,12 @@
+// 앱의 메인 화면
+
 import 'package:ahri_manager/screen/shop_list.dart';
-import 'package:ahri_manager/screen/calendar.dart';
+import 'package:ahri_manager/screen/schedule.dart';
 import 'package:ahri_manager/screen/hospital_map.dart';
 import 'package:ahri_manager/screen/my_animal_information.dart';
 import 'package:flutter/material.dart';
 import 'package:ahri_manager/plus/user_helper.dart';
 import 'package:ahri_manager/data/user_information.dart';
-
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);

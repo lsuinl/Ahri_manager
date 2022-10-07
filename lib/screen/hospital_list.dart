@@ -1,3 +1,5 @@
+// 병원 정보를 리스트화해서 볼 수 있는 스크린
+
 import 'dart:collection';
 import 'package:ahri_manager/data/user_information.dart';
 import 'package:flutter/material.dart';

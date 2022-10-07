@@ -1,9 +1,7 @@
-import 'package:ahri_manager/screen/calendar.dart';
-import 'package:flutter/material.dart';
+//달력과 투두리스트 사이에 있는 바 관리 코드 (날짜|일정버튼)
 
-/*
-달력과 투두리스트 사이에 있는 바 관리 코드 (날짜|할 일 개수)
- */
+import 'package:ahri_manager/screen/schedule.dart';
+import 'package:flutter/material.dart';
 
 class DiaryBanner extends StatelessWidget {
   final DateTime selectedDay;
@@ -22,7 +20,7 @@ class DiaryBanner extends StatelessWidget {
 
 
     return Container(
-      color: Colors.pink[100], //배너 배경 색깔
+      color: Colors.pink[100],
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 1.0),
         child: Row(
@@ -35,7 +33,7 @@ class DiaryBanner extends StatelessWidget {
             ),
             ElevatedButton(
               onPressed: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => CalendarScreen()),);
+                Navigator.pop(context, MaterialPageRoute(builder: (context) => CalendarScreen()),);
               },
 
               style: ElevatedButton.styleFrom(primary: Colors.pink[200]),

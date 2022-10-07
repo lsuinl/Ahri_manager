@@ -1,10 +1,5 @@
 import 'package:ahri_manager/data/database/drift_database.dart';
-import 'package:ahri_manager/screen/calendar.dart';
 import 'package:ahri_manager/screen/check_permission.dart';
-import 'package:ahri_manager/screen/home.dart';
-import 'package:ahri_manager/screen/hospital_list.dart';
-import 'package:ahri_manager/screen/hospital_map.dart';
-import 'package:ahri_manager/screen/input_animal_information.dart';
 import 'package:drift/drift.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
@@ -25,7 +20,7 @@ const DEFAULT_COLORS = [
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized(); //플러터가 준비될 때까지 대기.
-  await initializeDateFormatting(); //intl안에 있는 모든 언어 사용 가능. 특히 날짜 관련.
+  await initializeDateFormatting();
   //runApp 전에 우리가 실행해야 하는 코드가 있기 때문에 WidgetFlutterBinding 함수를 사용하는 것
 
   final database = LocalDatabase();
@@ -36,8 +31,7 @@ void main() async {
   //데이터베이스 속 색깔 불러오기
   final colors = await database.getCategoryColors();
 
-  if (colors.isEmpty) {
-    //color가 비어있다면 위에 리스트에서 색깔을 가져옴.
+  if (colors.isEmpty) { //color가 비어있다면 위에 리스트에서 색깔을 가져옴.
     for (String hexCode in DEFAULT_COLORS) {
       await database.createCategoryColor(
         CategoryColorsCompanion(
@@ -50,7 +44,6 @@ void main() async {
   runApp(
     MaterialApp(
         debugShowCheckedModeBanner: false,
-        //앱 스타일
         home: CheckPermissionScreen() //
         ),
   );

@@ -1,3 +1,5 @@
+// 병원의 위치와 정보를 지도를 통해 볼 수 있는 맵 스크린
+
 import 'package:ahri_manager/data/user_information.dart';
 import 'package:ahri_manager/screen/hospital_list.dart';
 import 'package:flutter/material.dart';
@@ -7,8 +9,9 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:ahri_manager/data/hospital_information.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../plus/user_helper.dart';
-import 'dart:ui' as ui;
-//마커디자인 변경
+// import 'dart:ui' as ui;
+
+
 class HospitalMapScreen extends StatefulWidget {
   const HospitalMapScreen({Key? key}) : super(key: key);
 
@@ -31,22 +34,22 @@ class _HospitalMapScreenState extends State<HospitalMapScreen> {
     helper.init().then((value) {updateScreen();});
     getCurrentLocation();
     super.initState();
-    setcustommappin();
+    // setcustommappin();
   }
 
-  void setcustommappin() async {
-    markerIcon = await getbytesfromasset('asset/imgs/hospitalmarker.png', 100);
-  }
-
-  Future<Uint8List> getbytesfromasset(String path, int width) async{
-    ByteData data= await rootBundle.load(path);
-    ui.Codec codec = await ui.instantiateImageCodec(data.buffer.asUint8List(),
-        targetWidth: width);
-    ui.FrameInfo fi = await codec.getNextFrame();
-    return (await fi.image.toByteData(format: ui.ImageByteFormat.png))
-        !.buffer
-        .asUint8List();
-  }
+  // void setcustommappin() async {
+  //   markerIcon = await getbytesfromasset('asset/imgs/hospitalmarker.png', 100);
+  // }
+  //
+  // Future<Uint8List> getbytesfromasset(String path, int width) async{
+  //   ByteData data= await rootBundle.load(path);
+  //   ui.Codec codec = await ui.instantiateImageCodec(data.buffer.asUint8List(),
+  //       targetWidth: width);
+  //   ui.FrameInfo fi = await codec.getNextFrame();
+  //   return (await fi.image.toByteData(format: ui.ImageByteFormat.png))
+  //       !.buffer
+  //       .asUint8List();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -59,7 +62,7 @@ class _HospitalMapScreenState extends State<HospitalMapScreen> {
       if (hospitalinf[i].animal.contains(animalspecies)) {
         _markers.add(Marker(
           markerId: MarkerId(hospitalinf[i].name),
-          icon: BitmapDescriptor.fromBytes(markerIcon),
+          // icon: BitmapDescriptor.fromBytes(markerIcon),
           position: LatLng(
             hospitalinf[i].xy.latitude,
             hospitalinf[i].xy.longitude,

@@ -1,3 +1,5 @@
+// 사용자가 입력하는 동물 정보 관리
+
 class user_information{
   int id=0;
   String name="";

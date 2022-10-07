@@ -1,7 +1,10 @@
+// 내 동물 정보를 확인할 수 있는 스크린
+
 import 'package:ahri_manager/screen/input_animal_information.dart';
 import 'package:flutter/material.dart';
 import 'package:ahri_manager/plus/user_helper.dart';
 import 'package:ahri_manager/data/user_information.dart';
+
 
 class MyAnimalInformationScreen extends StatefulWidget {
   const MyAnimalInformationScreen({Key? key}) : super(key: key);

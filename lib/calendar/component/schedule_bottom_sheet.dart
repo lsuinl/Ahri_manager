@@ -1,11 +1,11 @@
+// Add 버튼을 누르면 하단에서 흰 공간이 올라오게 하는 클래스
+// 여기서는 일정 등록 내용 쓸 때 사용됩니다!
+
 import 'package:ahri_manager/calendar/component/custom_text_field.dart';
 import 'package:ahri_manager/data/database/drift_database.dart';
 import 'package:drift/drift.dart' show Value;
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
-
-// Add 버튼을 누르면 하단에서 흰 공간이 올라오게 하는 클래스
-// 여기서는 일정 등록 내용 쓸 때 사용됩니다!
 
 class ScheduleBottomSheet extends StatefulWidget {
   final DateTime selectedDate;
@@ -29,16 +29,14 @@ class _ScheduleBottomSheetState extends State<ScheduleBottomSheet> {
   @override
   Widget build(BuildContext context) {
     final bottonInset = MediaQuery.of(context).viewInsets.bottom;
-    //스크린부분에서 시스템적인 UI에 가려진 만큼의 사이즈를 가져올 수 있다.
-    //여기서는 키보드에 가려져서 안 보일 부분만큼 흰 창을 올려줄 것이다.
+    //키보드에 가려져서 안 보일 부분만큼 흰 창을 올려줄 것이다.
 
     return SingleChildScrollView(
-      //스크롤 기능
       child: GestureDetector(
           onTap: () {
             FocusScope.of(context)
-                .requestFocus(FocusNode()); //현재 포커스 되어 있는 곳에서 포커스를 없앨 수 있다.
-          }, //키보드가 실행된 상태에서 bottom_sheet 아무 곳이나 누르면 키보드가 내려감
+                .requestFocus(FocusNode());
+          },
           child: FutureBuilder<Schedule>(
             future: widget.scheduleId == null
                 ? null
@@ -65,17 +63,15 @@ class _ScheduleBottomSheetState extends State<ScheduleBottomSheet> {
 
               return SafeArea(
                 child: Container(
-                  height: MediaQuery.of(context).size.height / 1.4 +
-                      bottonInset, //높이 = 전체화면의 1/1.8배 + 키보드 높이
+                  height: MediaQuery.of(context).size.height / 1.8 +
+                      bottonInset,
                   color: Colors.white,
                   child: Padding(
                     padding: EdgeInsets.only(bottom: bottonInset),
-                    //패딩도 포함시켜줘야 할 수 있다.
                     child: Padding(
                       padding: EdgeInsets.only(left: 8, right: 8, top: 16),
                       child: Form(
                         key: formKey,
-                        //autovalidateMode: AutovalidateMode.always,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -132,15 +128,13 @@ class _ScheduleBottomSheetState extends State<ScheduleBottomSheet> {
   }
 
   Future<void> onSavePressed() async {
-    //저장버튼 누르면
-    //formKey는 생성을 했는데 Form 위젯과 결합을 안 했을 때
     if (formKey.currentState == null) {
       return;
     }
 
     //모든 텍스트 폼 필드를 검사한 뒤 모두 에러가 없으면 TRUE가 나옴
     if (formKey.currentState!.validate()) {
-      formKey.currentState!.save(); // 에러가 없어서 저장.
+      formKey.currentState!.save();
 
       if (widget.scheduleId == null) {
         await GetIt.I<LocalDatabase>().createSchedule(

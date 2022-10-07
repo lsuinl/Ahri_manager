@@ -1,9 +1,12 @@
+// 앱을 맨 처음 실행할 때 동물 정보를 기입하는 스크린 관리
+
 import 'package:ahri_manager/plus/user_helper.dart';
 import 'package:ahri_manager/data/user_information.dart';
 import 'package:ahri_manager/screen/home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/cupertino.dart';
+
 
 class InputAnimalInformationScreen extends StatefulWidget {
   const InputAnimalInformationScreen({Key? key}) : super(key: key);

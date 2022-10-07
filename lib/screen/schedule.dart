@@ -1,13 +1,14 @@
+// 사용자의 일정을 기록하는 스크린
+
 import 'package:ahri_manager/calendar/component/calendar.dart';
 import 'package:ahri_manager/calendar/component/schedule_bottom_sheet.dart';
 import 'package:ahri_manager/calendar/component/schedule_card.dart';
-import 'package:ahri_manager/calendar/component/today_banner.dart';
+import 'package:ahri_manager/calendar/component/schedule_banner.dart';
 import 'package:ahri_manager/calendar/model/schedule_with_color.dart';
 import 'package:ahri_manager/data/database/drift_database.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 
-//캘린더 스크린 관리창(초기설정을 기반으로+직접 지정하는 일정관리)
 
 class CalendarScreen extends StatefulWidget {
   const CalendarScreen({Key? key}) : super(key: key);
@@ -73,8 +74,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
     );
   }
 
-  FloatingActionButton renderFloatingActionButton() {
-    // 일정 추가 Button
+  FloatingActionButton renderFloatingActionButton() { // 일정 추가 Button
     return FloatingActionButton(
       onPressed: () {
         showModalBottomSheet(

@@ -1,7 +1,7 @@
-import 'package:flutter/material.dart';
-
 // 일기를 캘린더 밑에 보여줍니다.
-// 일기 제목
+// 오늘 날짜 | 일기 제목 | 일기 내용
+
+import 'package:flutter/material.dart';
 
 class DiaryCard extends StatelessWidget {
   final String title;
@@ -33,7 +33,7 @@ class DiaryCard extends StatelessWidget {
               SizedBox(width: 16.0),
               _Date(date: date),
               SizedBox(width: 16.0),
-              _Title(title: title), //일기 제목
+              _Title(title: title),
               SizedBox(width: 16.0,),
               _Content(content: content,),
             ],
