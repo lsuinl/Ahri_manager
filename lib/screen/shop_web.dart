@@ -1,6 +1,9 @@
+// 용품 판매 사이트를 볼 수 있게 해주는 스크린
+
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:ahri_manager/data/shop_information.dart';
+
 
 class ShopWebScreen extends StatefulWidget {
   final String shopname;

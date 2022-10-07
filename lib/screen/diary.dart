@@ -1,3 +1,5 @@
+// 일기창을 관리하는 스크린
+
 import 'package:ahri_manager/calendar/component/calendar.dart';
 import 'package:ahri_manager/calendar/component/diary_banner.dart';
 import 'package:ahri_manager/calendar/component/diary_bottom_sheet.dart';
@@ -153,6 +155,7 @@ class _ShowDiary extends StatelessWidget {
                   child: Text('작성된 일기가 없어요!',
                     style: TextStyle(
                       //fontFamily: 'jua',
+                      //fontWeight: FontWeight.w200,
                       fontSize: 20.0,
                     ),
                   ),
@@ -164,13 +167,12 @@ class _ShowDiary extends StatelessWidget {
                 //스크롤 가능
                 itemCount: snapshot.data!.length, //일기 개수
                 separatorBuilder: (context, index) {
-                  //두 목록 사이에 끼워넣기
                   return SizedBox(height: 8.0); //두 목록 사이에 여백 추가
                 },
                 itemBuilder: (context, index) {
                   final diaryData = snapshot.data![index];
 
-                  return Dismissible(
+                  return Dismissible( //왼쪽으로 스크롤하면 삭제
                     key: ObjectKey(diaryData.id),
                     direction: DismissDirection.endToStart,
                     onDismissed: (DismissDirection direction) {
@@ -190,7 +192,7 @@ class _ShowDiary extends StatelessWidget {
                           },
                         );
                       },
-                      child: DiaryCard(
+                      child: DiaryCard( //일기 내용 띄우기
                         date: selectedDate,
                         title: diaryData.title,
                         content: diaryData.content,

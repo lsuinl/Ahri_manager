@@ -1,8 +1,11 @@
+// 용품 판매 사이트를 리스트화해서 볼 수 있는 스크린
+
 import 'package:flutter/material.dart';
 import 'package:ahri_manager/screen/shop_web.dart';
 import 'package:ahri_manager/data/user_information.dart';
 import 'package:ahri_manager/plus/user_helper.dart';
 import 'package:ahri_manager/data/shop_information.dart';
+
 
 class ShopListScreen extends StatefulWidget {
   const ShopListScreen({Key? key}) : super(key: key);

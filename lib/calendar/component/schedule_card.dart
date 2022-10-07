@@ -1,7 +1,7 @@
-import 'package:flutter/material.dart';
-
 // 캘린더 밑에 일정 리스트 관리
 // 일정 제목 | 카테고리 색상
+
+import 'package:flutter/material.dart';
 
 class ScheduleCard extends StatelessWidget {
   final String title; //일정 제목
@@ -49,7 +49,9 @@ class _Title extends StatelessWidget { //제목
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(child: Text(title));
+    return Expanded(child:
+        Text(title),
+    );
   }
 }
 

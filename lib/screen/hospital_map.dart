@@ -1,3 +1,5 @@
+// 병원의 위치와 정보를 지도를 통해 볼 수 있는 맵 스크린
+
 import 'package:ahri_manager/data/user_information.dart';
 import 'package:ahri_manager/screen/hospital_list.dart';
 import 'package:flutter/material.dart';
@@ -8,6 +10,7 @@ import 'package:ahri_manager/data/hospital_information.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../plus/user_helper.dart';
 // import 'dart:ui' as ui;
+
 
 class HospitalMapScreen extends StatefulWidget {
   const HospitalMapScreen({Key? key}) : super(key: key);

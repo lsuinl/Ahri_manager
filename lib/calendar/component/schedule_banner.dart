@@ -1,12 +1,7 @@
-import 'package:ahri_manager/data/database/drift_database.dart';
+//달력과 투두리스트 사이에 있는 바 관리 코드 (날짜 | 일기 버튼)
+
 import 'package:ahri_manager/screen/diary.dart';
 import 'package:flutter/material.dart';
-import 'package:get_it/get_it.dart';
-import '../model/schedule_with_color.dart';
-
-/*
-달력과 투두리스트 사이에 있는 바 관리 코드 (날짜|할 일 개수)
- */
 
 class TodayBanner extends StatelessWidget {
   final DateTime selectedDay;

@@ -1,3 +1,5 @@
+//앱을 사용하기 위해 권한을 설정할 수 있게 하기 위한 권한 설정 스크린
+
 import 'package:ahri_manager/screen/home.dart';
 import 'package:ahri_manager/screen/input_animal_information.dart';
 import 'package:flutter/material.dart';
@@ -162,22 +164,25 @@ class _lodding extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Colors.pink[100],
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  "로웰펫",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontFamily: 'jua',
-                    fontSize: 50.0,
-                  ),
-                ),
-              ],
-            ),
+        body:Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 15.0),
+    child: Column(
+    mainAxisAlignment: MainAxisAlignment.center,
+    crossAxisAlignment: CrossAxisAlignment.stretch,
+    children: [
+    Column(
+    mainAxisAlignment: MainAxisAlignment.center,
+    children: [
+    Text(
+    "아리랑",
+    style: TextStyle(
+    color: Colors.white,
+    fontFamily: 'jua',
+    fontSize: 50.0,
+    ),
+    ),
+    ],
+    ),
             Padding(
               padding: const EdgeInsets.only(top: 20.0, bottom: 20),
               child: Image.asset(
@@ -208,7 +213,7 @@ class _lodding extends StatelessWidget {
               style: TextStyle(color: Colors.black),
             ),
           ],
-        ));
+        )));
   }
 }
 
@@ -228,7 +233,7 @@ class _error extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  "로웰펫",
+                  "아리랑",
                   style: TextStyle(
                     color: Colors.white,
                     fontFamily: 'jua',

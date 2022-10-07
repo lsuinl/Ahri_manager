@@ -1,3 +1,5 @@
+//유저 정보와의 인터페이스 역할 코드
+
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:ahri_manager/data/user_information.dart';
 import 'dart:convert';

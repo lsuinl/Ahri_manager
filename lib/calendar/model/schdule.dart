@@ -4,8 +4,6 @@ class Schedules extends Table {
   // PRIMARY KEY
   IntColumn get id => integer().autoIncrement()();
 
-  //autoIncrement: 자동으로 숫자를 늘려라.
-
   // 제목
   TextColumn get title => text()();
 
