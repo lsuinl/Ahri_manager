@@ -119,7 +119,7 @@ class _HomeScreenState extends State<HomeScreen> {
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                SizedBox(height:30,),
+                SizedBox(height:1,),
                Image.asset('asset/imgs/${user_infotmations.first.species}.png',scale: 3,),
             ]
         ),
@@ -163,7 +163,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     builder: (context) => HospitalMapScreen()));
                           },
                           icon: Image.asset('asset/imgs/hospital.png'),
-                          iconSize: 100,
+                          iconSize: 90,
                         ),
                         Text(
                           '병원 찾기',
