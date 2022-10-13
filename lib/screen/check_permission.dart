@@ -209,8 +209,12 @@ class _lodding extends StatelessWidget {
               color: Colors.white,
             ),
             Text(
-              "데이터를 확인 중입니다.",
-              style: TextStyle(color: Colors.black),
+              "데이터를 확인 중입니다...",
+              style: TextStyle(
+              color: Colors.white,
+              fontFamily: 'jua',
+              fontSize: 17.0,
+            ),
             ),
           ],
         )));
