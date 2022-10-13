@@ -18,7 +18,11 @@ class CalendarScreen extends StatefulWidget {
 }
 
 class _CalendarScreenState extends State<CalendarScreen> {
-  DateTime selectedDay = DateTime.now();
+  DateTime selectedDay = DateTime.utc(
+    DateTime.now().year,
+    DateTime.now().month,
+    DateTime.now().day,
+  );
   DateTime focusedDay = DateTime.now();
 
   //final ScrollController _scrollController = ScrollController();
