@@ -50,7 +50,11 @@ class _Title extends StatelessWidget { //제목
   @override
   Widget build(BuildContext context) {
     return Expanded(child:
-        Text(title),
+        Text(title,
+        style: TextStyle(
+          fontFamily: 'jua',
+          fontSize: 15,
+        ),),
     );
   }
 }

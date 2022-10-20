@@ -35,7 +35,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
         title: Padding(
           padding: const EdgeInsets.only(top: 8.0),
           child: Text(
-            '캘린더',
+            '스케줄러',
             style: TextStyle(
               fontFamily: 'jua',
               fontSize: 30.0,
@@ -129,7 +129,7 @@ class _ScheduleList extends StatelessWidget {
                   child: Text(
                     '등록된 스케줄이 없어요.',
                     style: TextStyle(
-                      //fontFamily: 'jua',
+                      fontFamily: 'jua',
                       fontSize: 20.0,
                     ),
                   ),

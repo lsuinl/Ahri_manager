@@ -39,8 +39,12 @@ class TodayBanner extends StatelessWidget {
                 },
               
               style: ElevatedButton.styleFrom(primary: Colors.pink[200]),
-              child: Text("일기"),
-            )
+              child: Text("일기",
+                style: TextStyle(
+                    fontFamily: 'jua',
+                    fontSize: 17.5),
+              ),
+            ),
 
             // IconButton(
             //     onPressed: () {

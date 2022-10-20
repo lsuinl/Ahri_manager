@@ -222,7 +222,7 @@ class _InputAnimalInformationScreenState extends State<InputAnimalInformationScr
               ),
               Padding(
                 //무게
-                padding: EdgeInsets.fromLTRB(30, 17, 210, 0),
+                padding: EdgeInsets.fromLTRB(30, 17, 190, 0),
                 child: Row(
                   children: <Widget>[
                     new Text(
