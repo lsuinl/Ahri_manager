@@ -37,7 +37,10 @@ class DiaryBanner extends StatelessWidget {
               },
 
               style: ElevatedButton.styleFrom(primary: Colors.pink[200]),
-              child: Text("일정"),
+              child: Text("일정",
+              style: TextStyle(
+                fontFamily: 'jua',
+              fontSize: 17.5),),
             )
           ],
         ),

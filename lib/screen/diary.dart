@@ -32,7 +32,7 @@ class _DiaryScreenState extends State<DiaryScreen> {
         title: Padding(
           padding: const EdgeInsets.only(top: 8.0),
           child: Text(
-            '캘린더',
+            '다이어리',
             style: TextStyle(
               fontFamily: 'jua',
               fontSize: 30.0,
@@ -158,8 +158,8 @@ class _ShowDiary extends StatelessWidget {
                 return Center(
                   child: Text('작성된 일기가 없어요!',
                     style: TextStyle(
-                      //fontFamily: 'jua',
-                      //fontWeight: FontWeight.w200,
+                      fontFamily: 'jua',
+                      fontWeight: FontWeight.w200,
                       fontSize: 20.0,
                     ),
                   ),
