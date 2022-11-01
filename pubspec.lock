@@ -244,6 +244,15 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_inappwebview:
+    dependency: "direct main"
+    description:
+      path: "."
+      ref: HEAD
+      resolved-ref: "252d836d52bff32870ed1b72231e428b0009e89e"
+      url: "https://github.com/CodeEagle/flutter_inappwebview"
+    source: git
+    version: "5.4.3+7"
   flutter_launcher_icons:
     dependency: "direct dev"
     description:
@@ -345,34 +354,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.0.1"
-  google_maps_flutter:
-    dependency: "direct main"
-    description:
-      name: google_maps_flutter
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "2.2.1"
-  google_maps_flutter_android:
-    dependency: transitive
-    description:
-      name: google_maps_flutter_android
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "2.3.2"
-  google_maps_flutter_ios:
-    dependency: transitive
-    description:
-      name: google_maps_flutter_ios
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "2.1.12"
-  google_maps_flutter_platform_interface:
-    dependency: transitive
-    description:
-      name: google_maps_flutter_platform_interface
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "2.2.4"
   graphs:
     dependency: transitive
     description:
@@ -513,6 +494,15 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.2"
+  naver_map_plugin:
+    dependency: "direct main"
+    description:
+      path: "."
+      ref: HEAD
+      resolved-ref: d6029c020e13c926ff5f94b445b4f65abb48b85f
+      url: "https://github.com/LBSTECH/naver_map_plugin.git"
+    source: git
+    version: "0.9.7"
   package_config:
     dependency: transitive
     description:

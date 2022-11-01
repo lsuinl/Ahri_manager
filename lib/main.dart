@@ -4,7 +4,7 @@ import 'package:drift/drift.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:intl/date_symbol_data_local.dart';
-
+import 'package:ahri_manager/screen/fuck.dart';
 const DEFAULT_COLORS = [
   'F44336', //red
   'E91E63', //pink
@@ -44,7 +44,7 @@ void main() async {
   runApp(
     MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: CheckPermissionScreen() //
+        home: naver() //
         ),
   );
 }

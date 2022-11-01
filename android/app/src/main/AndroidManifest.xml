@@ -13,8 +13,8 @@
         android:name="${applicationName}"
         android:icon="@mipmap/launcher_icon"
         android:usesCleartextTraffic="true">
-       <meta-data android:name="com.google.android.geo.API_KEY"
-           android:value="AIzaSyBEYNgwTFy7sGFVO5tvDG61iKlJIJxLtEQ"/>
+<!--       <meta-data android:name="com.google.android.geo.API_KEY"-->
+<!--           android:value="AIzaSyBEYNgwTFy7sGFVO5tvDG61iKlJIJxLtEQ"/>-->
         <activity
             android:name=".MainActivity"
             android:exported="true"
@@ -41,5 +41,9 @@
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
+        <meta-data
+            android:name="com.naver.maps.map.CLIENT_ID"
+            android:value="gie0i93lub" />
     </application>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
 </manifest>
