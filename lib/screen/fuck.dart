@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:naver_map_plugin/naver_map_plugin.dart';
+import 'package:flutter_naver_map/flutter_naver_map.dart';
 
 class naver extends StatefulWidget {
   const naver({Key? key}) : super(key: key);
@@ -31,5 +31,4 @@ class _naverState extends State<naver> {
     if (_controller.isCompleted) _controller = Completer();
     _controller.complete(controller);
   }
-
 }

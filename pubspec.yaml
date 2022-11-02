@@ -34,8 +34,8 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   geolocator: ^9.0.1
-  naver_map_plugin:
-    git: https://github.com/LBSTECH/naver_map_plugin.git
+  flutter_naver_map:
+    git: https://github.com/note11g/flutter_naver_map
   flutter_inappwebview:
     git: https://github.com/CodeEagle/flutter_inappwebview
 

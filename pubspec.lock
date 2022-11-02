@@ -267,6 +267,15 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.1"
+  flutter_naver_map:
+    dependency: "direct main"
+    description:
+      path: "."
+      ref: HEAD
+      resolved-ref: "2daaf2941a1eb767e2f979021cdf4f6ca34b4548"
+      url: "https://github.com/note11g/flutter_naver_map"
+    source: git
+    version: "0.10.5"
   flutter_plugin_android_lifecycle:
     dependency: transitive
     description:
@@ -494,15 +503,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.2"
-  naver_map_plugin:
-    dependency: "direct main"
-    description:
-      path: "."
-      ref: HEAD
-      resolved-ref: d6029c020e13c926ff5f94b445b4f65abb48b85f
-      url: "https://github.com/LBSTECH/naver_map_plugin.git"
-    source: git
-    version: "0.9.7"
   package_config:
     dependency: transitive
     description:
