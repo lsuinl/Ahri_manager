@@ -27,7 +27,7 @@
 //   final UserHelper helper = UserHelper();
 //   LatLng mylocation = LatLng(0, 0);
 //   Uint8List markerIcon=Uint8List(0);//초기화
-//
+// //--------------------------------
 //   @override
 //   void initState() {
 //     hospitalinf = hospitialinf;
