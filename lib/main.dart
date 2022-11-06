@@ -45,7 +45,7 @@ void main() async {
   runApp(
     MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: InputAnimalInformationScreen() //
+        home: CheckPermissionScreen() //
         ),
   );
 }
