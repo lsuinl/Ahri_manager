@@ -170,7 +170,7 @@ class _InputAnimalInformationScreenState extends State<InputAnimalInformationScr
                 ),
               ),
               Padding(
-                padding: EdgeInsets.fromLTRB(30, 20, 30, 5),
+                padding: EdgeInsets.fromLTRB(30, 20, 30, 20),
                 child: Row(
                   children: [
                     Text(
@@ -220,34 +220,34 @@ class _InputAnimalInformationScreenState extends State<InputAnimalInformationScr
                   ],
                 ),
               ),
-              Padding(
-                //무게
-                padding: EdgeInsets.fromLTRB(30, 17, 190, 0),
-                child: Row(
-                  children: <Widget>[
-                    new Text(
-                      " 몸무게",
-                      textAlign: TextAlign.left,
-                      style: TextStyle(fontFamily: 'jua', fontSize: 20),
-                    ),
-                    new Text('       '),
-                    new Flexible(
+              Row(
+                children: <Widget>[
+                  SizedBox(width: 30,),
+                  new Text(
+                    " 몸무게",
+                    textAlign: TextAlign.left,
+                    style: TextStyle(fontFamily: 'jua', fontSize: 20),
+                  ),
+                  SizedBox(width: 20,),
+                  Container(
+                    child: new Flexible(
                       child: new TextField(
                         keyboardType: TextInputType.number,
                         controller: weight,
                         style: Theme.of(context).textTheme.bodyText1,
                       ),
                     ),
-                    new Text(
-                      "kg",
-                      textAlign: TextAlign.left,
-                      style: TextStyle(fontSize: 17),
-                    ),
-                  ],
-                ),
+                    width: 40,
+                  ),
+                  new Text(
+                    "kg",
+                    textAlign: TextAlign.left,
+                    style: TextStyle(fontSize: 17),
+                  ),
+                ],
               ),
               Padding(
-                padding: EdgeInsets.fromLTRB(30, 25, 30, 30),
+                padding: EdgeInsets.fromLTRB(25, 25, 30, 30),
                 child: Row(
                   children: [
                     Text(
