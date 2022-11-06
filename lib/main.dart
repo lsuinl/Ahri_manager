@@ -1,5 +1,6 @@
 import 'package:ahri_manager/data/database/drift_database.dart';
 import 'package:ahri_manager/screen/check_permission.dart';
+import 'package:ahri_manager/screen/input_animal_information.dart';
 import 'package:drift/drift.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';

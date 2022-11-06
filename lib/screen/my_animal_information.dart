@@ -74,7 +74,7 @@ class _MyAnimalInformationScreenState extends State<MyAnimalInformationScreen> {
                   ),
                 ),
                 Text(
-                  '     몸무게: ${user_infotmations.first.weight}kg',
+                  '     몸무게: ${user_infotmations.first.weight}g',
                   style: TextStyle(
                     fontFamily: 'jua',
                     fontSize: 24.0,
