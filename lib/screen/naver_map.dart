@@ -1,4 +1,4 @@
-// import 'dart:async';
+import 'dart:async';
 import 'package:ahri_manager/data/user_information.dart';
 import 'package:ahri_manager/data/hospital_information.dart';
 import 'package:ahri_manager/plus/user_helper.dart';
@@ -20,34 +20,34 @@ class naver extends StatefulWidget {
 class _naverState extends State<naver> {
   List<Marker> _markers = [];
   NaverMapController? mapController;
-  List<information> hospitalinf = []; //이거왜?
+  List<information> hospitalinf = [];
   List<user_information> user_informations = [];
   final UserHelper helper = UserHelper();
   LatLng mylocation = LatLng(0, 0);
   final scaffoldKey = GlobalKey<ScaffoldState>();
-  // Completer<NaverMapController> _controller = Completer();//
+  Completer<NaverMapController> _controller = Completer();
   late OverlayImage markerIcon;
 
+  //커스텀 마커디자인
   void setCustomMapPin() async {
     markerIcon = await OverlayImage.fromAssetImage(
-        assetName: 'asset/imgs/hospitalmarker.png',
-        size: Size(1, 1)
+        assetName: 'asset/imgs/marker.png',
     );
   }
 
   @override
   void initState() {
-    hospitalinf = hospitialinf;
+    hospitalinf = hospitialinf; //병원리스트
     helper.init().then((value) {
       updateScreen();
     });
-    getCurrentLocation();
-    setCustomMapPin();
+    getCurrentLocation(); //내위치 가져오기
+    setCustomMapPin(); //커스텀마거적용
     super.initState();
   }
 
   @override
-  //정보 가져오기+마커화
+  //병원 정보 가져오기+마커화
   Widget build(BuildContext context) {
     String animalspecies = "";
     if (user_informations.isNotEmpty) {
@@ -58,13 +58,12 @@ class _naverState extends State<naver> {
       if (hospitalinf[i].animal.contains(animalspecies)) {
         _markers.add(Marker(
           markerId: (hospitalinf[i].name),
-          // icon: BitmapDescriptor.fromBytes(markerIcon),
           position: LatLng(
             hospitalinf[i].xy.latitude,
             hospitalinf[i].xy.longitude,
           ),
           icon: markerIcon,
-          onMarkerTab: (Marker? marker, Map<String, int?> iconSize) {
+          onMarkerTab: (Marker? marker, Map<String, int?> iconSize) { //마커선택 시 탭 활성화
             showModalBottomSheet<void>(
               context: context,
               builder: (context) {
@@ -125,7 +124,7 @@ class _naverState extends State<naver> {
 
     //화면구성
     return Scaffold(
-        appBar: AppBar(
+        appBar: AppBar( //상단:앱바
           title: Text(
             '병원찾기',
             style: TextStyle(
@@ -143,7 +142,7 @@ class _naverState extends State<naver> {
           ),
           backgroundColor: Colors.red[100],
           centerTitle: true,
-          actions: [
+          actions: [ //인근병원찾기버튼
             TextButton(
               onPressed: () {
                 LatLng initlocation = LatLng(0, 0);
@@ -160,6 +159,9 @@ class _naverState extends State<naver> {
                     }
                   }
                 }
+                if(mapController!=null)
+                  mapController!.locationOverlay!.setPosition(initlocation);
+                CameraPosition.fromMap(CameraPosition(target: initlocation));
               },
               child: Text(
                 "인근병원찾기",
@@ -180,18 +182,11 @@ class _naverState extends State<naver> {
                   Expanded(
                     flex: 3,
                     child: NaverMap(
-                      initialCameraPosition: CameraPosition(
-                        target: LatLng(37.564214, 127.001699),
-                        zoom: 11,
-                      ),
-                      //초기 카메라 위치
-                      logoClickEnabled: true,
-                      //내위치표시
-                      locationButtonEnable: true,
-                      //내위치로가기버튼
-                      mapType: MapType.Basic,
-                      //맵타입형식
-                      // onMapCreated: _onMapCreated(mapController!),    //콜백 조작
+                      initLocationTrackingMode: LocationTrackingMode.Follow, //초기위치는 내위치
+                      logoClickEnabled: true, //로고
+                      locationButtonEnable: true,//내위치로버툰
+                      mapType: MapType.Basic, //맵타입
+                      onMapCreated:  _onMapCreated,  //콜백 조작
                       markers: _markers,
                     ),
                   ),
@@ -220,10 +215,10 @@ class _naverState extends State<naver> {
     );
   }
 
-  // void _onMapCreated(NaverMapController controller) {
-  //   if (_controller.isCompleted) _controller = Completer();
-  //   _controller.complete(controller);
-  // }
+  void _onMapCreated(NaverMapController controller) {
+    if (_controller.isCompleted) _controller = Completer();
+    _controller.complete(controller);
+  }
 
   //현재위치 가져오기
   getCurrentLocation() async {
@@ -235,7 +230,7 @@ class _naverState extends State<naver> {
     });
   }
 
-  //초기상태업데이트
+  //초기정보업데이트
   void updateScreen() {
     user_informations = helper.getuserinformation();
     setState(() {});

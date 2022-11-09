@@ -200,43 +200,5 @@
 //                             markers: _markers,
 //                           ),
 //                         ),
-//                         TextButton(
-//                           onPressed: () {
-//                             Navigator.push(
-//                                 context,
-//                                 MaterialPageRoute(
-//                                     builder: (context) => HospitalListScreen(
-//                                           mylocation: mylocation,
-//                                         )));},
-//                           child: Text(
-//                             "리스트로 보기",
-//                             style: TextStyle(
-//                               color: Colors.black,
-//                               fontSize: 20.0,
-//                               fontFamily: 'jua',),
-//                           ),
-//                         )
-//                       ],
-//                     );
-//                   })
-//             );
-//   }
 //
-//   onMapCreated(GoogleMapController controller) {
-//     mapController = controller;
-//   }
-//
-//   getCurrentLocation() async {
-//     Position position = await Geolocator.getCurrentPosition(
-//         desiredAccuracy: LocationAccuracy.low);
-//     print(position);
-//     setState(() {
-//       mylocation = LatLng(position.latitude, position.longitude);
-//     });
-//   }
-//
-//   void updateScreen() {
-//     user_infotmations = helper.getuserinformation();
-//     setState(() {});
-//   }
 // }
