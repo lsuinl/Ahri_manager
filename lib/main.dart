@@ -4,7 +4,7 @@ import 'package:drift/drift.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:intl/date_symbol_data_local.dart';
-import 'package:ahri_manager/screen/naver_map.dart';
+import 'package:ahri_manager/screen/hospital_map.dart';
 const DEFAULT_COLORS = [
   'F44336', //red
   'E91E63', //pink
