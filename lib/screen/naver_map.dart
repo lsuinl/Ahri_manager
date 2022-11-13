@@ -159,9 +159,13 @@ class _naverState extends State<naver> {
                     }
                   }
                 }
-                if(mapController!=null)
-                  mapController!.locationOverlay!.setPosition(initlocation);
-                CameraPosition.fromMap(CameraPosition(target: initlocation));
+                  mylocation=initlocation;
+                  print(mylocation );
+                  CameraUpdate cameraupdate =CameraUpdate.scrollTo(initlocation);
+                  if(mapController!=null){
+                    mapController!.moveCamera(cameraupdate);
+                  }
+
               },
               child: Text(
                 "인근병원찾기",
@@ -186,7 +190,7 @@ class _naverState extends State<naver> {
                       logoClickEnabled: true, //로고
                       locationButtonEnable: true,//내위치로버툰
                       mapType: MapType.Basic, //맵타입
-                      onMapCreated:  _onMapCreated,  //콜백 조작
+                      onMapCreated:  _onMapCreated, //콜백 조작
                       markers: _markers,
                     ),
                   ),
@@ -218,6 +222,7 @@ class _naverState extends State<naver> {
   void _onMapCreated(NaverMapController controller) {
     if (_controller.isCompleted) _controller = Completer();
     _controller.complete(controller);
+    mapController=controller; //하,,,니놈이구나
   }
 
   //현재위치 가져오기
@@ -229,7 +234,6 @@ class _naverState extends State<naver> {
       mylocation = LatLng(position.latitude, position.longitude);
     });
   }
-
   //초기정보업데이트
   void updateScreen() {
     user_informations = helper.getuserinformation();
