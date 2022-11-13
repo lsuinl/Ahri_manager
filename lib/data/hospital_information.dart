@@ -1,7 +1,6 @@
 // 소수 반려동물을 진료할 수 있는 병원 정보 관리
 
-import 'package:google_maps_flutter/google_maps_flutter.dart';
-
+import 'package:flutter_naver_map/flutter_naver_map.dart';
 class information {
   late String name;
   late String phone;

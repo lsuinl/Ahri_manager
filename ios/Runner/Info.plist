@@ -41,13 +41,17 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-    <key>NMFClientId</key>
-    <string>gie0i93lub</string>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
 	<key>NSAppTransportSecurity</key>
     <dict>
+        <key>NMFClientId</key>
+        <string>gie0i93lub</string>
+        <key>io.flutter.embedded_views_preview</key>
+        <true/>
         <key>NSAllowsLocalNetworking</key>
+        <true/>
+        <key>NSAllowsArbitraryLoads</key>
         <true/>
         <key>NSAllowsArbitraryLoadsInWebContent</key>
         <true/>

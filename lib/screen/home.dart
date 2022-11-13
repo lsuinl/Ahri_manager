@@ -160,7 +160,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => HospitalMapScreen()));
+                                    builder: (context) => naver()));
                           },
                           icon: Image.asset('asset/imgs/hospital.png'),
                           iconSize: 90,

@@ -3,7 +3,7 @@
 import 'dart:collection';
 import 'package:ahri_manager/data/user_information.dart';
 import 'package:flutter/material.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:flutter_naver_map/flutter_naver_map.dart';
 import 'package:ahri_manager/data/hospital_information.dart';
 import 'package:flutter/cupertino.dart';
 import '../plus/user_helper.dart';
@@ -20,7 +20,7 @@ class HospitalListScreen extends StatefulWidget {
 }
 
 class _HospitalListScreenState extends State<HospitalListScreen> {
-  GoogleMapController? mapController;
+  NaverMapController? mapController;
   List<information> hospitalinf = [];
   List<user_information> user_infotmations = [];
   final UserHelper helper = UserHelper();
