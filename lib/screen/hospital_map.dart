@@ -7,6 +7,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_naver_map/flutter_naver_map.dart';
 
@@ -30,10 +31,10 @@ class _naverState extends State<naver> {
   String animalspecies = "";
 
   @override
-  final TextStyle textStyle=TextStyle(
-    fontFamily: 'jua',
+  final TextStyle textStyle=GoogleFonts.nanumGothic(
     fontSize: 20.0,
-    color: Colors.brown,
+    color: Colors.black,
+    fontWeight: FontWeight.w600,
   );
 
   void initState() {
@@ -98,12 +99,12 @@ class _naverState extends State<naver> {
               context: context,
               builder: (context) {
                 return Container(
-                  height: 200,
+                  height: MediaQuery.of(context).size.height/2,
                   decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image: AssetImage('asset/imgs/pattern1.png',),
-                      fit: BoxFit.cover,
-                    ),
+                    // image: DecorationImage(
+                    //   image: AssetImage('asset/imgs/pattern1.png',),
+                    //   fit: BoxFit.cover,
+                    // ),
                   ),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -180,16 +181,17 @@ class _appbar extends StatelessWidget with PreferredSizeWidget{
         style: textStyle.copyWith(
           color: Colors.white,
           fontSize: 30.0,
+          fontWeight: FontWeight.w600,
           shadows: [
             Shadow(
-              blurRadius: 10.0,
+              blurRadius: 5.0,
               color: Colors.black,
               offset: Offset(1.0, 1.0),
             ),
           ],
         ),
       ),
-      backgroundColor: Colors.red[100],
+      backgroundColor: Colors.purple[100],
       centerTitle: true,
       actions: [ //인근병원찾기버튼
         TextButton(
