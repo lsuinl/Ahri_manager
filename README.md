@@ -16,7 +16,7 @@
     툴: Flutter
 
 ## 🐹 팀원
-#### BackEnd + FrontEnd : [김수인](https://github.com/lsuinl) , [김효선](https://github.com/hy5sun)
-#### FrontEnd : [안지유](https://github.com/zzzzzuuuuu)
-
-
+|<img src="https://github.com/lsuinl.png" width="80">|<img src="https://github.com/hy5sun.png" width="80">|<img src="https://github.com/zzzzzuuuuu.png" width="80">|
+|:---:|:---:|:---:|
+|[김수인](https://github.com/lsuinl)|[김효선](https://github.com/hy5sun)|[안지유](https://github.com/zzzzzuuuuu)
+|BackEnd + FrontEnd|BackEnd + FrontEnd|FrontEnd|
