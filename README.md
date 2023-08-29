@@ -1,6 +1,6 @@
 # 🦄 아리랑 [AhriRang]
-#### - 특수반려동물의 다양한 정보를 제공하는 안드로이드-ios 하이브리드 어플
-#### - 명지 SW 프로그래밍 개발 경진 대회 제출
+- 특수반려동물의 다양한 정보를 제공하는 안드로이드-ios 하이브리드 어플
+- 명지 SW 프로그래밍 개발 경진 대회 출품작
 
 ## 🦎 개발기간
     2022.09.19 ~ ing 
@@ -19,4 +19,3 @@
 |<img src="https://github.com/lsuinl.png" width="80">|<img src="https://github.com/hy5sun.png" width="80">|<img src="https://github.com/zzzzzuuuuu.png" width="80">|
 |:---:|:---:|:---:|
 |[김수인](https://github.com/lsuinl)|[김효선](https://github.com/hy5sun)|[안지유](https://github.com/zzzzzuuuuu)
-|BackEnd + FrontEnd|BackEnd + FrontEnd|FrontEnd|
