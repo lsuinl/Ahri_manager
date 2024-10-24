@@ -72,5 +72,7 @@
     <string>사진첩에 있는 사진을 가져오게 허락해주십쇼</string>
     <key>NSCameraUsageDescription</key>
     <string>카메라를 쓸 수 있게 허락해주십쇼</string>
+	<key>UIApplicationSupportsIndirectInputEvents</key>
+	<true/>
 </dict>
 </plist>
