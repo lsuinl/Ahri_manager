@@ -20,6 +20,10 @@ class _ShopWebScreenState extends State<ShopWebScreen> {
 
   @override //초기에 한번만 실행
   void initState() {
+    controller = WebViewController()
+      ..setJavaScriptMode(JavaScriptMode.unrestricted)
+    ..loadRequest(Uri.parse(weburl[shopname]));
+
     shopname = widget.shopname;
     weburl = Weburl;
     super.initState();
@@ -49,10 +53,7 @@ class _ShopWebScreenState extends State<ShopWebScreen> {
         actions: [
           IconButton(
             onPressed: () {
-              if (controller == null) {
-                return;
-              }
-              controller!.loadUrl(weburl[shopname]);
+              controller!.loadRequest(Uri.parse(weburl[shopname]));
             },
             icon: Icon(
               Icons.home,
@@ -60,11 +61,7 @@ class _ShopWebScreenState extends State<ShopWebScreen> {
           ),
         ],
       ),
-      body: WebView( //웹페이지 표기 위젯
-        onWebViewCreated: (WebViewController controller){this.controller = controller;},
-        initialUrl: weburl[shopname],
-        javascriptMode: JavascriptMode.unrestricted,
-      ),
+      body: WebViewWidget(controller: controller!)
     );
   }
 }

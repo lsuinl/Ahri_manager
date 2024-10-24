@@ -1,11 +1,12 @@
 import 'package:ahri_manager/data/database/drift_database.dart';
 import 'package:ahri_manager/screen/check_permission.dart';
+import 'package:ahri_manager/screen/home.dart';
 import 'package:ahri_manager/screen/input_animal_information.dart';
 import 'package:drift/drift.dart';
 import 'package:flutter/material.dart';
-import 'package:get_it/get_it.dart';
-import 'package:intl/date_symbol_data_local.dart';
 import 'package:ahri_manager/screen/hospital_map.dart';
+import 'package:get_it/get_it.dart';
+import 'package:intl/date_symbol_data_file.dart';
 const DEFAULT_COLORS = [
   'F44336', //red
   'E91E63', //pink
@@ -21,7 +22,7 @@ const DEFAULT_COLORS = [
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized(); //플러터가 준비될 때까지 대기.
-  await initializeDateFormatting();
+ // await initializeDateFormatting();
   //runApp 전에 우리가 실행해야 하는 코드가 있기 때문에 WidgetFlutterBinding 함수를 사용하는 것
 
   final database = LocalDatabase();
@@ -45,7 +46,7 @@ void main() async {
   runApp(
     MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: naver() //
+        home: InputAnimalInformationScreen() //
         ),
   );
 }

@@ -121,9 +121,6 @@ class _ok extends StatelessWidget {
                       ),
                     ),
                     style: ElevatedButton.styleFrom(
-                      primary: Colors.pink[300],
-                      //배경색
-                      onPrimary: Colors.pink,
                       //눌렀을 때
                       shadowColor: Colors.black,
                       shape: RoundedRectangleBorder(

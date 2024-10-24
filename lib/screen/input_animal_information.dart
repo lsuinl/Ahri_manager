@@ -132,7 +132,6 @@ class _InputAnimalInformationScreenState
                   child: new Flexible(
                     child: new TextField(
                       controller: name,
-                      style: Theme.of(context).textTheme.bodyText1,
                     ),
                   ),
                   width: 150, //TextField 크기
@@ -253,7 +252,6 @@ class _InputAnimalInformationScreenState
                     child: new TextField(
                       keyboardType: TextInputType.number,
                       controller: weight,
-                      style: Theme.of(context).textTheme.bodyText1,
                     ),
                   ),
                   width: 43,

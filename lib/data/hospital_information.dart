@@ -4,12 +4,12 @@ import 'package:flutter_naver_map/flutter_naver_map.dart';
 class information {
   late String name;
   late String phone;
-  late LatLng xy;
+  late NLatLng xy;
   late List animal;
   late String adress;
 
   information(
-      String name, String phone, LatLng xy, List animal, String adress) {
+      String name, String phone, NLatLng xy, List animal, String adress) {
     this.name = name;
     this.phone = phone;
     this.xy = xy;
@@ -22,7 +22,7 @@ List<information> hospitialinf = [
   information(
     "24시부평종합동물의료센터",
     "032-511-6836",
-    LatLng(
+    NLatLng(
       37.5025841,
       126.7216472,
     ),
@@ -32,7 +32,7 @@ List<information> hospitialinf = [
   information(
     "24시지구촌동물메디컬센터",
     "02-869-7582",
-    LatLng(
+    NLatLng(
       37.4987491,
       126.8847737,
     ),
@@ -42,7 +42,7 @@ List<information> hospitialinf = [
   information(
       "24시폴동물병원",
       "031-717-7558",
-      LatLng(
+      NLatLng(
         37.3705246,
         127.1075005,
       ),
@@ -51,7 +51,7 @@ List<information> hospitialinf = [
   information(
       "25시종합동물병원",
       "031-378-1114",
-      LatLng(
+      NLatLng(
         37.1490582,
         127.0721971,
       ),
@@ -60,7 +60,7 @@ List<information> hospitialinf = [
   information(
       "WE동물병원",
       "031-269-9975",
-      LatLng(
+      NLatLng(
         37.3081761,
         126.9896866,
       ),
@@ -69,7 +69,7 @@ List<information> hospitialinf = [
   information(
       "가람동물병원",
       "031-906-0976",
-      LatLng(
+      NLatLng(
         37.6542524,
         126.7789937,
       ),
@@ -78,7 +78,7 @@ List<information> hospitialinf = [
   information(
       "개포별빛동물병원",
       "02-573-7582",
-      LatLng(
+      NLatLng(
         37.4763984,
         127.0463008,
       ),
@@ -87,7 +87,7 @@ List<information> hospitialinf = [
   information(
       "고강동물병원",
       "032-683-5137",
-      LatLng(
+      NLatLng(
         37.5268451,
         126.8158044,
       ),
@@ -96,7 +96,7 @@ List<information> hospitialinf = [
   information(
       "고려종합동물병원",
       "02-575-7999",
-      LatLng(
+      NLatLng(
         37.4935677,
         127.0507717,
       ),
@@ -105,7 +105,7 @@ List<information> hospitialinf = [
   information(
       "공원옆동물병원",
       "02-2650-8275",
-      LatLng(
+      NLatLng(
         37.5173721,
         126.8652319,
       ),
@@ -114,7 +114,7 @@ List<information> hospitialinf = [
   information(
       "공항축산동물병원",
       "02-2663-8520",
-      LatLng(
+      NLatLng(
         37.563583,
         126.8076903,
       ),
@@ -123,7 +123,7 @@ List<information> hospitialinf = [
   information(
       "굿모닝동물병원",
       "02-2665-8256",
-      LatLng(
+      NLatLng(
         37.5763859,
         126.8129994,
       ),
@@ -132,7 +132,7 @@ List<information> hospitialinf = [
   information(
       "금강종합동물병원",
       "02-2686-8008",
-      LatLng(
+      NLatLng(
         37.4953416,
         126.8429191,
       ),
@@ -141,7 +141,7 @@ List<information> hospitialinf = [
   information(
       "금쪽금쪽금쪽반려동물병원",
       "031-944-9979",
-      LatLng(
+      NLatLng(
         37.704678,
         126.722809,
       ),
@@ -150,7 +150,7 @@ List<information> hospitialinf = [
   information(
       "금천 24시 K동물의료센터",
       "0607-1415-2475",
-      LatLng(
+      NLatLng(
         37.456045,
         126.8995615,
       ),
@@ -159,7 +159,7 @@ List<information> hospitialinf = [
   information(
       "노룬산동물병원",
       "02-464-2748",
-      LatLng(
+      NLatLng(
         37.5368792,
         127.0617852,
       ),
@@ -168,7 +168,7 @@ List<information> hospitialinf = [
   information(
       "다우동물병원",
       "031-985-7579",
-      LatLng(
+      NLatLng(
         37.6229156,
         126.6979541,
       ),
@@ -177,7 +177,7 @@ List<information> hospitialinf = [
   information(
       "닥터스종합동물병원",
       "02-905-7588",
-      LatLng(
+      NLatLng(
         37.6291401,
         127.0578102,
       ),
@@ -186,7 +186,7 @@ List<information> hospitialinf = [
   information(
       "대치성심동물병원",
       "02-501-1139",
-      LatLng(
+      NLatLng(
         37.493456,
         127.0597594,
       ),
@@ -195,7 +195,7 @@ List<information> hospitialinf = [
   information(
       "동물사랑병원",
       "032-323-8275",
-      LatLng(
+      NLatLng(
         37.5124841,
         126.753855,
       ),
@@ -204,7 +204,7 @@ List<information> hospitialinf = [
   information(
       "로얄종합동물병원",
       "033-766-7230",
-      LatLng(
+      NLatLng(
         37.3413366,
         127.9534235,
       ),
@@ -213,7 +213,7 @@ List<information> hospitialinf = [
   information(
       "리베동물메디컬센터",
       "02-2604-0156",
-      LatLng(
+      NLatLng(
         37.5251751,
         126.8682309,
       ),
@@ -222,7 +222,7 @@ List<information> hospitialinf = [
   information(
       "맘스동물의료센터",
       "032-229-8275",
-      LatLng(
+      NLatLng(
         37.5052215,
         126.7511765,
       ),
@@ -231,7 +231,7 @@ List<information> hospitialinf = [
   information(
       "메디포즈동물병원",
       "010-8995-6354",
-      LatLng(
+      NLatLng(
         37.591936,
         127.2285532,
       ),
@@ -240,7 +240,7 @@ List<information> hospitialinf = [
   information(
       "메디피쉬수산질병관리원",
       "070-4647-1224",
-      LatLng(
+      NLatLng(
         37.3201219,
         126.8448628,
       ),
@@ -249,7 +249,7 @@ List<information> hospitialinf = [
   information(
       "물고기병원 수산질병관리원",
       "010-8960-6839",
-      LatLng(
+      NLatLng(
         37.6331134,
         127.0710645,
       ),
@@ -258,7 +258,7 @@ List<information> hospitialinf = [
   information(
       "미소동물의료센터",
       "02-2603-0075",
-      LatLng(
+      NLatLng(
         37.544852,
         126.8368232,
       ),
@@ -267,7 +267,7 @@ List<information> hospitialinf = [
   information(
       "벨라동물병원",
       "02-859-8775",
-      LatLng(
+      NLatLng(
         37.5005388,
         126.8846046,
       ),
@@ -276,7 +276,7 @@ List<information> hospitialinf = [
   information(
       "새은평동물의료센터",
       "02-358-7566",
-      LatLng(
+      NLatLng(
         37.6074525,
         126.9221367,
       ),
@@ -285,7 +285,7 @@ List<information> hospitialinf = [
   information(
       "서울종합동물병원",
       "031-422-7565",
-      LatLng(
+      NLatLng(
         37.3977731,
         126.97754,
       ),
@@ -294,7 +294,7 @@ List<information> hospitialinf = [
   information(
       "서울종합동물병원본원",
       "02-888-8807",
-      LatLng(
+      NLatLng(
         37.4771943,
         126.9352519,
       ),
@@ -303,7 +303,7 @@ List<information> hospitialinf = [
   information(
       "숲속동물병원",
       "02-492-9303",
-      LatLng(
+      NLatLng(
         37.5892125,
         127.0905471,
       ),
@@ -312,7 +312,7 @@ List<information> hospitialinf = [
   information(
       "신세계동물병원",
       "054-273-9636",
-      LatLng(
+      NLatLng(
         36.0151371,
         129.3709135,
       ),
@@ -321,7 +321,7 @@ List<information> hospitialinf = [
   information(
       "신세계동물의료센터",
       "055-367-9123",
-      LatLng(
+      NLatLng(
         37.2390535,
         127.3253153,
       ),
@@ -330,7 +330,7 @@ List<information> hospitialinf = [
   information(
       "아크리스동물의료센터",
       "02-583-7582",
-      LatLng(
+      NLatLng(
         37.5136773,
         127.0618982,
       ),
@@ -339,7 +339,7 @@ List<information> hospitialinf = [
   information(
       "어울림동물병원",
       "02-305-4242",
-      LatLng(
+      NLatLng(
         37.573616,
         126.916407,
       ),
@@ -348,7 +348,7 @@ List<information> hospitialinf = [
   information(
       "에코동물병원",
       "02-443-2222",
-      LatLng(
+      NLatLng(
         37.4927329,
         127.1280761,
       ),
@@ -357,7 +357,7 @@ List<information> hospitialinf = [
   information(
       "연서동동물종합병원",
       "02-358-7582",
-      LatLng(
+      NLatLng(
         37.6131681,
         126.9178498,
       ),
@@ -366,7 +366,7 @@ List<information> hospitialinf = [
   information(
       "예은동물병원",
       "02-529-5575",
-      LatLng(
+      NLatLng(
         37.4923809,
         127.0400194,
       ),
@@ -375,7 +375,7 @@ List<information> hospitialinf = [
   information(
       "오석헌동물병원",
       "02-6402-0301",
-      LatLng(
+      NLatLng(
         37.5451492,
         127.0141611,
       ),
@@ -384,7 +384,7 @@ List<information> hospitialinf = [
   information(
       "우신종합동물병원",
       "02-836-6509",
-      LatLng(
+      NLatLng(
         37.5071693,
         126.9112269,
       ),
@@ -393,7 +393,7 @@ List<information> hospitialinf = [
   information(
       "이솝동물메디컬",
       "055-748-7500",
-      LatLng(
+      NLatLng(
         35.1784006,
         128.0974023,
       ),
@@ -402,7 +402,7 @@ List<information> hospitialinf = [
   information(
       "이앤박동물병원",
       "02-939-6898",
-      LatLng(
+      NLatLng(
         37.6652688,
         127.0665438,
       ),
@@ -411,7 +411,7 @@ List<information> hospitialinf = [
   information(
       "이지훈동물병원",
       "031-295-5975",
-      LatLng(
+      NLatLng(
         37.2761766,
         126.9786051,
       ),
@@ -420,7 +420,7 @@ List<information> hospitialinf = [
   information(
       "인덕원종합동물병원",
       "031-426-0075",
-      LatLng(
+      NLatLng(
         37.3982624,
         126.9763994,
       ),
@@ -429,7 +429,7 @@ List<information> hospitialinf = [
   information(
       "일산시티동물의료센터",
       "031-932-0085",
-      LatLng(
+      NLatLng(
         37.660119,
         126.7664489,
       ),
@@ -438,7 +438,7 @@ List<information> hospitialinf = [
   information(
       "조은동물병원",
       "054-277-7535",
-      LatLng(
+      NLatLng(
         36.0248597,
         129.3595406,
       ),
@@ -447,7 +447,7 @@ List<information> hospitialinf = [
   information(
       "죽전동물병원",
       "031-266-2993",
-      LatLng(
+      NLatLng(
         37.3207062,
         127.1144354,
       ),
@@ -456,7 +456,7 @@ List<information> hospitialinf = [
   information(
       "청라라임동물병원",
       "032-563-1900",
-      LatLng(
+      NLatLng(
         37.5366477,
         126.6534751,
       ),
@@ -465,7 +465,7 @@ List<information> hospitialinf = [
   information(
       "최영민동물의료센터",
       "02-546-9539",
-      LatLng(
+      NLatLng(
         37.5151461,
         127.032368,
       ),
@@ -474,7 +474,7 @@ List<information> hospitialinf = [
   information(
       "충북대학교 동물병원",
       "043-261-2602",
-      LatLng(
+      NLatLng(
         36.6233247,
         127.4559218,
       ),
@@ -483,7 +483,7 @@ List<information> hospitialinf = [
   information(
       "케나인동물병원",
       "042-487-7555",
-      LatLng(
+      NLatLng(
         36.3487488,
         127.399673,
       ),
@@ -492,7 +492,7 @@ List<information> hospitialinf = [
   information(
       "탑케어동물의료원",
       "1666-7501",
-      LatLng(
+      NLatLng(
         37.6311912,
         126.8310468,
       ),
@@ -501,7 +501,7 @@ List<information> hospitialinf = [
   information(
       "태전동물병원",
       "053-357-7588",
-      LatLng(
+      NLatLng(
         35.9290044,
         128.5474052,
       ),
@@ -510,7 +510,7 @@ List<information> hospitialinf = [
   information(
       "파우동물병원",
       "031-898-0330",
-      LatLng(
+      NLatLng(
         37.3321847,
         127.1235368,
       ),
@@ -519,7 +519,7 @@ List<information> hospitialinf = [
   information(
       "하나동물병원",
       "02-6242-7500",
-      LatLng(
+      NLatLng(
         37.5894645,
         127.0609308,
       ),
@@ -528,7 +528,7 @@ List<information> hospitialinf = [
   information(
       "한성동물병원",
       "02-872-7609",
-      LatLng(
+      NLatLng(
         37.4782212,
         126.9318251,
       ),
@@ -537,7 +537,7 @@ List<information> hospitialinf = [
   information(
       "한수동물병원",
       "02-306-8575",
-      LatLng(
+      NLatLng(
         37.5817478,
         126.9070339,
       ),
@@ -546,7 +546,7 @@ List<information> hospitialinf = [
   information(
       "한양동물메디컬센터",
       "02-2281-5200",
-      LatLng(
+      NLatLng(
         37.5596166,
         127.0369899,
       ),
@@ -555,7 +555,7 @@ List<information> hospitialinf = [
   information(
       "황학균동물병원",
       "042-822-4775",
-      LatLng(
+      NLatLng(
         36.3451008,
         127.339087,
       ),

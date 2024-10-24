@@ -222,7 +222,8 @@ class $SchedulesTable extends Schedules
       'id', aliasedName, false,
       type: DriftSqlType.int,
       requiredDuringInsert: false,
-      defaultConstraints: 'PRIMARY KEY AUTOINCREMENT');
+      //defaultConstraints: 'PRIMARY KEY AUTOINCREMENT'
+  );
   final VerificationMeta _titleMeta = const VerificationMeta('title');
   @override
   late final GeneratedColumn<String> title = GeneratedColumn<String>(
@@ -444,7 +445,8 @@ class $CategoryColorsTable extends CategoryColors
       'id', aliasedName, false,
       type: DriftSqlType.int,
       requiredDuringInsert: false,
-      defaultConstraints: 'PRIMARY KEY AUTOINCREMENT');
+      //defaultConstraints: 'PRIMARY KEY AUTOINCREMENT'
+  );
   final VerificationMeta _hexCodeMeta = const VerificationMeta('hexCode');
   @override
   late final GeneratedColumn<String> hexCode = GeneratedColumn<String>(
@@ -684,7 +686,8 @@ class $DiaryTable extends Diary with TableInfo<$DiaryTable, DiaryData> {
       'id', aliasedName, false,
       type: DriftSqlType.int,
       requiredDuringInsert: false,
-      defaultConstraints: 'PRIMARY KEY AUTOINCREMENT');
+     // defaultConstraints: 'PRIMARY KEY AUTOINCREMENT'
+  );
   final VerificationMeta _titleMeta = const VerificationMeta('title');
   @override
   late final GeneratedColumn<String> title = GeneratedColumn<String>(

@@ -33,27 +33,25 @@ dependencies:
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
-  geolocator: ^9.0.1
-  flutter_naver_map:
-    git: https://github.com/note11g/flutter_naver_map
-  flutter_inappwebview:
-    git: https://github.com/CodeEagle/flutter_inappwebview
+  geolocator: ^13.0.1
+  flutter_naver_map: ^1.3.0+1
+
 
   #google_maps_flutter: ^2.2.0
-  cupertino_icons: ^1.0.2
-  webview_flutter: ^3.0.0
-  image_picker: ^0.8.5+3
-  shared_preferences: ^2.0.15
-  google_fonts: ^3.0.1
-  permission_handler: ^10.0.1
-  table_calendar: ^3.0.7
-  intl: ^0.17.0
-  drift: ^2.1.0
-  sqlite3_flutter_libs: ^0.5.0
-  path_provider: ^2.0.0
-  day_night_time_picker: ^1.1.3
-  get_it: ^7.2.0
-  url_launcher: ^6.1.6
+  cupertino_icons: ^1.0.8
+  webview_flutter: ^4.10.0
+  image_picker: ^1.1.2
+  shared_preferences: ^2.3.2
+  google_fonts: ^6.2.1
+  permission_handler: ^11.3.1
+  table_calendar: ^3.1.2
+  intl: ^0.19.0
+  drift: ^2.21.0
+  sqlite3_flutter_libs: ^0.5.26
+  path_provider: ^2.1.4
+  day_night_time_picker: ^1.3.1
+  get_it: ^8.0.1
+  url_launcher: ^6.3.1
 
 dev_dependencies:
   flutter_test:
@@ -91,7 +89,7 @@ flutter:
 
 
   fonts:
-    - family: NotoSans
+    - family: NotoSansds
       fonts:
         - asset: asset/font/NotoSansKR-Black.otf
           weight: 900

@@ -100,8 +100,6 @@ class _birdurlState extends State<_birdurl> {
                           ),
                         ),
                         style: ElevatedButton.styleFrom(
-                          primary: Colors.pink[50],
-                          onPrimary: Colors.pink,
                           //애니메이션 색깔
                           shadowColor: Colors.black,
                           elevation: 5.0,

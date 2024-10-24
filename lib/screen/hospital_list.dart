@@ -10,7 +10,7 @@ import '../plus/user_helper.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class HospitalListScreen extends StatefulWidget {
-  final LatLng mylocation;
+  final NLatLng mylocation;
 
   const HospitalListScreen({required this.mylocation, Key? key})
       : super(key: key);
@@ -28,7 +28,7 @@ class _HospitalListScreenState extends State<HospitalListScreen> {
   List<DropdownMenuItem<String>> _dropDownSpeciesItems =
       new List.empty(growable: true);
   String? _sortText;
-  LatLng mylocation = LatLng(0, 0);
+  NLatLng mylocation = NLatLng(0, 0);
 
   @override
   void initState() {

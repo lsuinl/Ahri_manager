@@ -19,15 +19,15 @@ class naver extends StatefulWidget {
 }
 
 class _naverState extends State<naver> {
-  List<Marker> _markers = [];
+  List<NMarker> _markers = [];
   NaverMapController? mapController;
   List<information> hospitalinf = [];
   List<user_information> user_informations = [];
   final UserHelper helper = UserHelper();
-  LatLng mylocation = LatLng(0, 0);
+  NLatLng mylocation = NLatLng(0, 0);
   final scaffoldKey = GlobalKey<ScaffoldState>();
   Completer<NaverMapController> _controller = Completer();
-  late OverlayImage markerIcon;
+  late NOverlayImage markerIcon;
   String animalspecies = "";
 
   @override
@@ -43,7 +43,8 @@ class _naverState extends State<naver> {
       updateScreen();
     });
     getCurrentLocation(); //내위치 가져오기
-    setCustomMapPin(); //커스텀마거적용
+    setCustomMapPin(); //커스텀마거적용\
+    mapController!.addOverlayAll(_markers.toSet());
     super.initState();
   }
 
@@ -76,7 +77,7 @@ class _naverState extends State<naver> {
     Position position = await Geolocator.getCurrentPosition(
         desiredAccuracy: LocationAccuracy.low);
     setState(() {
-      mylocation = LatLng(position.latitude, position.longitude);
+      mylocation = NLatLng(position.latitude, position.longitude);
     });
   }
 
@@ -87,68 +88,71 @@ class _naverState extends State<naver> {
 
     for (int i = 0; i < hospitalinf.length; i++) {
       if (hospitalinf[i].animal.contains(animalspecies)) {
-        _markers.add(Marker(
-          markerId: (hospitalinf[i].name),
-          position: LatLng(
+        _markers.add(NMarker(
+          id: (hospitalinf[i].name),
+          position: NLatLng(
             hospitalinf[i].xy.latitude,
             hospitalinf[i].xy.longitude,
           ),
           icon: markerIcon,
-          onMarkerTab: (Marker? marker, Map<String, int?> iconSize) { //마커선택 시 탭 활성화
-            showModalBottomSheet<void>(
-              context: context,
-              builder: (context) {
-                return Container(
-                  height: MediaQuery.of(context).size.height/2,
-                  decoration: BoxDecoration(
-                    // image: DecorationImage(
-                    //   image: AssetImage('asset/imgs/pattern1.png',),
-                    //   fit: BoxFit.cover,
-                    // ),
-                  ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    mainAxisSize: MainAxisSize.min,
-                    children: <Widget>[
-                      Text(
-                        "${hospitalinf[i].name}",
-                        style: textStyle,
-                      ),
-                      new TextButton(
-                        onPressed: () =>
-                            launchUrl(Uri.parse(
-                                'tel:${hospitalinf[i].phone.replaceAll(
-                                    "-", "")}')),
-                        child: new Text(
-                          "${hospitalinf[i].phone}",
-                          style: textStyle.copyWith(
-                            fontSize: 16,
-                            color: Colors.red,
-                          ),
+        ));
+        _markers.last.openInfoWindow(
+          NInfoWindow.onMarker(id: hospitalinf[i].name, text: hospitalinf[i].name));
+        _markers.last.setOnTapListener(
+              (NMarker? marker) { //마커선택 시 탭 활성화
+          showModalBottomSheet<void>(
+            context: context,
+            builder: (context) {
+              return Container(
+                height: MediaQuery.of(context).size.height/2,
+                decoration: BoxDecoration(
+                  // image: DecorationImage(
+                  //   image: AssetImage('asset/imgs/pattern1.png',),
+                  //   fit: BoxFit.cover,
+                  // ),
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    Text(
+                      "${hospitalinf[i].name}",
+                      style: textStyle,
+                    ),
+                    new TextButton(
+                      onPressed: () =>
+                          launchUrl(Uri.parse(
+                              'tel:${hospitalinf[i].phone.replaceAll(
+                                  "-", "")}')),
+                      child: new Text(
+                        "${hospitalinf[i].phone}",
+                        style: textStyle.copyWith(
+                          fontSize: 16,
+                          color: Colors.red,
                         ),
                       ),
-                      Text(
-                        "${hospitalinf[i].adress}",
-                        textAlign: TextAlign.center,
-                        style: textStyle,
-                      ),
-                    ],
-                  ),
-                  //),
-                );
-              }, // builder
-            );
-          },
-          infoWindow: hospitalinf[i].name,
-        ));
+                    ),
+                    Text(
+                      "${hospitalinf[i].adress}",
+                      textAlign: TextAlign.center,
+                      style: textStyle,
+                    ),
+                  ],
+                ),
+                //),
+              );
+            }, // builder
+          );
+        },);
+
       }
     }
 
   }
   //커스텀 마커디자인
   void setCustomMapPin() async {
-    markerIcon = await OverlayImage.fromAssetImage(
-      assetName: 'asset/imgs/marker.png',
+    markerIcon = await NOverlayImage.fromAssetImage(
+      'asset/imgs/marker.png',
     );
   }
 
@@ -158,10 +162,10 @@ class _naverState extends State<naver> {
   }
 }
 
-class _appbar extends StatelessWidget with PreferredSizeWidget{
+class _appbar extends StatelessWidget implements PreferredSizeWidget {
   final TextStyle textStyle;
   final List<information> hospitalinf;
-  final LatLng mylocation;
+  final NLatLng mylocation;
   final NaverMapController? mapController;
   final String animalspecies;
 
@@ -171,7 +175,8 @@ class _appbar extends StatelessWidget with PreferredSizeWidget{
     required this.mylocation,
     required this.mapController,
     required this.animalspecies,
-    Key? key}) : super(key: key);
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -196,25 +201,21 @@ class _appbar extends StatelessWidget with PreferredSizeWidget{
       actions: [ //인근병원찾기버튼
         TextButton(
           onPressed: () {
-            LatLng initlocation = LatLng(0, 0);
+            NLatLng initlocation = NLatLng(0, 0);
             for (int i = 0; i < hospitalinf.length; i++) {
               if (hospitalinf[i].animal.contains(animalspecies)) {
                 if (((mylocation.latitude - initlocation.latitude).abs() +
-                    (mylocation.longitude - initlocation.longitude)
-                        .abs()) >
-                    ((mylocation.latitude - hospitalinf[i].xy.latitude)
-                        .abs() +
-                        (mylocation.longitude - hospitalinf[i].xy.longitude)
-                            .abs())) {
+                    (mylocation.longitude - initlocation.longitude).abs()) >
+                    ((mylocation.latitude - hospitalinf[i].xy.latitude).abs() +
+                        (mylocation.longitude - hospitalinf[i].xy.longitude).abs())) {
                   initlocation = hospitalinf[i].xy;
                 }
               }
             }
-            CameraUpdate cameraupdate =CameraUpdate.scrollTo(initlocation);
-            if(mapController!=null){
-              mapController!.moveCamera(cameraupdate);
+            NCameraUpdate cameraupdate = NCameraUpdate.scrollAndZoomTo(target: initlocation,zoom: 1.0);
+            if (mapController != null) {
+              mapController!.updateCamera(cameraupdate);
             }
-
           },
           child: Text(
             "인근병원찾기",
@@ -228,15 +229,21 @@ class _appbar extends StatelessWidget with PreferredSizeWidget{
     );
   }
 
+  // preferredSize를 명시적으로 정의합니다.
+  @override
+  Size get preferredSize => Size.fromHeight(kToolbarHeight);
+}
+
+
   @override
   // TODO: implement preferredSize
   Size get preferredSize => Size.fromHeight(kToolbarHeight) ;
-}
+
 
 class _navermap extends StatelessWidget {
   final ValueChanged<NaverMapController> onMapCreated;
-  final List<Marker> markers;
-  final LatLng mylocation;
+  final List<NMarker> markers;
+  final NLatLng mylocation;
   final TextStyle textStyle;
 
   const _navermap({
@@ -256,12 +263,16 @@ class _navermap extends StatelessWidget {
               Expanded(
                 flex: 3,
                 child: NaverMap(
-                  initLocationTrackingMode: LocationTrackingMode.Follow, //초기위치는 내위치
-                  logoClickEnabled: true, //로고
-                  locationButtonEnable: true,//내위치로버툰
-                  mapType: MapType.Basic, //맵타입
-                  onMapCreated:  onMapCreated, //콜백 조작
-                  markers:markers,
+                  options: NaverMapViewOptions(
+                    logoClickEnable: true,
+                    locationButtonEnable: true,
+                    mapType: NMapType.basic,
+
+
+                  ),
+                  //initLocationTrackingMode: LocationTrackingMode.Follow, //초기위치는 내위치
+                  //onMapCreated:  onMapCreated, //콜백 조작
+                  //:markers,
                 ),
               ),
               TextButton(

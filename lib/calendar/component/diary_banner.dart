@@ -36,7 +36,7 @@ class DiaryBanner extends StatelessWidget {
                 Navigator.pop(context, MaterialPageRoute(builder: (context) => CalendarScreen()),);
               },
 
-              style: ElevatedButton.styleFrom(primary: Colors.pink[200]),
+              style: ElevatedButton.styleFrom(),
               child: Text("일정",
               style: TextStyle(
                 fontFamily: 'jua',
