@@ -44,7 +44,6 @@ class _naverState extends State<naver> {
     });
     getCurrentLocation(); //내위치 가져오기
     setCustomMapPin(); //커스텀마거적용\
-    mapController!.addOverlayAll(_markers.toSet());
     super.initState();
   }
 
@@ -71,6 +70,7 @@ class _naverState extends State<naver> {
     if (_controller.isCompleted) _controller = Completer();
     _controller.complete(controller);
     mapController=controller; //하,,,니놈이구나
+    mapController!.addOverlayAll(_markers.toSet());
   }
 
   void getCurrentLocation() async { //현재위치 가져오기

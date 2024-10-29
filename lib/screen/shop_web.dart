@@ -20,12 +20,12 @@ class _ShopWebScreenState extends State<ShopWebScreen> {
 
   @override //초기에 한번만 실행
   void initState() {
-    controller = WebViewController()
-      ..setJavaScriptMode(JavaScriptMode.unrestricted)
-    ..loadRequest(Uri.parse(weburl[shopname]));
-
     shopname = widget.shopname;
     weburl = Weburl;
+    controller = WebViewController()
+      ..setJavaScriptMode(JavaScriptMode.unrestricted)
+      ..loadRequest(Uri.parse(weburl[shopname]));
+
     super.initState();
   }
 

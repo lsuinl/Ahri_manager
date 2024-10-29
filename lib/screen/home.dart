@@ -93,7 +93,6 @@ class _HomeScreenState extends State<HomeScreen> {
                       //달력
                       //mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        SizedBox(width:130.0, height:70,),
                         IconButton(
                           onPressed: () {
                             Navigator.push(
@@ -101,8 +100,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                 MaterialPageRoute(
                                     builder: (context) => CalendarScreen()));
                           },
-                          icon: Image.asset('asset/imgs/schedule.png'),
-                          iconSize: 90,
+                          icon: Image.asset('asset/imgs/schedule.png'
+                          ,width: 60,
+                          ),
                           //padding,
                         ),
                         Text(
@@ -120,7 +120,7 @@ class _HomeScreenState extends State<HomeScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 SizedBox(height:1,),
-               Image.asset('asset/imgs/${user_infotmations.first.species}.png',scale: 3,),
+               Image.asset('asset/imgs/${user_infotmations.first.species}.png',scale:1.5,),
             ]
         ),
                 Row(
@@ -135,8 +135,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 MaterialPageRoute(
                                     builder: (context) => ShopListScreen()));
                           },
-                          icon: Image.asset('asset/imgs/pet-food.png'),
-                          iconSize: 80,
+                          icon: Image.asset('asset/imgs/pet-food.png'   ,width: 60),
                         ),
                         Text(
                           "물품구매",
@@ -162,8 +161,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 MaterialPageRoute(
                                     builder: (context) => naver()));
                           },
-                          icon: Image.asset('asset/imgs/hospital.png'),
-                          iconSize: 90,
+                          icon: Image.asset('asset/imgs/hospital.png'   ,width: 60),
                         ),
                         Text(
                           '병원 찾기',
