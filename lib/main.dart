@@ -1,5 +1,6 @@
 import 'package:ahri_manager/data/database/drift_database.dart';
 import 'package:ahri_manager/user/screen/login_screen.dart';
+import 'package:ahri_manager/user/screen/register_screen.dart';
 import 'package:drift/drift.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_naver_map/flutter_naver_map.dart';
@@ -51,7 +52,8 @@ void main() async {
       // Use builder only if you need to use library outside ScreenUtilInit context
       builder: (_, child) {
         return const MaterialApp(
-            debugShowCheckedModeBanner: false, home: LoginScreen() //
+            debugShowCheckedModeBanner: false, 
+            home: RegisterScreen(content: Text("dd")) //
             );
       }));
 }

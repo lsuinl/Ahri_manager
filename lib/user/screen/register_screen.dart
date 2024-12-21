@@ -6,21 +6,25 @@ class RegisterScreen extends StatelessWidget {
   final String? title;
   final Widget content;
 
-  const RegisterScreen({
-    required this.content,
-    this.title,
-    super.key});
+  const RegisterScreen({required this.content, this.title, super.key});
 
   @override
   Widget build(BuildContext context) {
     return Basic(
         child: Column(
-            children: [
-            title==null ?Container():Text(title!),//hmm
-              content,
-              NextButton(),
-    ],
-    )
-    );
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+        BackButton(),
+        Center(
+          child: title == null ?Container(): Text(title!), //hmm
+        ),
+        ]),
+        content,
+        NextButton(),
+      ],
+    ));
   }
 }

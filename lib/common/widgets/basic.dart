@@ -18,7 +18,11 @@ class Basic extends StatelessWidget {
     return  Scaffold(
       backgroundColor: backgroundColor?? Colors.white,
       appBar: renderAppBar(),
-      body:child,
+      body: SafeArea(
+          top: true,
+          bottom: false,
+          child: child
+      ),
       bottomNavigationBar: bottomNavigationBar,
     );
   }
