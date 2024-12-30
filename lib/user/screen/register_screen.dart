@@ -2,6 +2,7 @@ import 'package:ahri_manager/common/widgets/basic.dart';
 import 'package:ahri_manager/user/component/next_button.dart';
 import 'package:flutter/material.dart';
 
+//회원가입 진행 = 닉네임설정
 class RegisterScreen extends StatelessWidget {
   final String? title;
   final Widget content;
@@ -23,7 +24,7 @@ class RegisterScreen extends StatelessWidget {
         ),
         ]),
         content,
-        NextButton(),
+        //NextButton(),
       ],
     ));
   }

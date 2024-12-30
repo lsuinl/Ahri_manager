@@ -4,7 +4,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../common/utils/color.dart';
 
 class NextButton extends StatelessWidget {
-  const NextButton({super.key});
+  final VoidCallback onPressed;
+
+  const NextButton({
+    required this.onPressed,
+    super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -20,9 +24,7 @@ class NextButton extends StatelessWidget {
           backgroundColor: MainColor,   // 배경색 설정
           foregroundColor: Colors.white, // 텍스트 색상 설정
         ),
-        onPressed: (){
-
-        },
+        onPressed: onPressed,
         child: Text("다음")));
   }
 }

@@ -2,6 +2,9 @@ import 'package:ahri_manager/common/widgets/basic.dart';
 import 'package:flutter/material.dart';
 import 'package:loading_indicator/loading_indicator.dart';
 
+import '../../common/utils/color.dart';
+
+//로딩 = 필요 데이터를 불러옴
 class LoadingScreen extends StatelessWidget {
   const LoadingScreen({super.key});
 
@@ -20,8 +23,10 @@ class LoadingScreen extends StatelessWidget {
         Container(
             width: 100,
             child: LoadingIndicator(
+              colors:[MainColor],
               indicatorType: Indicator.orbit,
-            ))
+            )),
+
       ],
     )));
   }

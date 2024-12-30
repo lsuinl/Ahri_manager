@@ -1,7 +1,6 @@
 // 앱의 메인 화면
 
 import 'package:ahri_manager/screen/shop_list.dart';
-import 'package:ahri_manager/screen/schedule.dart';
 import 'package:ahri_manager/screen/hospital_map.dart';
 import 'package:ahri_manager/screen/my_animal_information.dart';
 import 'package:flutter/material.dart';
@@ -95,10 +94,6 @@ class _HomeScreenState extends State<HomeScreen> {
                       children: [
                         IconButton(
                           onPressed: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => CalendarScreen()));
                           },
                           icon: Image.asset('asset/imgs/schedule.png'
                           ,width: 60,

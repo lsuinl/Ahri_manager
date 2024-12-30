@@ -2,6 +2,9 @@ import 'package:ahri_manager/common/widgets/basic.dart';
 import 'package:flutter/material.dart';
 import 'dart:io' show Platform;
 
+//로그인
+//android: google, kakao
+//ios: google, kakao, apple
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
 
