@@ -5,7 +5,10 @@ import 'dart:io' show Platform;
 //로그인
 //android: google, kakao
 //ios: google, kakao, apple
+
 class LoginScreen extends StatelessWidget {
+  static String get routeName => 'login';
+
   const LoginScreen({super.key});
 
   @override

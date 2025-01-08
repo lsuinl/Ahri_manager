@@ -8,6 +8,7 @@ import 'package:ahri_manager/plus/user_helper.dart';
 import 'package:ahri_manager/data/user_information.dart';
 
 class HomeScreen extends StatefulWidget {
+  static String get routeName => 'home';
   const HomeScreen({Key? key}) : super(key: key);
 
   @override
